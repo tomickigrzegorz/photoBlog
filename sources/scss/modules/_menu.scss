@@ -1,0 +1,127 @@
+.menu-wrap {
+    position: absolute;
+    z-index: 1001;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background: #373a47;
+    padding: 2.5em 1.5em 0;
+    @include font-size(12);
+    transform: translate3d(-300px, 0, 0);
+    transition: transform 0.4s;
+    transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+    input {
+        line-height: 1.5;
+    }
+
+    a {
+        color: #b8b7ad;
+        &:hover, &:focus {
+            color: #c94e50;
+        }
+    }
+}
+
+/* Menu Button */
+.menu-button {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    right: -15px;
+    opacity: 1;
+    margin: 1em;
+    padding: 0;
+    width: 2.5em;
+    height: 2.25em;
+    border: none;
+    text-indent: 2.5em;
+    @include font-size(25);
+    color: transparent;
+    background: transparent;
+    cursor: pointer;
+
+    &:before {
+        position: absolute;
+        top: 0.5em;
+        right: 0.5em;
+        bottom: 0.5em;
+        left: 0.5em;
+        background: linear-gradient(#3DC0F1 20%, transparent 20%, transparent 40%, #3DC0F1 40%, #3DC0F1 60%, transparent 60%, transparent 80%, #3DC0F1 80%);
+        content: '';
+    }
+
+    &:hover {
+        opacity: 0.6;
+    }
+
+}
+
+/* Close Button */
+.close-button {
+    width: 1em;
+    height: 1em;
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    overflow: hidden;
+    text-indent: 1em;
+    @include font-size(10);
+    border: none;
+    background: transparent;
+    color: transparent;
+    cursor: pointer;
+
+    &:before, &:after {
+        content: '';
+        position: absolute;
+        width: 3px;
+        height: 100%;
+        top: 0;
+        left: 50%;
+        background: #bdc3c7;
+    }
+
+    &:before {
+        transform: rotate(45deg);
+    }
+
+    &:after {
+        transform: rotate(-45deg);
+    }
+}
+
+.menu,
+.icon-list {
+    height: 100%;
+}
+
+/* Shown menu */
+.show-menu {
+    .menu-wrap {
+        transform: translate3d(0, 0, 0);
+        transition: transform 0.8s;
+        transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+    }
+    .icon-list, .icon-list a {
+        transform: translate3d(0, 0, 0);
+        transition: transform 0.8s;
+        transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+    }
+
+    .icon-list a {
+        transition-duration: 0.9s;
+    }
+
+    .container::before {
+        opacity: 1;
+        transition: opacity 0.8s;
+        transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+        transform: translate3d(0, 0, 0);
+    }
+
+    .menu-button {
+        opacity: 0;
+        transition-duration: 0.9s;
+    }
+
+}

@@ -1,0 +1,43 @@
+block variables
+- var path = self.htmlWebpackPlugin.options
+- var pathToFile = (path.mode == 'development') ? "../../../sources/" : ""
+
+doctype html
+html(lang="pl", dir="ltr" itemscope itemtype="http://schema.org/WebPage")
+
+    include ./includes/head.pug
+    include ./includes/header.pug
+    include ./includes/svgLogo.pug
+
+    head
+        +head(path.file)
+
+    body
+        +svgLogo()
+        +header()
+
+        main(class="container pb home")
+            .body
+                ul.rig
+                    each val, i in path.file.items
+                        li
+                            a(class="rig-cell" href=val.href)
+                                figure
+                                    img(class="rig-img" src=(pathToFile+val.img), alt=val.alt)
+                                    figcaption
+                                        span.rig-overlay
+                                        span.rig-text
+                                            = val.text
+
+        script(type='application/ld+json').
+            {
+                "@context": "http://schema.org/",
+                "@type": "Blog",
+                "publisher": "blog.grzegorztomicki.pl",
+                "author": "#{path.file.schema.author}",
+                "datePublished": "#{path.file.schema.datePublished}",
+                "dateModified": "#{path.file.schema.dateModified}",
+                "headline": "Blog fotograficzny"
+            }
+
+        include ./includes/footer.pug

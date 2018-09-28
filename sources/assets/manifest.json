@@ -1,0 +1,22 @@
+{
+  "short_name": "Fotoblog GT",
+  "name": "Fotoblog Grzegorz Tomicki",
+  "icons": [
+    {
+      "src": "/images/static/app_192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/static/app_512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "index.html",
+  "background_color": "#FFFFFF",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#FFFFFF",
+  "orientation": "portrait"
+}
