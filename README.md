@@ -4,4 +4,4 @@
 
 ### Production version
 
-Visit online [: http://blog.grzegorztomicki.pl](http://blog.grzegorztomicki.pl)
+Visit online: [http://blog.grzegorztomicki.pl](http://blog.grzegorztomicki.pl)
