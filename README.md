@@ -1,6 +1,6 @@
 # My photo blog
 
->The entire environment based on webpack + pug template + json
+>The entire environment based on webpack 4 + pug template + json
 
 ### Production version
 

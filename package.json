@@ -6,6 +6,14 @@
     "dev": "webpack-dev-server --config ./config/webpack.config.js --mode development --open",
     "prod": "webpack --config ./config/webpack.config.js --mode production"
   },
+  "keywords": [
+    "webpack 4",
+    "pug",
+    "postcss",
+    "json data",
+    "babel",
+    "service worker"
+  ],
   "author": "Grzegorz Tomicki <gtomik@gmail.com>",
   "license": "MIT",
   "devDependencies": {
