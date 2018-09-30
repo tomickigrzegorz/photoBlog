@@ -1,5 +1,7 @@
 .disqus-contet {
     text-align: center;
+    width: 100%;
+    max-width: $max-width;
 }
 
 .comments-button {
@@ -9,4 +11,8 @@
     color: white;
     padding: 1em;
     cursor: pointer;
+    transition: all .2s ease-in-out;
+    &:hover {
+        transform: scale(1.1);
+    }
 }

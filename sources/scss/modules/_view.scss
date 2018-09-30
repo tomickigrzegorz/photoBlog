@@ -21,9 +21,28 @@ h1 {
     padding-right: 15px;
 }
 
-.disqus-contet {
-    width: 100%;
-    max-width: $max-width;
+.sweep-to-top {
+    position: relative;
+    transform: translateZ(0);
+    transition: color 1000ms;
+    padding: 0 5px;
+    &:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #f13d3d;
+        transform: scaleY(0);
+        transform-origin: 50% 100%;
+        transition-property: transform;
+        transition: 200ms ease-out;
+    }
+    &:hover:before {
+        transform: scaleY(1);
+    }
 }
 
 figure {
@@ -33,89 +52,5 @@ figure {
     }
     figcaption {
         margin: 0;
-    }
-}
-
-.box-article {
-    .title {
-        h1 {
-            @include font-size(34);
-            font-weight: 700;
-            @media (max-width: 480px) {
-                @include font-size(30);
-            }
-            line-height: 120%;
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-    }
-    .date {
-        small {
-            line-height: 32px;
-            vertical-align: middle;
-            margin-left: 5px;
-        }
-    }
-    .text {
-        margin: 10px 0;
-        line-height: 150%;
-        padding-top: 10px;
-        a {
-            color: #f13d3d;
-            text-decoration: none;
-            border-bottom: 1px solid #f13d3d;
-            padding-bottom: 1px;
-            &:hover {
-                // border-bottom: 1px solid #3dc0f1;
-                color: #fff;
-                border-bottom: none;
-            }
-        }
-    }
-    
-    figcaption {
-        margin: 15px 0;
-    }
-    .content {
-        a {
-            color: #f13d3d;
-            text-decoration: none;
-            border-bottom: 1px solid #f13d3d;
-            padding-bottom: 1px;
-            &:hover {
-                // border-bottom: 1px solid #3dc0f1;
-                color: #fff;
-                border-bottom: none;
-            }
-        }
-    }
-}
-
-.icon {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    stroke-width: 0;
-    stroke: currentColor;
-    fill: currentColor;
-    vertical-align: middle;
-}
-
-.maps-title {
-    margin: 20px 0 10px;
-}
-
-.iframe-rwd {
-    position: relative;
-    padding-bottom: 65.25%;
-    padding-top: 30px;
-    height: 0;
-    overflow: hidden;
-    iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
     }
 }

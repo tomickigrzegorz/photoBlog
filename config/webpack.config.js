@@ -5,8 +5,10 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const HtmlWebpackInlineSourcePlugin = require("html-webpack-inline-source-plugin");
+const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const PreloadWebpackPlugin = require('preload-webpack-plugin');
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 const PUBLIC_PATH = 'http://blog.grzegorztomicki.pl/';
@@ -151,7 +153,6 @@ module.exports = (env, argv) => {
                         /manifest\.json$/,
                         /robots\.txt$/,
                         /\.html$/,
-                        /\.css$/,
                         /images/,
                     ],
                 }), argv
@@ -160,7 +161,7 @@ module.exports = (env, argv) => {
                 new CopyWebpackPlugin([
                     { from: 'sources/assets/manifest.json', to: 'assets/' },
                     { from: 'sources/assets/robots.txt', to: './' },
-                    { from: 'sources/images/', to: 'images/' }
+                    // { from: 'sources/images/', to: 'images/' }
 
                 ]), argv
             ),
@@ -172,14 +173,22 @@ module.exports = (env, argv) => {
             }),
         ]
             .concat(entryHtmlPlugins)
-            // .concat(prodPlugin(
-            //     new ScriptExtHtmlWebpackPlugin({
-            //         defaultAttribute: 'async'
-            //     }), argv
-            // ))
             .concat(prodPlugin(
                 new HtmlWebpackInlineSourcePlugin(), argv
             ))
+            .concat(prodPlugin(
+                new ScriptExtHtmlWebpackPlugin({
+                    defaultAttribute: 'defer'
+                }), argv
+            ))
+            // .concat(prodPlugin(
+            //     new PreloadWebpackPlugin({
+            //         rel: 'preload',
+            //         as: 'script',
+            //         include: 'all',
+            //         fileBlacklist: [/\.(css|map)$/, /base?.+/]
+            //     }), argv
+            // ))
             .concat(prodPlugin(
                 new BundleAnalyzerPlugin({
                     openAnalyzer: true,

@@ -1,5 +1,6 @@
 .share-button-temp {
   margin: 20px 0;
+
   h3 {
     font-weight: 400;
     margin-bottom: 3px;
@@ -8,16 +9,19 @@
   .share-button {
     display: inline-block;
     overflow: hidden;
+
     .share-icon {
       fill: #FFF;
       border: 0;
     }
+
     .share-btn {
       cursor: pointer;
       display: inline-block;
       overflow: hidden;
       @include transition(all .2s ease-in-out);
       background-color: transparent;
+
       .share-btn__hidden {
         position: absolute;
         clip: rect(1px, 1px, 1px, 1px);
@@ -29,15 +33,19 @@
       .share-btn__wrapper {
         line-height: 42px;
       }
+
       &.btn-facebook {
         background-color: $share-facebook;
       }
+
       &.btn-twitter {
         background-color: $share-twitter;
       }
+
       &.btn-google {
         background-color: $share-google;
       }
+
       &.btn-add-opinion {
         background-color: $share-button;
         color: #FFF;
@@ -45,41 +53,41 @@
         text-align: center;
         @include font-size(13);
         border-bottom: 4px solid $share-button-hover;
+
         &:hover {
           background-color: $share-button-hover;
         }
       }
     }
-    &:hover > div {
+
+    &:hover>div {
       opacity: 0.5;
+
       &:hover {
         opacity: 1;
       }
     }
-  }
-}
 
-@media (min-width: $screen-ss) {
-
-  .share-button-temp {
-    .share-button {
+    @media (min-width: $screen-ss) {
       height: 46px;
       margin-left: -4px;
+
       .share-btn {
         margin: 4px 0 0;
       }
-      .share-icon, .share-btn {
+
+      .share-icon,
+      .share-btn {
         width: 42px;
         height: 42px;
       }
     }
-  }
-}
 
-@media (min-width: $screen-md) {
-  .share-button-temp {
-    .share-button {
+    @media (min-width: $screen-md) {
       margin-left: -2px;
     }
+
   }
+
+
 }

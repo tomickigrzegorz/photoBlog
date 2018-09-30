@@ -114,7 +114,7 @@ let option = {
         "stick": "share-button-stick",
         "bottom": "share-button-bottom"
     },
-    "title": "Podziel się"
+    "title": "Podziel się:"
 };
 
 let sharebutton = new ShareButton(option);

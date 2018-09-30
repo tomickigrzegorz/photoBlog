@@ -92,7 +92,7 @@
     text-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
     top: 40%;
     color: white;
-    filter: alpha(opacity=0); /*For older IE*/
+    filter: alpha(opacity=0);
     transform: translateY(-20px);
     @media (min-width: 401px) {
         transition: all .3s;
@@ -102,23 +102,13 @@
     }
 }
 
-@media (max-width: 9000px) {
-
-}
-
-@media (max-width: 700px) {
+@media (max-width: 900px) {
     .rig li {
         width: 50%;
     }
 }
 
 @media (max-width: 600px) {
-    .rig li {
-        width: 50%;
-    }
-}
-
-@media (max-width: 400px) {
     .rig li {
         width: 100%;
         margin-bottom: 3px;

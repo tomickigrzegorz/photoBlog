@@ -19,19 +19,17 @@
         filter: alpha(opacity=100);
         opacity: 1;
     }
-}
-
-.scroll-button--hidden {
-    filter: alpha(opacity=0);
-    opacity: 0;
-    visibility: hidden;
-}
-
-.triangle-up {
-    width: 0;
-    height: 0;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-bottom: 7px solid #fff;
-    margin: auto;
+    &--hidden {
+        filter: alpha(opacity=0);
+        opacity: 0;
+        visibility: hidden;
+    }
+    .triangle-up {
+        width: 0;
+        height: 0;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-bottom: 7px solid #fff;
+        margin: auto;
+    }
 }
