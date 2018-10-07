@@ -1,17 +1,16 @@
 const webpack = require("webpack");
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require("clean-webpack-plugin");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
+const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const HtmlWebpackInlineSourcePlugin = require("html-webpack-inline-source-plugin");
-const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-const PreloadWebpackPlugin = require('preload-webpack-plugin');
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
-const PUBLIC_PATH = 'http://blog.grzegorztomicki.pl/';
+const PUBLIC_PATH = 'http://somesite.com/';
 
 const entry = require('./entry.js');
 
@@ -21,8 +20,8 @@ module.exports = (env, argv) => {
         ? {
             'pathToDist': '../dist',
             'mode': 'production',
-            'minify': { 
-                removeComments: true, 
+            'minify': {
+                removeComments: true,
                 collapseWhitespace: true,
                 removeScriptTypeAttributes: true,
             }
@@ -33,27 +32,30 @@ module.exports = (env, argv) => {
             'minify': false
         }
 
-    const entryHtmlPlugins = Object.values(entry.html).map(siteName => {
-        const templateName = (siteName === 'index') ? 'index' : 'article'
-        return new HtmlWebpackPlugin({
-            filename: `${siteName}.html`,
+    const entryHtmlPlugins = Object.keys(entry.html).map(entryName => {
+        const templateName = (entryName === 'index') ? 'index' : 'article'
+        return new HtmlWebPackPlugin({
+            filename: `${entryName}.html`,
             template: `./sources/templates/${templateName}.pug`,
-            chunks: [templateName],
+            file: require(`../sources/data/${entryName}.json`),
+            chunks: [entryName],
             minify: type.minify,
-            file: require(`../sources/data/${siteName}.json`),
             mode: type.mode,
+            inlineSource: '.(css)$',
             // inlineSource: '.(js|css)$',
         })
     });
 
     const output = {
-        path: path.resolve(__dirname, type.pathToDist),
-        filename: "./vendor/js/[name].[hash].js"
+        path: path.resolve(__dirname, "../dist"),
+        filename: (chunkData) => {
+            return chunkData.chunk.name === 'index' ? 'vendor/js/index.[hash].js' : 'vendor/js/article.[hash].js';
+        },
     }
 
     return {
         devtool: devProdOption('source-map', 'none', argv),
-        entry: entry.site,
+        entry: entry.html,
         output: output,
         module: {
             rules: [
@@ -64,9 +66,21 @@ module.exports = (env, argv) => {
                     use: {
                         loader: 'babel-loader',
                         options: {
-                            presets: ['@babel/preset-env']
+                            presets: ['@babel/env']
                         }
                     }
+                },
+                {
+                    // HTML
+                    test: /\.html$/,
+                    use: [
+                        {
+                            loader: "html-loader",
+                            options: {
+                                minimize: argv.mode === 'development' ? false : true
+                            }
+                        }
+                    ]
                 },
                 {   // CSS SASS SCSS
                     test: /\.(css|sass|scss)$/,
@@ -98,7 +112,7 @@ module.exports = (env, argv) => {
                             loader: 'sass-resources-loader',
                             options: {
                                 resources: [
-                                    path.resolve(__dirname, '../sources/scss/style.scss')
+                                    './sources/scss/style.scss'
                                 ]
                             },
                         }
@@ -124,21 +138,17 @@ module.exports = (env, argv) => {
                 }
             ]
         },
-        optimization: {
-            // runtimeChunk: 'single'
-            // namedModules: true
-            // runtimeChunk: true
-        },
+        optimization: {},
         plugins: [
             prodPlugin(
                 new CleanWebpackPlugin('dist', {
                     verbose: true,
-                    root: path.resolve('./')
+                    root: __dirname + '/'
                 }), argv
             ),
             prodPlugin(
                 new MiniCssExtractPlugin({
-                    filename: "./vendor/css/[name].[hash].css"
+                    filename: "vendor/css/[name].[hash].css"
                 }), argv
             ),
             prodPlugin(
@@ -151,18 +161,13 @@ module.exports = (env, argv) => {
                     staticFileGlobsIgnorePatterns: [
                         /\.map$/,
                         /manifest\.json$/,
-                        /robots\.txt$/,
-                        /\.html$/,
-                        /images/,
+                        /css/
                     ],
                 }), argv
             ),
             prodPlugin(
                 new CopyWebpackPlugin([
-                    { from: 'sources/assets/manifest.json', to: 'assets/' },
-                    { from: 'sources/assets/robots.txt', to: './' },
-                    // { from: 'sources/images/', to: 'images/' }
-
+                    { from: 'sources/assets/', to: 'assets/' }
                 ]), argv
             ),
             prodPlugin(
@@ -174,21 +179,13 @@ module.exports = (env, argv) => {
         ]
             .concat(entryHtmlPlugins)
             .concat(prodPlugin(
-                new HtmlWebpackInlineSourcePlugin(), argv
-            ))
-            .concat(prodPlugin(
                 new ScriptExtHtmlWebpackPlugin({
-                    defaultAttribute: 'defer'
+                    defaultAttribute: 'async'
                 }), argv
             ))
-            // .concat(prodPlugin(
-            //     new PreloadWebpackPlugin({
-            //         rel: 'preload',
-            //         as: 'script',
-            //         include: 'all',
-            //         fileBlacklist: [/\.(css|map)$/, /base?.+/]
-            //     }), argv
-            // ))
+            .concat(prodPlugin(
+                new HtmlWebpackInlineSourcePlugin(), argv
+            ))
             .concat(prodPlugin(
                 new BundleAnalyzerPlugin({
                     openAnalyzer: true,
