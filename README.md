@@ -6,4 +6,4 @@ The last change, placing the source of styles directly into the body has increas
 
 ### Production version
 
-Visit online: [http://blog.grzegorztomicki.pl](http://blog.grzegorztomicki)
+Visit online: [http://blog.grzegorztomicki.pl](http://blog.grzegorztomicki.pl)
