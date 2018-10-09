@@ -129,6 +129,3 @@ let option = {
 
 let sharebutton = new ShareButton(option);
 sharebutton.init();
-
-// a = "http://pinterest.com/pin/create/button/?url=" + encodeURI(window.location.href) + "&media=" + encodeURI($('meta[property="og:image"]').attr("content")) + "&description=" + encodeURI($("title").text());
-// window.open(a, "sharing", ["width=734,height=734", "left=" + (screen.width - 734) / 2, "top=" + (screen.height - 734) / 2, "toolbar=0,status=0"].join());

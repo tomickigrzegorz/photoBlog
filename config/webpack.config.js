@@ -150,7 +150,7 @@ module.exports = (env, argv) => {
             prodPlugin(
                 new CleanWebpackPlugin('dist', {
                     verbose: true,
-                    root: __dirname + './'
+                    root: path.resolve('./')
                 }),
                 argv
             ),
