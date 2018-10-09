@@ -1,39 +1,40 @@
-const webpack = require("webpack");
+const webpack = require('webpack');
 const path = require('path');
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
-const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const HtmlWebpackInlineSourcePlugin = require("html-webpack-inline-source-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+    .BundleAnalyzerPlugin;
 
 const PUBLIC_PATH = 'http://somesite.com/';
 
 const entry = require('./entry.js');
 
 module.exports = (env, argv) => {
-
-    const type = (argv.mode === 'production')
-        ? {
-            'pathToDist': '../dist',
-            'mode': 'production',
-            'minify': {
-                removeComments: true,
-                collapseWhitespace: true,
-                removeScriptTypeAttributes: true,
-            }
-        }
-        : {
-            'pathToDist': 'dist',
-            'mode': 'development',
-            'minify': false
-        }
+    const type =
+        argv.mode === 'production'
+            ? {
+                  pathToDist: '../dist',
+                  mode: 'production',
+                  minify: {
+                      removeComments: true,
+                      collapseWhitespace: true,
+                      removeScriptTypeAttributes: true
+                  }
+              }
+            : {
+                  pathToDist: 'dist',
+                  mode: 'development',
+                  minify: false
+              };
 
     const entryHtmlPlugins = Object.keys(entry.html).map(entryName => {
-        const templateName = (entryName === 'index') ? 'index' : 'article'
+        const templateName = entryName === 'index' ? 'index' : 'article';
         return new HtmlWebPackPlugin({
             filename: `${entryName}.html`,
             template: `./sources/templates/${templateName}.pug`,
@@ -41,17 +42,19 @@ module.exports = (env, argv) => {
             chunks: [entryName],
             minify: type.minify,
             mode: type.mode,
-            inlineSource: '.(css)$',
+            inlineSource: '.(css)$'
             // inlineSource: '.(js|css)$',
-        })
+        });
     });
 
     const output = {
-        path: path.resolve(__dirname, "../dist"),
-        filename: (chunkData) => {
-            return chunkData.chunk.name === 'index' ? 'vendor/js/index.[hash].js' : 'vendor/js/article.[hash].js';
-        },
-    }
+        path: path.resolve(__dirname, '../dist'),
+        filename: chunkData => {
+            return chunkData.chunk.name === 'index'
+                ? 'vendor/js/index.[hash].js'
+                : 'vendor/js/article.[hash].js';
+        }
+    };
 
     return {
         devtool: devProdOption('source-map', 'none', argv),
@@ -75,17 +78,21 @@ module.exports = (env, argv) => {
                     test: /\.html$/,
                     use: [
                         {
-                            loader: "html-loader",
+                            loader: 'html-loader',
                             options: {
-                                minimize: argv.mode === 'development' ? false : true
+                                minimize:
+                                    argv.mode === 'development' ? false : true
                             }
                         }
                     ]
                 },
-                {   // CSS SASS SCSS
+                {
+                    // CSS SASS SCSS
                     test: /\.(css|sass|scss)$/,
                     use: [
-                        argv.mode === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader,
+                        argv.mode === 'development'
+                            ? 'style-loader'
+                            : MiniCssExtractPlugin.loader,
                         {
                             loader: 'css-loader',
                             options: {
@@ -97,9 +104,11 @@ module.exports = (env, argv) => {
                             loader: 'postcss-loader',
                             options: {
                                 sourceMap: true,
-                                plugins: () => [require('autoprefixer')({
-                                    'browsers': ['> 1%', 'last 2 versions']
-                                })],
+                                plugins: () => [
+                                    require('autoprefixer')({
+                                        browsers: ['> 1%', 'last 2 versions']
+                                    })
+                                ]
                             }
                         },
                         {
@@ -111,20 +120,18 @@ module.exports = (env, argv) => {
                         {
                             loader: 'sass-resources-loader',
                             options: {
-                                resources: [
-                                    './sources/scss/style.scss'
-                                ]
-                            },
+                                resources: ['./sources/scss/style.scss']
+                            }
                         }
                     ]
                 },
                 {
                     // IMAGES
                     test: /\.(jpe?g|png|gif|svg)$/i,
-                    loader: "file-loader",
+                    loader: 'file-loader',
                     options: {
                         useRelativePath: true,
-                        name: '[name].[ext]',
+                        name: '[name].[ext]'
                     }
                 },
                 {
@@ -143,13 +150,15 @@ module.exports = (env, argv) => {
             prodPlugin(
                 new CleanWebpackPlugin('dist', {
                     verbose: true,
-                    root: __dirname + '/'
-                }), argv
+                    root: __dirname + './'
+                }),
+                argv
             ),
             prodPlugin(
                 new MiniCssExtractPlugin({
-                    filename: "vendor/css/[name].[hash].css"
-                }), argv
+                    filename: 'vendor/css/[name].[hash].css'
+                }),
+                argv
             ),
             prodPlugin(
                 new SWPrecacheWebpackPlugin({
@@ -162,47 +171,50 @@ module.exports = (env, argv) => {
                         /\.map$/,
                         /manifest\.json$/,
                         /css/
-                    ],
-                }), argv
+                    ]
+                }),
+                argv
             ),
             prodPlugin(
                 new CopyWebpackPlugin([
                     { from: 'sources/assets/', to: 'assets/' }
-                ]), argv
+                ]),
+                argv
             ),
-            prodPlugin(
-                new OptimizeCssAssetsPlugin(), argv
-            ),
+            prodPlugin(new OptimizeCssAssetsPlugin(), argv),
             new webpack.DefinePlugin({
                 PRODUCTION: JSON.stringify(true)
-            }),
+            })
         ]
             .concat(entryHtmlPlugins)
-            .concat(prodPlugin(
-                new ScriptExtHtmlWebpackPlugin({
-                    defaultAttribute: 'async'
-                }), argv
-            ))
-            .concat(prodPlugin(
-                new HtmlWebpackInlineSourcePlugin(), argv
-            ))
-            .concat(prodPlugin(
-                new BundleAnalyzerPlugin({
-                    openAnalyzer: true,
-                }), argv
-            ))
-    }
+            .concat(
+                prodPlugin(
+                    new ScriptExtHtmlWebpackPlugin({
+                        defaultAttribute: 'async'
+                    }),
+                    argv
+                )
+            )
+            .concat(prodPlugin(new HtmlWebpackInlineSourcePlugin(), argv))
+            .concat(
+                prodPlugin(
+                    new BundleAnalyzerPlugin({
+                        openAnalyzer: true
+                    }),
+                    argv
+                )
+            )
+    };
 };
-
 
 function devProdOption(dev, prod, argv) {
     return argv.mode === 'development' ? dev : prod;
 }
 
 function prodPlugin(plugin, argv) {
-    return argv.mode === 'production' ? plugin : () => { };
+    return argv.mode === 'production' ? plugin : () => {};
 }
 
 function devPlugin(plugin, argv) {
-    return argv.mode === 'development' ? plugin : () => { };
+    return argv.mode === 'development' ? plugin : () => {};
 }
