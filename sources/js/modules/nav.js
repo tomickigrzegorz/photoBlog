@@ -22,23 +22,20 @@ class NavMenu {
     }
 
     addToHeaderMenu() {
-        return document.getElementById(this.header).innerHTML = this.menu();
+        return (document.getElementById(this.header).innerHTML = this.menu());
     }
 
     buildMenu() {
-
         this.addToHeaderMenu();
 
         let elements = document.querySelectorAll(this.contact, this.portfolio);
 
-        elements.forEach(function(item){
-            item.addEventListener("click", function() {
+        elements.forEach(function(item) {
+            item.addEventListener('click', function() {
                 document.getElementById('toggle-nav').click();
             });
         });
-
     }
-
 }
 
 let menunav = new NavMenu('header-menu', '#contact', '#portfolio');

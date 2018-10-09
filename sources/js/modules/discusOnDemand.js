@@ -1,10 +1,7 @@
-;(function () {
-
-    'use strict';
-
+(function() {
     // Global object
     let App = {};
-    let discusContent = document.getElementById("disqus_thread");
+    let discusContent = document.getElementById('disqus_thread');
     // Create button
     App.commentsButton = document.createElement('button');
     App.commentsButton.setAttribute('class', 'comments-button');
@@ -12,13 +9,12 @@
     App.commentsButton.innerHTML = 'dodaj / pokaż komentarze';
 
     // Append button to body
-    if(discusContent) {
+    if (discusContent) {
         discusContent.appendChild(App.commentsButton);
     }
 
     // Click event handler
-    App.commentsButton.onclick = function () {
-
+    App.commentsButton.onclick = function() {
         // Remove button on click
         this.parentNode.removeChild(this);
 
@@ -39,8 +35,9 @@
         dsq.async = true;
         dsq.src = '//' + App.disqus_shortname + '.disqus.com/embed.js';
 
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-
+        (
+            document.getElementsByTagName('head')[0] ||
+            document.getElementsByTagName('body')[0]
+        ).appendChild(dsq);
     };
-
 })();

@@ -12,21 +12,28 @@ class ShareButton {
         let placeStick = document.getElementById(this.option.place.stick);
         let placeBottom = document.getElementById(this.option.place.bottom);
 
-        if(placeStick || placeBottom) {
+        if (placeStick || placeBottom) {
             placeStick.innerHTML = this.htmlTemplate(this.option.place.stick);
             placeBottom.innerHTML = this.htmlTemplate(this.option.place.bottom);
         }
-    };
+    }
 
     htmlTemplate(place) {
         let social = {
-            "facebook" : '<svg class="share-icon share-facebook"><use xlink:href="#share-icon-facebook"></use></svg>',
-            "twitter" : '<svg class="share-icon share-twitter"><use xlink:href="#share-icon-twitter"></use></svg>',
-            "google" : '<svg class="share-icon share-google"><use xlink:href="#share-icon-google"></use></svg>',
-            "add": '<svg class="share-icon share-add"><use xlink:href="#share-icon-add-opinion"></use></svg>'
+            facebook:
+                '<svg class="share-icon share-facebook"><use xlink:href="#share-icon-facebook"></use></svg>',
+            twitter:
+                '<svg class="share-icon share-twitter"><use xlink:href="#share-icon-twitter"></use></svg>',
+            google:
+                '<svg class="share-icon share-google"><use xlink:href="#share-icon-google"></use></svg>',
+            add:
+                '<svg class="share-icon share-add"><use xlink:href="#share-icon-add-opinion"></use></svg>'
         };
 
-        let addComment = (place === 'share-button-bottom') ? '' : `<div title="Dodaj opinię." data-share="opinion" class="share-btn btn-add-opinion"><span class="share-btn__wrapper">Dodaj komentarz</span></div>`;
+        let addComment =
+            place === 'share-button-bottom'
+                ? ''
+                : '<div title="Dodaj opinię." data-share="opinion" class="share-btn btn-add-opinion"><span class="share-btn__wrapper">Dodaj komentarz</span></div>';
 
         let html = `
         <h3>${this.option.title}</h3>
@@ -47,75 +54,81 @@ class ShareButton {
     }
 
     eventButton() {
-        let buttonShare = document.querySelectorAll(".share-btn");
+        let buttonShare = document.querySelectorAll('.share-btn');
         let winWidth = 520;
         let winHeight = 320;
-        let winTop = (screen.height / 2) - (winHeight / 2);
-        let winLeft = (screen.width / 2) - (winWidth / 2);
+        let winTop = screen.height / 2 - winHeight / 2;
+        let winLeft = screen.width / 2 - winWidth / 2;
 
-        buttonShare.forEach((el) => {
-            let typeSocial = el.getAttribute("data-share");
+        buttonShare.forEach(el => {
+            let typeSocial = el.getAttribute('data-share');
             el.addEventListener('click', () => {
-                if(typeSocial === 'print') {
+                if (typeSocial === 'print') {
                     window.print();
-                } else if(typeSocial === 'opinion' ) {
+                } else if (typeSocial === 'opinion') {
                     let h = document.body.scrollHeight;
                     window.scrollTo(0, h);
                     document.querySelectorAll('.comments-button')[0].click();
                 } else {
-                    window.open(this.showShareLink(typeSocial), 'sharer', `top=${winTop}, left=${winLeft}, toolbar=0, status=0, width=${winWidth}, height=${winHeight}`);
+                    window.open(
+                        this.showShareLink(typeSocial),
+                        'sharer',
+                        `top=${winTop}, left=${winLeft}, toolbar=0, status=0, width=${winWidth}, height=${winHeight}`
+                    );
                 }
-            })
-        })
-    };
-
+            });
+        });
+    }
 
     showShareLink(typeSocial) {
         let url;
-        switch(typeSocial) {
-            case "facebook":
+        switch (typeSocial) {
+            case 'facebook':
                 url = `https://www.facebook.com/sharer/sharer.php?u=${this.getUrl()}&p=${this.getDescription()}`;
                 break;
-            case "twitter":
+            case 'twitter':
                 url = `http://twitter.com/share?text=${this.getTitle()}&url=${this.getUrl()}`;
                 break;
-            case "google":
+            case 'google':
                 url = `https://plus.google.com/share?url=${this.getUrl()}`;
                 break;
         }
         return url;
-    };
+    }
 
     getUrl() {
         return window.location.href;
-    };
+    }
 
     getTitle() {
         return document.title;
-    };
+    }
 
     getDescription() {
-        let description
-            , content
-            , meta = document.getElementsByTagName('meta');
+        let description,
+            content,
+            meta = document.getElementsByTagName('meta');
 
         for (let x = 0, y = meta.length; x < y; x++) {
-            if (meta[x].name.toLowerCase() === "description") {
+            if (meta[x].name.toLowerCase() === 'description') {
                 description = meta[x];
             }
         }
-        content = description.content.replace(/ /g, "%20");
+        content = description.content.replace(/ /g, '%20');
         return content;
-    };
+    }
 }
 
 let option = {
-    "place": {
-        "stick": "share-button-stick",
-        "bottom": "share-button-bottom"
+    place: {
+        stick: 'share-button-stick',
+        bottom: 'share-button-bottom'
     },
-    "title": "Podziel się:"
+    title: 'Podziel się:'
 };
 
 let sharebutton = new ShareButton(option);
 sharebutton.init();
+
+// a = "http://pinterest.com/pin/create/button/?url=" + encodeURI(window.location.href) + "&media=" + encodeURI($('meta[property="og:image"]').attr("content")) + "&description=" + encodeURI($("title").text());
+// window.open(a, "sharing", ["width=734,height=734", "left=" + (screen.width - 734) / 2, "top=" + (screen.height - 734) / 2, "toolbar=0,status=0"].join());

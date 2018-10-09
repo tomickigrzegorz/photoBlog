@@ -1,14 +1,18 @@
 .header {
     position: relative;
+
     a {
         text-decoration: none;
     }
+
     padding: 0 15px;
     max-width: $max-width;
     margin: 0 auto;
+
     .logo {
         max-width: 225px;
     }
+
     .header-sentence {
         position: absolute;
         color: #3e3e3e;
@@ -40,14 +44,17 @@
         background: rgba(0, 0, 0, 0.8);
         transition: all 0.3s ease-in-out;
     }
+
     ul {
         position: relative;
         top: 12%;
         padding: 0;
         transform: scale(2);
         transition: all 0.3s ease-in-out;
+
         li {
             display: inline-block;
+
             /*margin: 20px;*/
             a {
                 border-radius: 3px;
@@ -57,6 +64,7 @@
                 font-size: 18px;
                 color: #fff;
                 transition: all 0.2s ease-in-out;
+
                 i {
                     margin-right: 5px;
                     font-size: 24px;
@@ -87,6 +95,7 @@
     text-indent: 100%;
     overflow: hidden;
     border: 1px solid #3DC0F1;
+
     &:before {
         position: absolute;
         top: 0.7em;
@@ -100,15 +109,18 @@
 
 #toggle-nav {
     display: none;
-    &:checked ~ .box {
+
+    &:checked~.box {
         opacity: 1;
         z-index: 400;
+
         ul {
             transform: scale(1);
         }
     }
-    &:checked ~ .box, &:checked ~ #toggle-nav-label {
-        background: #fff;
+
+    &:checked~.box,
+    &:checked~#toggle-nav-label {
         color: rgba(0, 0, 0, 0.8);
     }
 }
