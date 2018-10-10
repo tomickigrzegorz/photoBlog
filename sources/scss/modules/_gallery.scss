@@ -1,0 +1,136 @@
+.rig {
+    max-width: $max-width;
+    margin: 0 auto 0;
+    padding: 0;
+    font-size: 0;
+    list-style: none;
+    .rig-text {
+        @include font-size(18);
+        text-transform: uppercase;
+        line-height: 100%;
+        span {
+            display: block;
+            margin-top: 5px;
+            @include font-size(12);
+        }
+    }
+    li {
+        position: relative;
+        display: inline-block;
+        *display: inline; /*for IE6 - IE7*/
+        width: 33.33333333%;
+        vertical-align: middle;
+        box-sizing: border-box;
+        margin: 0;
+        transition: transform 0.3s linear 0.1s, z-index 1s linear 0s;
+        &:hover .rig-text {
+            transform: translateY(0);
+            opacity: 0.9;
+        }
+        @media (min-width: 401px) {
+            &:hover {
+                z-index: 1;
+                transform: scale(1.1);
+                transition: transform 0.3s linear 0.1s;
+                box-shadow: 0 28px 81px -7px rgba(0, 0, 0, 0.44);
+            }
+        }
+        &:hover .rig-overlay {
+            opacity: 0.4;
+        }
+    }
+}
+
+.rig-cell {
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+/* If have the image layer */
+.rig-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: none;
+    @media (min-width: 401px) {
+        transform: scale(1);
+        transition: all 1s;
+    }
+}
+
+.rig-overlay {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    background: #3DC0F1;
+    opacity: 0;
+    filter: alpha(opacity=0); /*For IE6 - IE8*/
+    @media (min-width: 401px) {
+        transition: all 0.6s;
+    }
+    @media (max-width: 768px) {
+        opacity: 0;
+    }
+}
+
+.rig-text {
+    display: block;
+    padding: 0 15px;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    text-transform: capitalize;
+    @include font-size(18);
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+    top: 40%;
+    color: white;
+    filter: alpha(opacity=0);
+    transform: translateY(-20px);
+    @media (min-width: 401px) {
+        transition: all .3s;
+    }
+    @media (min-width: 769px) {
+        opacity: 0;
+    }
+}
+
+@media (max-width: 900px) {
+    .rig li {
+        width: 50%;
+    }
+}
+
+@media (max-width: 600px) {
+    .rig li {
+        width: 100%;
+        margin-bottom: 3px;
+    }
+    .home {
+        &.container {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .rig-text {
+            top: 70%;
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .rig-cell {
+        margin: 0;
+    }
+}
+
+.fot {
+    @include font-size(14);
+    margin: -14px 0;
+}

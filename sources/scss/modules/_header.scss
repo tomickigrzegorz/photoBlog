@@ -1,0 +1,126 @@
+.header {
+    position: relative;
+
+    a {
+        text-decoration: none;
+    }
+
+    padding: 0 15px;
+    max-width: $max-width;
+    margin: 0 auto;
+
+    .logo {
+        max-width: 225px;
+    }
+
+    .header-sentence {
+        position: absolute;
+        color: #3e3e3e;
+        font-size: 9px;
+        line-height: 100%;
+        margin-left: 45px;
+        top: 110px;
+        bottom: 9px;
+    }
+}
+
+#header-menu {
+    position: absolute;
+    top: 0;
+    right: 21px;
+}
+
+#overlaymenu {
+    .box {
+        position: fixed;
+        text-align: center;
+        overflow: hidden;
+        z-index: -1;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background: rgba(0, 0, 0, 0.8);
+        transition: all 0.3s ease-in-out;
+    }
+
+    ul {
+        position: relative;
+        top: 12%;
+        padding: 0;
+        transform: scale(2);
+        transition: all 0.3s ease-in-out;
+
+        li {
+            display: inline-block;
+
+            /*margin: 20px;*/
+            a {
+                border-radius: 3px;
+                padding: 15px;
+                border: 1px solid transparent;
+                text-decoration: none;
+                font-size: 18px;
+                color: #fff;
+                transition: all 0.2s ease-in-out;
+
+                i {
+                    margin-right: 5px;
+                    font-size: 24px;
+                }
+
+                &:hover {
+                    border-color: #fff;
+                }
+            }
+        }
+    }
+}
+
+#toggle-nav-label {
+    color: rgba(0, 0, 0, 0.5);
+    background: #FFF;
+    text-align: center;
+    line-height: 50px;
+    font-size: 16px;
+    display: block;
+    cursor: pointer;
+    position: relative;
+    z-index: 500;
+    width: 45px;
+    height: 45px;
+    border-radius: 3px;
+    margin-top: 23px;
+    text-indent: 100%;
+    overflow: hidden;
+    border: 1px solid #3DC0F1;
+
+    &:before {
+        position: absolute;
+        top: 0.7em;
+        right: 0.5em;
+        bottom: 0.7em;
+        left: 0.5em;
+        background: linear-gradient(#3DC0F1 20%, transparent 20%, transparent 40%, #3DC0F1 40%, #3DC0F1 60%, transparent 60%, transparent 80%, #3DC0F1 80%);
+        content: '';
+    }
+}
+
+#toggle-nav {
+    display: none;
+
+    &:checked~.box {
+        opacity: 1;
+        z-index: 400;
+
+        ul {
+            transform: scale(1);
+        }
+    }
+
+    &:checked~.box,
+    &:checked~#toggle-nav-label {
+        color: rgba(0, 0, 0, 0.8);
+    }
+}

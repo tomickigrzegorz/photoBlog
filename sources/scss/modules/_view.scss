@@ -1,0 +1,58 @@
+.text-center {
+    text-align: center;
+}
+
+.pb {
+    padding-bottom: 120px;
+}
+
+h1 {
+    @include font-size(20);
+}
+
+.container {
+    @include clearfix;
+    width: 100%;
+    max-width: $max-width;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.sweep-to-top {
+    position: relative;
+    transform: translateZ(0);
+    transition: color 1000ms;
+    padding: 0 5px;
+
+    &:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #f13d3d;
+        transform: scaleY(0);
+        transform-origin: 50% 100%;
+        transition-property: transform;
+        transition: 200ms ease-out;
+    }
+
+    &:hover:before {
+        transform: scaleY(1);
+    }
+}
+
+figure {
+    img {
+        @include img-responsive;
+        margin: 0 auto;
+    }
+
+    figcaption {
+        margin: 0;
+    }
+}

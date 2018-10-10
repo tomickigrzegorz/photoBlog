@@ -1,0 +1,14 @@
+.footer {
+    position: absolute;
+    width: 100%;
+    max-width: $max-width;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    @include font-size(12);
+    padding: 15px 5px;
+    .text-small {
+        margin-bottom: 5px;
+    }
+}

@@ -1,0 +1,18 @@
+.disqus-contet {
+    text-align: center;
+    width: 100%;
+    max-width: $max-width;
+}
+
+.comments-button {
+    background-color: #60b044;
+    border: none;
+    border-radius: .313em;
+    color: white;
+    padding: 1em;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    &:hover {
+        transform: scale(1.1);
+    }
+}

@@ -1,0 +1,59 @@
+block variables
+- var path = self.htmlWebpackPlugin.options
+- var pathToFile = (path.mode == 'development') ? "../../../sources/" : ""
+
+doctype html
+html(lang="pl", dir="ltr" itemscope itemtype="http://schema.org/WebPage")
+
+    include ./includes/head.pug
+    include ./includes/header.pug
+    include ./includes/svgLogo.pug
+    include ./includes/image.pug
+
+    head
+        +head(path.file)
+
+    body
+        +svgLogo()
+        +header()
+
+        main(class="container")
+            article(class="box-article")
+                header(class="title")
+                    h1= path.file.body.title
+                .date
+                    svg(class="icon" viewBox="0 0 32 32")
+                        path(class="path1" d="M10 12h4v4h-4zM16 12h4v4h-4zM22 12h4v4h-4zM4 24h4v4h-4zM10 24h4v4h-4zM16 24h4v4h-4zM10 18h4v4h-4zM16 18h4v4h-4zM22 18h4v4h-4zM4 18h4v4h-4zM26 0v2h-4v-2h-14v2h-4v-2h-4v32h30v-32h-4zM28 30h-26v-22h26v22z")
+                    small= path.file.body.date
+                    #share-button-stick.share-button-temp
+                .text!= path.file.body.text
+                .content
+                    each val, i in path.file.body.items
+                        figure
+                            .item__img
+                                +image(pathToFile+val.path, val.img, "responsively-lazy")
+                            if val.text
+                                figcaption!= val.text
+                        
+                    .maps-title!= path.file.mapstitle
+
+
+                #share-button-bottom.share-button-temp
+                .disqus-contet.row.pb
+                    #disqus_thread
+                    noscript Please enable JavaScript to view the 
+                        a(href="https://disqus.com/?ref_noscript" rel="nofollow") | comments powered by Disqus.
+
+        script(type='application/ld+json').
+            {
+                "@context": "http://schema.org/",
+                "@type": "Blog",
+                "publisher": "blog.grzegorztomicki.pl",
+                "author": "#{path.file.schema.author}",
+                "datePublished": "#{path.file.schema.datePublished}",
+                "dateModified": "#{path.file.schema.dateModified}",
+                "headline": "Blog fotograficzny"
+            }
+
+
+        include ./includes/footer.pug
