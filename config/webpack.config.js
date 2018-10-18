@@ -176,7 +176,8 @@ module.exports = (env, argv) => {
             ),
             prodPlugin(
                 new CopyWebpackPlugin([
-                    { from: 'sources/assets/', to: 'assets/' }
+                    { from: 'sources/assets/', to: 'assets/' },
+                    { from: 'sources/assets/favicon.ico', to: './' },
                 ]),
                 argv
             ),
