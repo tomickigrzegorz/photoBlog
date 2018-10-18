@@ -1,3 +1,4 @@
+import './modules/foreachPolyfill';
 import './modules/scrolltop';
 import './modules/nav';
 
