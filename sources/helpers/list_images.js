@@ -1,26 +1,27 @@
-const fs = require("fs");
+const fs = require('fs');
 
-const nameGallery   = "lwow";
-const name          = nameGallery;  // = nameGallery folder i json tak samo sie nazywa
+const nameGallery = 'wieden';
+const name = nameGallery; // = nameGallery folder i json tak samo sie nazywa
 
 const test = [];
-const author = "Grzegorz Tomicki";
+const author = 'Grzegorz Tomicki';
 
 let now = new Date();
-let date = now.getDate()  + "." + (now.getMonth()+1) + "." + now.getFullYear();
+let date = now.getDate() + '.' + (now.getMonth() + 1) + '.' + now.getFullYear();
 
-let datePublished = new Date().toISOString().slice(0,10);
+let datePublished = new Date().toISOString().slice(0, 10);
 let dateModified = datePublished;
 
-fs.readdir(`./sources/images/${nameGallery}/1200/`, function (err, files) {
-    if (err)
-        throw err;
+fs.readdir(`../images/${nameGallery}/1200/`, function (err, files) {
+    if (err) throw err;
     for (let index in files) {
-        let path = `{"path":"./images/${nameGallery}/","img":"${files[index]}","alt":""}`;
-        test.push("\r\n\t\t\t\t" + path);
+        let path = `{"path":"./images/${nameGallery}/","img":"${
+            files[index]
+            }","alt":""}`;
+        test.push('\r\n\t\t\t\t' + path);
     }
 
-    const template  = (`{
+    const template = `{
     "head": {
         "title": "",
         "description": ""
@@ -41,8 +42,6 @@ fs.readdir(`./sources/images/${nameGallery}/1200/`, function (err, files) {
         "author": "${author}"
     }
 }
-    `
-    );
-
-    fs.writeFile(`./sources/data/site/${name}.json`, template, function (err) {});
+    `;
+    fs.writeFile(`../data/${name}.json`, template, function (err) { });
 });
