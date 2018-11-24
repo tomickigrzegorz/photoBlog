@@ -6,54 +6,59 @@
     margin-bottom: 3px;
   }
 
-  .share-button {
-    display: inline-block;
-    overflow: hidden;
+  .share {
+    &:hover > div {
+      opacity: 0.5;
 
-    .share-icon {
-      fill: #FFF;
-      border: 0;
+      &:hover {
+        opacity: 1;
+      }
     }
 
-    .share-btn {
+    &__content {
+      display: inline-block;
+      overflow: hidden;
+    }
+    &__icon {
+      fill: #fff;
+      border: 0;
+    }
+    &__btn {
       cursor: pointer;
       display: inline-block;
       overflow: hidden;
-      @include transition(all .2s ease-in-out);
+      @include transition(all 0.2s ease-in-out);
       background-color: transparent;
-
-      .share-btn__hidden {
+      &--hidden {
         position: absolute;
         clip: rect(1px, 1px, 1px, 1px);
         padding: 0;
         border: 0;
         overflow: hidden;
       }
-
-      .share-btn__wrapper {
+      &--wrapper {
         line-height: 42px;
       }
-
-      &.btn-facebook {
+      &--facebook {
         background-color: $share-facebook;
       }
 
-      &.btn-twitter {
+      &--twitter {
         background-color: $share-twitter;
       }
 
-      &.btn-google {
+      &--google {
         background-color: $share-google;
       }
 
-      &.btn-mail {
+      &--mail {
         background-color: $share-google;
       }
 
-      &.btn-add-opinion {
+      &--add-opinion {
         background-color: $share-button;
-        color: #FFF;
-        width: 125px;
+        color: #fff;
+        min-width: 125px;
         text-align: center;
         @include font-size(13);
         border-bottom: 4px solid $share-button-hover;
@@ -63,35 +68,21 @@
         }
       }
     }
-
-    &:hover>div {
-      opacity: 0.5;
-
-      &:hover {
-        opacity: 1;
-      }
-    }
-
-    @media (min-width: $screen-ss) {
-      height: 46px;
-      margin-left: -4px;
-
-      .share-btn {
-        margin: 4px 0 0;
-      }
-
-      .share-icon,
-      .share-btn {
-        width: 42px;
-        height: 42px;
-      }
-    }
-
-    @media (min-width: $screen-md) {
-      margin-left: -2px;
-    }
-
   }
 
+  @media (min-width: $screen-ss) {
+    .share__btn {
+      margin: 4px 0 0;
+    }
 
+    .share__icon,
+    .share__btn {
+      width: 42px;
+      height: 42px;
+    }
+  }
+
+  @media (min-width: $screen-md) {
+    margin-left: -2px;
+  }
 }

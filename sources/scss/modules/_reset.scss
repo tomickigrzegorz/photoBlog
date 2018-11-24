@@ -1,31 +1,35 @@
-html, body {
-    margin: 0;
-    padding: 0;
+html,
+body {
+  margin: 0;
+  padding: 0;
 }
 
 html {
-    height: 100%;
-    font-size: 62.5%;
+  height: 100%;
+  font-size: 62.5%;
 }
 
 body {
-    position: relative;
-    font-family: "Proxima Nova Regular", "Segoe UI", Roboto, "Droid Sans", "Helvetica Neue", Arial, sans-serif;
-    @include font-size(18);
-    line-height: 1.25em;
-    font-weight: 400;
-    font-style: normal;
-    min-height: 100%;
-    color: #525252;
-    text-rendering: optimizeLegibility;
-    overflow-x: hidden;
+  position: relative;
+  font-family: "Proxima Nova Regular", "Segoe UI", Roboto, "Droid Sans",
+    "Helvetica Neue", Arial, sans-serif;
+  @include font-size(20);
+  font-weight: 400;
+  font-style: normal;
+  min-height: 100%;
+  color: #000;
+  background-color: #F5F5F5;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
-*, *:after, *:before {
-    box-sizing: border-box;
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
 }
 
 img {
-    border: 0;
-    vertical-align: middle;
+  border: 0;
+  vertical-align: middle;
 }

@@ -1,14 +1,12 @@
 .row {
-    overflow: hidden;
-    max-width: $max-width;
-    min-width: $min-width;
-    margin: 0 auto;
+  overflow: hidden;
+  max-width: $max-width;
+  min-width: $min-width;
+  margin: 0 auto;
 
-    &:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-
-   
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 }

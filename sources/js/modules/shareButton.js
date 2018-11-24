@@ -21,31 +21,31 @@ class ShareButton {
   htmlTemplate(place) {
     let social = {
       facebook:
-        '<svg class="share-icon share-facebook"><use xlink:href="#share-icon-facebook"></use></svg>',
+        '<svg class="share__icon share__btn--facebook"><use xlink:href="#share-icon-facebook"></use></svg>',
       twitter:
-        '<svg class="share-icon share-twitter"><use xlink:href="#share-icon-twitter"></use></svg>',
+        '<svg class="share__icon share__btn--twitter"><use xlink:href="#share-icon-twitter"></use></svg>',
       mail:
-        '<svg class="share-icon share-mail"><use xlink:href="#share-icon-mail"></use></svg>',
+        '<svg class="share__icon share__btn--mail"><use xlink:href="#share-icon-mail"></use></svg>',
       add:
-        '<svg class="share-icon share-add"><use xlink:href="#share-icon-add-opinion"></use></svg>'
+        '<svg class="share__icon share__btn--add"><use xlink:href="#share-icon-add-opinion"></use></svg>'
     };
 
     let addComment =
       place === 'share-button-bottom'
         ? ''
-        : '<div title="Dodaj opinię." data-share="opinion" class="share-btn btn-add-opinion"><span class="share-btn__wrapper">Dodaj komentarz</span></div>';
+        : '<div title="Dodaj opinię." data-share="opinion" class="share__btn share__btn--add-opinion"><span class="share__btn--wrapper">Dodaj komentarz</span></div>';
 
     let html = `
         <h3>${this.option.title}</h3>
-        <div class="share-button fl">
-            <div title="Udostępnij w serwisie Facebook. Strona otworzy się w nowym oknie." data-share="facebook" class="share-btn btn-facebook">
-                <span class="share-btn__wrapper">${social.facebook}</span>
+        <div class="share fl">
+            <div title="Udostępnij w serwisie Facebook. Strona otworzy się w nowym oknie." data-share="facebook" class="share__btn btn-facebook">
+                <span class="share__btn--wrapper">${social.facebook}</span>
             </div>
-            <div title="Udostępnij w serwisie Twitter. Strona otworzy się w nowym oknie." data-share="twitter" class="share-btn btn-twitter">
-                <span class="share-btn__wrapper">${social.twitter}</span>
+            <div title="Udostępnij w serwisie Twitter. Strona otworzy się w nowym oknie." data-share="twitter" class="share__btn btn-twitter">
+                <span class="share__btn--wrapper">${social.twitter}</span>
             </div>
-            <div title="Wyślij maila." data-share="mail" class="share-btn btn-mail">
-                <span class="share-btn__wrapper">${social.mail}</span>
+            <div title="Wyślij maila." data-share="mail" class="share__btn btn-mail">
+                <span class="share__btn--wrapper">${social.mail}</span>
             </div>
             ${addComment}
         </div>
@@ -54,7 +54,7 @@ class ShareButton {
   }
 
   eventButton() {
-    let buttonShare = document.querySelectorAll('.share-btn');
+    let buttonShare = document.querySelectorAll('.share__btn');
     let winWidth = 520;
     let winHeight = 320;
     let winTop = screen.height / 2 - winHeight / 2;
