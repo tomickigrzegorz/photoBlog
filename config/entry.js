@@ -11,6 +11,7 @@ module.exports.html = {
     "jeden-dzien-w-berlinie": "./sources/js/article.js",
     "lucja-komunia-i-plener": "./sources/js/article.js",
     "lwow": "./sources/js/article.js",
+    "lublin": "./sources/js/article.js",
     "bratyslawa": "./sources/js/article.js",
     "wieden": "./sources/js/article.js",
     "magda-i-grzesiek": "./sources/js/article.js",

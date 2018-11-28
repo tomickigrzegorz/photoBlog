@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const nameGallery = 'wieden';
+const nameGallery = 'lublin';
 const name = nameGallery; // = nameGallery folder i json tak samo sie nazywa
 
 const test = [];
