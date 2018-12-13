@@ -25,7 +25,6 @@ class Hohoho {
         d: Math.random() * this.ns
       });
     }
-
   }
 
   getWidth() {
@@ -38,7 +37,10 @@ class Hohoho {
   createCanvas() {
     let canv = document.createElement('canvas');
     canv.id = 'canvas';
-    canv.setAttribute('style', 'position: fixed; top: 0; pointer-events: none;');
+    canv.setAttribute(
+      'style',
+      'position: fixed; top: 0; pointer-events: none;'
+    );
     document.body.appendChild(canv);
   }
 
@@ -61,7 +63,6 @@ class Hohoho {
         }
         this.ctx.fill();
         this.updateSnowflakes();
-
       }, this.interval);
     };
   }
@@ -100,7 +101,6 @@ class Hohoho {
       }
     }
   }
-
 }
 
 const options = {
