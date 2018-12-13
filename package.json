@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config ./config/webpack.config.js --mode development --open",
-    "prod": "webpack --config ./config/webpack.config.js --mode production"
+    "prod": "webpack --config ./config/webpack.config.js --mode production",
+    "sitemap": "node ./sources/helpers/sitemap.js",
+    "json": "node ./sources/helpers/list_images.js"
   },
   "keywords": [
     "webpack 4",
