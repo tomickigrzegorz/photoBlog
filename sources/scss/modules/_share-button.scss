@@ -7,6 +7,7 @@
   }
 
   .share {
+    display: inline-block;
     &:hover > div {
       opacity: 0.5;
 
