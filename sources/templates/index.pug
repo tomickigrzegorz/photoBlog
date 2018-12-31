@@ -19,15 +19,15 @@ html(lang="pl", dir="ltr" itemscope itemtype="http://schema.org/WebPage")
 
         main(class="container pb home")
             .body
-                ul.rig
+                div.gallery
                     each val, i in path.file.items
-                        li
-                            a(class="rig-cell" href=val.href)
+                        div.gallery__items
+                            a(href=val.href)
                                 figure
-                                    img(class="rig-img" src=(pathToFile+val.img), alt=val.alt)
+                                    img(class="gallery__img" src=(pathToFile+val.img), alt=val.alt)
                                     figcaption
-                                        span.rig-overlay
-                                        span.rig-text
+                                        div.gallery__overlay
+                                        div.gallery__text
                                             = val.text
 
         script(type='application/ld+json').
