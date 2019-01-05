@@ -12,16 +12,16 @@ let date = now.getDate() + '.' + (now.getMonth() + 1) + '.' + now.getFullYear();
 let datePublished = new Date().toISOString().slice(0, 10);
 let dateModified = datePublished;
 
-fs.readdir(`../sources/images/${nameGallery}/1200/`, function(err, files) {
-  if (err) throw err;
-  for (let index in files) {
-    let path = `{"path":"./images/${nameGallery}/","img":"${
-      files[index]
-    }","alt":""}`;
-    test.push('\r\n\t\t\t\t' + path);
-  }
+fs.readdir(`../sources/images/${nameGallery}/1200/`, function (err, files) {
+    if (err) throw err;
+    for (let index in files) {
+        let path = `{"path":"./images/${nameGallery}/","img":"${
+            files[index]
+            }","alt":""}`;
+        test.push('\r\n\t\t\t\t' + path);
+    }
 
-  const template = `{
+    const template = `{
     "head": {
         "title": "",
         "description": ""
@@ -43,5 +43,5 @@ fs.readdir(`../sources/images/${nameGallery}/1200/`, function(err, files) {
     }
 }
     `;
-  fs.writeFile(`../sources/data/${name}.json`, template, function(err) {});
+    fs.writeFile(`../sources/data/${name}.json`, template, function (err) { });
 });

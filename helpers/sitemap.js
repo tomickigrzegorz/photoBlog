@@ -3,7 +3,7 @@ const fs = require('fs');
 const htmlPlace = '../dist';
 const ulrPart = [];
 
-fs.readdir(`${htmlPlace}`, function(err, files) {
+fs.readdir(`${htmlPlace}`, function (err, files) {
   if (err) throw err;
   for (let index in files) {
     let rest = files[index].split('.')[1];
@@ -26,9 +26,9 @@ fs.readdir(`${htmlPlace}`, function(err, files) {
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">${ulrPart.join(
-              ''
-            )}
+    ''
+  )}
 </urlset>`;
 
-  fs.writeFile('../sitemap.xml', template, function(err) {});
+  fs.writeFile('../sitemap.xml', template, function (err) { });
 });
