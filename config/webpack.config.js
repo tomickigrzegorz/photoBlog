@@ -169,7 +169,9 @@ module.exports = (env, argv) => {
           staticFileGlobsIgnorePatterns: [
             /\.map$/,
             /manifest\.json$/,
-            /css/
+            /css/,
+            /\.txt/,
+            /\.htaccess/
           ]
         }),
         argv
