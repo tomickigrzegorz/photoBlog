@@ -1,6 +1,7 @@
-class Scroller {
+class ScrollerTop {
   constructor(options) {
     this.options = options;
+    this.init();
   }
 
   init() {
@@ -48,10 +49,7 @@ class Scroller {
     if (this.scrollTop() > 0 && this.stop == false) {
       setTimeout(() => {
         this.scrollAnimate();
-        window.scrollBy(
-          0,
-          -Math.abs(this.scrollTop()) / this.options.normal['steps']
-        );
+        window.scrollBy(0, -Math.abs(this.scrollTop()) / this.options.normal['steps']);
       }, this.options.normal['ms']);
     }
   }
@@ -66,23 +64,15 @@ class Scroller {
   }
 
   click(button) {
-    button.addEventListener(
-      'click',
-      e => {
-        e.stopPropagation();
-        this.scroll();
-      },
-      false
-    );
+    button.addEventListener('click', e => {
+      e.stopPropagation();
+      this.scroll();
+    }, false);
 
-    button.addEventListener(
-      'dblclick',
-      e => {
-        e.stopPropagation();
-        this.scrollNoAnimate();
-      },
-      false
-    );
+    button.addEventListener('dblclick', e => {
+      e.stopPropagation();
+      this.scrollNoAnimate();
+    }, false);
   }
 
   hide(button) {
@@ -103,22 +93,14 @@ class Scroller {
 
   stopListener() {
     let position = this.scrollTop();
-    window.addEventListener(
-      'scroll',
-      () => {
-        this.scrollTop() > position ? this.stopTimeout(200) : '';
-        position = this.scrollTop();
-      },
-      false
-    );
+    window.addEventListener('scroll', () => {
+      this.scrollTop() > position ? this.stopTimeout(200) : '';
+      position = this.scrollTop();
+    }, false);
 
-    window.addEventListener(
-      'wheel',
-      e => {
-        if (e.deltaY > 0) this.stopTimeout(200);
-      },
-      false
-    );
+    window.addEventListener('wheel', e => {
+      if (e.deltaY > 0) this.stopTimeout(200);
+    }, false);
   }
 
   stopTimeout(ms) {
@@ -133,21 +115,4 @@ class Scroller {
   }
 }
 
-let options = {
-  showButtonAfter: 200, // show button after scroling down this amount of px
-  animate: 'normal', // [false|normal|linear] - for false no aditional settings are needed
-
-  normal: {
-    // applys only if [animate: normal] - set scroll loop distanceLeft/steps|ms
-    steps: 20, // the more steps per loop the slower animation gets
-    ms: 10 // the less ms the quicker your animation gets
-  },
-  linear: {
-    // applys only if [animate: linear] - set scroll px|ms
-    px: 30, // the more px the quicker your animation gets
-    ms: 10 // the less ms the quicker your animation gets
-  }
-};
-
-let scroll = new Scroller(options);
-scroll.init();
+export default ScrollerTop;

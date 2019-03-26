@@ -31,3 +31,46 @@
 @mixin transition($transition) {
   transition: $transition;
 }
+
+$breakpoints: (
+  xs: 512px,
+  sm: 768px,
+  md: 896px,
+  lg: 1152px,
+  xl: 1280px
+);
+
+@mixin breakpoint( $breakpoint ) {
+  @if map-has-key( $breakpoints, $breakpoint ) {
+     @media ( min-width: #{ map-get( $breakpoints, $breakpoint ) } ) {
+       @content;
+     }
+  } @else if type_of( $breakpoint ) == number and unit( $breakpoint ) == px or unit( $breakpoint ) == em or unit( $breakpoint ) == rem {
+     @media (min-width: $breakpoint ) {
+       @content;
+     }
+   } @else {
+     @warn "Nie można pobrać żadnej wartości z `#{$breakpoint}`. Nie jest zdefiniowany w mapie `$breakpoints` lub jest nieprawidłową liczbą px, em, lub rem.";
+  }
+}
+
+// p {
+//   padding: 10px;
+//   @include breakpoint(xs) { 
+//     margin-top: 10px; 
+//   }
+//  }
+
+// p {
+//   padding: 10px;
+//   @media (min-width: 512px) { 
+//     margin-top: 10px; 
+//   }
+//  }
+
+// p {
+//   padding: 10px;
+//   @include breakpoint(1600px) { 
+//     margin-top: 10px; 
+//   }
+//  }

@@ -1,6 +1,9 @@
+import '../../scss/modules/_share-button.scss';
+
 class ShareButton {
   constructor(option) {
     this.option = option;
+    this.init();
   }
 
   init() {
@@ -72,7 +75,7 @@ class ShareButton {
         } else if (typeSocial === 'mail') {
           let mailtoLink = `mailto:?subject=Zobacz może Ci się spodoba&body=${this.getTitle()} %20%0A ${this.getUrl()}`;
           let win = window.open(mailtoLink, 'mail');
-          setTimeout(function() {
+          setTimeout(function () {
             win.close();
           }, 500);
         } else {
@@ -122,13 +125,4 @@ class ShareButton {
   }
 }
 
-let option = {
-  place: {
-    stick: 'share-button-stick',
-    bottom: 'share-button-bottom'
-  },
-  title: 'Podziel się:'
-};
-
-let sharebutton = new ShareButton(option);
-sharebutton.init();
+export default ShareButton;

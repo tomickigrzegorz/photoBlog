@@ -1,120 +1,45 @@
-(function(window, document, index) {
-  let extendObj = function(defaults, options) {
-      let prop,
-        extended = {};
-      for (prop in defaults)
-        if (Object.prototype.hasOwnProperty.call(defaults, prop))
-          extended[prop] = defaults[prop];
+import '../../scss/modules/_discus-button.scss';
 
-      for (prop in options)
-        if (Object.prototype.hasOwnProperty.call(options, prop))
-          extended[prop] = options[prop];
+class DisqusLoader {
+  constructor(option) {
+    this.option = option;
+    this.init();
+  }
 
-      return extended;
-    },
-    getOffset = function(el) {
-      let rect = el.getBoundingClientRect();
-      return {
-        top: rect.top + document.body.scrollTop,
-        left: rect.left + document.body.scrollLeft
-      };
-    },
-    loadScript = function(url, callback) {
-      let script = document.createElement('script');
-      script.src = url;
-      script.async = true;
-      script.setAttribute('data-timestamp', +new Date());
-      script.addEventListener('load', function() {
-        if (typeof callback === 'function') callback();
-      });
-      (document.head || document.body).appendChild(script);
-    },
-    throttle = function(a, b) {
-      let c, d;
-      return function() {
-        let e = this,
-          f = arguments,
-          g = +new Date();
-        c && g < c + a
-          ? (clearTimeout(d),
-            (d = setTimeout(function() {
-              (c = g), b.apply(e, f);
-            }, a)))
-          : ((c = g), b.apply(e, f));
-      };
-    },
-    throttleTO = false,
-    laziness = false,
-    disqusConfig = false,
-    scriptUrl = false,
-    scriptStatus = 'unloaded',
-    instance = false,
-    init = function() {
-      if (
-        !instance ||
-        !document.body.contains(instance) ||
-        instance.disqusLoaderStatus === 'loaded'
-      )
-        return true;
+  init() {
+    const discusContent = document.getElementById(this.option.disqusThread);
+    if (discusContent) {
+      discusContent.appendChild(this.disqusButtonCreate());
+      this.disqusEvent();
+    }
+  }
 
-      let winST = window.pageYOffset,
-        offset = getOffset(instance).top;
+  disqusButtonCreate() {
+    const commentsButton = document.createElement('button');
+    commentsButton.setAttribute('class', this.option.commentsButton);
+    commentsButton.innerHTML = this.option.buttonName;
+    return commentsButton;
+  }
 
-      // if the element is too far below || too far above
-      if (
-        offset - winST > window.innerHeight * laziness ||
-        winST - offset - instance.offsetHeight - window.innerHeight * laziness >
-          0
-      )
-        return true;
+  disqusEvent() {
+    const disqusButton = document.querySelector(`.${this.option.commentsButton}`);
+    disqusButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      const disqusContainer = document.createElement('div');
+      disqusContainer.setAttribute('id', this.option.disqusThread);
+      document.body.appendChild(disqusContainer);
 
-      let tmp = document.getElementById('disqus_thread');
-      if (tmp) tmp.removeAttribute('id');
-      instance.setAttribute('id', 'disqus_thread');
-      instance.disqusLoaderStatus = 'loaded';
+      const disqus_shortname = this.option.disqusShortName;
 
-      if (scriptStatus === 'loaded') {
-        DISQUS.reset({
-          reload: true,
-          config: disqusConfig
-        });
-      } // unloaded | loading
-      else {
-        window.disqus_config = disqusConfig;
-        if (scriptStatus === 'unloaded') {
-          scriptStatus = 'loading';
-          loadScript(scriptUrl, function() {
-            scriptStatus = 'loaded';
-          });
-        }
-      }
-    };
+      const dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 
-  window.addEventListener('scroll', throttle(throttleTO, init));
-  window.addEventListener('resize', throttle(throttleTO, init));
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    });
+  }
 
-  window.disqusLoader = function(element, options) {
-    options = extendObj(
-      {
-        laziness: 1,
-        throttle: 250,
-        scriptUrl: false,
-        disqusConfig: false
-      },
-      options
-    );
+}
 
-    laziness = options.laziness + 1;
-    throttleTO = options.throttle;
-    disqusConfig = options.disqusConfig;
-    scriptUrl = scriptUrl === false ? options.scriptUrl : scriptUrl; // set it only once
-
-    if (typeof element === 'string') instance = document.querySelector(element);
-    else if (typeof element.length === 'number') instance = element[0];
-    else instance = element;
-
-    instance.disqusLoaderStatus = 'unloaded';
-
-    init();
-  };
-})(window, document, 0);
+export default DisqusLoader;

@@ -1,8 +1,9 @@
 class NavMenu {
-  constructor(header, contact, portfolio) {
-    this.header = header;
-    this.contact = contact;
-    this.portfolio = portfolio;
+  constructor(option) {
+    this.header = option.navHeaderMenu;
+    this.contact = option.navContact;
+    this.portfolio = option.navPortfolio;
+    this.buildMenu();
   }
 
   menu() {
@@ -22,21 +23,19 @@ class NavMenu {
   }
 
   addToHeaderMenu() {
-    return (document.getElementById(this.header).innerHTML = this.menu());
+    return document.getElementById(this.header).innerHTML = this.menu();
   }
 
   buildMenu() {
     this.addToHeaderMenu();
+    const elements = document.querySelectorAll(this.contact, this.portfolio);
 
-    let elements = document.querySelectorAll(this.contact, this.portfolio);
-
-    elements.forEach(function(item) {
-      item.addEventListener('click', function() {
+    elements.forEach(function (item) {
+      item.addEventListener('click', function () {
         document.getElementById('toggle-nav').click();
       });
     });
   }
 }
 
-let menunav = new NavMenu('header-menu', '#contact', '#portfolio');
-menunav.buildMenu();
+export default NavMenu;

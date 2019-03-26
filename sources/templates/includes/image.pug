@@ -1,16 +1,17 @@
 mixin image(path, src, className)
     -
-        var setSrc = "data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-        var srcBig = path + "1200/" + src
-        var img400 = path + "400/" + src + " 400w, "
-        var img600 = path + "600/" + src + " 600w, "
-        var img800 = path + "800/" + src + " 800w, "
-        var img1000 = path + "1000/" + src + " 1000w, "
-        var img1200 = path + "1200/" + src + " 1200w"
-    img(
-        class = className
-        src = srcBig
-        srcset = setSrc
-        data-srcset = img400 + img600 + img800 + img1000 + img1200
-        alt = ''
-    )  
+        var img400 = path + "400/" + src
+        var img600 = path + "600/" + src
+        var img800 = path + "8000/" + src
+        var img1000 = path + "1000/" + src
+        var img1200 = path + "1200/" + src
+
+    picture
+        | <!--[if IE 9]><video style="display: none;><![endif]-->
+        source(data-srcset=img400 media="(max-width: 400px)")
+        source(data-srcset=img600 media="(max-width: 600px)")
+        source(data-srcset=img800 media="(max-width: 800px)")
+        source(data-srcset=img1000 media="(max-width: 1000px)")
+        source(data-srcset=img1200)
+        | <!--[if IE 9]></video><![endif]-->
+        img(data-src=img1200 class="lazyload")

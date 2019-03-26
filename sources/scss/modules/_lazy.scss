@@ -1,18 +1,5 @@
-.responsively-lazy {
-  width: 100%;
-
-  &:not(img) {
-    position: relative;
-    height: 0;
-  }
-
-  &:not(img) > img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
+img[data-sizes="auto"] {
+  display: block;
 }
 
 .item__img {
