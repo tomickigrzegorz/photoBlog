@@ -41,74 +41,58 @@
     height: 100%;
     left: 0;
     top: 0;
-    background: rgba(0, 0, 0, 0.8);
     transition: all 0.3s ease-in-out;
   }
 
   ul {
     position: relative;
-    top: 12%;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -30%);
     padding: 0;
-    transform: scale(2);
-    transition: all 0.3s ease-in-out;
+    transition: all 1s ease-in-out;
 
     li {
-      display: inline-block;
+      display: block;
+      padding: 15px;
+      text-transform: uppercase;
 
       a {
-        border-radius: 3px;
-        padding: 15px;
-        border: 1px solid transparent;
-        text-decoration: none;
-        font-size: 18px;
         color: #fff;
-        transition: all 0.2s ease-in-out;
+        @include font-size(25);
 
-        i {
-          margin-right: 5px;
-          font-size: 24px;
-        }
 
-        &:hover {
-          border-color: #fff;
-        }
       }
     }
   }
 }
 
 #toggle-nav-label {
-  color: rgba(0, 0, 0, 0.5);
-  background: #fff;
-  text-align: center;
-  line-height: 50px;
-  font-size: 16px;
+
+  background: #00cdf2;
+  color: transparent;
   display: block;
   cursor: pointer;
   position: relative;
   z-index: 500;
-  width: 45px;
-  height: 45px;
-  border-radius: 3px;
+  width: 55px;
+  height: 55px;
   margin-top: 23px;
   text-indent: 100%;
   overflow: hidden;
-  border: 1px solid #3dc0f1;
 
   &:before {
     position: absolute;
-    top: 0.7em;
+    top: 0.6em;
+    bottom: 0.6em;
     right: 0.5em;
-    bottom: 0.7em;
     left: 0.5em;
-    background: linear-gradient(#3dc0f1 20%,
-      transparent 20%,
-      transparent 40%,
-      #3dc0f1 40%,
-      #3dc0f1 60%,
-      transparent 60%,
-      transparent 80%,
-      #3dc0f1 80%);
+    background: linear-gradient(to bottom,
+      #fff 0%, #fff 20%,
+      transparent 20%, transparent 40%,
+      #fff 40%, #fff 60%,
+      transparent 60%, transparent 80%,
+      #fff 80%, #fff 100%);
     content: "";
   }
 }
@@ -119,14 +103,31 @@
   &:checked~.box {
     opacity: 1;
     z-index: 400;
-
-    ul {
-      transform: scale(1);
-    }
+    background: rgba(0, 0, 0, 0.8);
   }
 
-  &:checked~.box,
-  &:checked~#toggle-nav-label {
-    color: rgba(0, 0, 0, 0.8);
+  &:checked+#toggle-nav-label {
+
+    transition: all 0.5s ease-in-out;
+    transform: rotate(90deg);
+
+    &:before,
+    &:after {
+      position: absolute;
+      content: ' ';
+      top: 8px;
+      left: 25px;
+      height: 38px;
+      width: 5px;
+      background-color: #fff;
+    }
+
+    &:before {
+      transform: rotate(45deg);
+    }
+
+    &:after {
+      transform: rotate(-45deg);
+    }
   }
 }
