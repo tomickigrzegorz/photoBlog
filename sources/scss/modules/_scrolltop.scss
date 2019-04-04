@@ -14,15 +14,16 @@
   cursor: pointer;
   transition: all 1.2s;
   outline: 0;
+
   &:hover {
-    filter: alpha(opacity=100);
     opacity: 1;
   }
+
   &--hidden {
-    filter: alpha(opacity=0);
     opacity: 0;
     visibility: hidden;
   }
+
   .triangle-up {
     width: 0;
     height: 0;
