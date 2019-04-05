@@ -1,37 +1,20 @@
-import './modules/foreachPolyfill';
-import ScrollerTop from './modules/scrolltop';
-import NavMenu from './modules/nav';
 // import './modules/snow';
-
-
-import '../../sources/scss/style.scss';
-import '../../sources/scss/modules/_gallery.scss';
-import '../../sources/scss/modules/_grid.scss';
-
+import SmoothScroll from 'smooth-scroll';
+import '../scss/modules/_gallery.scss';
+import '../scss/modules/_grid.scss';
+import '../scss/style.scss';
+import './modules/ForeachPolyfill';
+import backToTop from './modules/BackToTop';
+import hamburgerMenu from './modules/HamburgerMenu';
+import NavMenu from './modules/NavMenu';
 
 document.addEventListener('DOMContentLoaded', () => {
+  const scroll = new SmoothScroll('a[href*="#"]', {
+    speed: 300,
+  });
 
-  const navOptoins = {
-    navHeaderMenu: 'header-menu',
-    navContact: '#contact',
-    navPortfolio: '#portfolio'
-  };
+  new NavMenu();
 
-  new NavMenu(navOptoins);
-
-  const options = {
-    showButtonAfter: 200,
-    animate: 'normal',
-    normal: {
-      steps: 20,
-      ms: 10
-    },
-    linear: {
-      px: 30,
-      ms: 10
-    }
-  };
-
-  new ScrollerTop(options);
-
+  hamburgerMenu();
+  backToTop();
 });

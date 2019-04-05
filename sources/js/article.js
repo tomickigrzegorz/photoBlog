@@ -1,57 +1,23 @@
-import './modules/foreachPolyfill';
-import ScrollerTop from './modules/scrolltop';
-import NavMenu from './modules/nav';
-import ShareButton from './modules/shareButton';
-
-import DisqusLoader from './modules/disqusLoader';
-import './modules/lazy';
-
-import '../../sources/scss/style.scss';
-import '../../sources/scss/modules/_article.scss';
-
+import SmoothScroll from 'smooth-scroll';
+import '../scss/modules/_article.scss';
+import '../scss/style.scss';
+import './modules/ForeachPolyfill';
+import './modules/Lazy';
+import backToTop from './modules/BackToTop';
+import DisqusLoader from './modules/DisqusLoader';
+import NavMenu from './modules/NavMenu';
+import ShareButton from './modules/ShareButton';
 
 document.addEventListener('DOMContentLoaded', () => {
+  const scroll = new SmoothScroll('a[href*="#"]', {
+    speed: 300,
+  });
 
-  const navOptoins = {
-    navHeaderMenu: 'header-menu',
-    navContact: '#contact',
-    navPortfolio: '#portfolio'
-  };
+  new NavMenu();
 
-  new NavMenu(navOptoins);
+  new ShareButton();
 
-  const shareButtonOptions = {
-    place: {
-      stick: 'share-button-stick',
-      bottom: 'share-button-bottom'
-    },
-    title: 'Podziel się:'
-  };
+  new DisqusLoader();
 
-  new ShareButton(shareButtonOptions);
-
-  const scrollerOptions = {
-    showButtonAfter: 200,
-    animate: 'normal',
-    normal: {
-      steps: 20,
-      ms: 10
-    },
-    linear: {
-      px: 30,
-      ms: 10
-    }
-  };
-
-  new ScrollerTop(scrollerOptions);
-
-  const disqusOptions = {
-    disqusThread: 'disqus_thread',
-    commentsButton: 'comments-button',
-    buttonName: 'dodaj / pokaż komentarze',
-    disqusShortName: 'bloggrzegorztomickipl'
-  };
-
-  new DisqusLoader(disqusOptions);
-
+  backToTop();
 });

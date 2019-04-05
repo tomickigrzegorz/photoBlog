@@ -1,8 +1,9 @@
 import '../../scss/modules/_discus-button.scss';
+import { disqusOptions } from '../helpers/constants';
 
 class DisqusLoader {
-  constructor(option) {
-    this.option = option;
+  constructor() {
+    this.option = disqusOptions;
     this.init();
   }
 
@@ -22,24 +23,28 @@ class DisqusLoader {
   }
 
   disqusEvent() {
-    const disqusButton = document.querySelector(`.${this.option.commentsButton}`);
-    disqusButton.addEventListener('click', (e) => {
+    const disqusButton = document.querySelector(
+      `.${this.option.commentsButton}`
+    );
+    disqusButton.addEventListener('click', e => {
       e.preventDefault();
       const disqusContainer = document.createElement('div');
       disqusContainer.setAttribute('id', this.option.disqusThread);
       document.body.appendChild(disqusContainer);
 
-      const disqus_shortname = this.option.disqusShortName;
+      const disqusShortname = this.option.disqusShortName;
 
       const dsq = document.createElement('script');
       dsq.type = 'text/javascript';
       dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      dsq.src = `//${disqusShortname}.disqus.com/embed.js`;
 
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      (
+        document.getElementsByTagName('head')[0] ||
+        document.getElementsByTagName('body')[0]
+      ).appendChild(dsq);
     });
   }
-
 }
 
 export default DisqusLoader;

@@ -75,8 +75,8 @@
   cursor: pointer;
   position: relative;
   z-index: 500;
-  width: 55px;
-  height: 55px;
+  width: 45px;
+  height: 45px;
   margin-top: 23px;
   text-indent: 100%;
   overflow: hidden;
@@ -116,8 +116,8 @@
       position: absolute;
       content: ' ';
       top: 8px;
-      left: 25px;
-      height: 38px;
+      left: 21px;
+      height: 28px;
       width: 5px;
       background-color: #fff;
     }
@@ -130,4 +130,9 @@
       transform: rotate(-45deg);
     }
   }
+}
+
+
+.hide-overflow {
+  overflow: hidden;
 }

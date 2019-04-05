@@ -1,0 +1,20 @@
+export const navOptions = {
+  navHeaderMenu: 'header-menu',
+  navContact: '#contact',
+  navPortfolio: '#portfolio',
+};
+
+export const shareButtonOptions = {
+  place: {
+    stick: 'share-button-stick',
+    bottom: 'share-button-bottom',
+  },
+  title: 'Podziel się:',
+};
+
+export const disqusOptions = {
+  disqusThread: 'disqus_thread',
+  commentsButton: 'comments-button',
+  buttonName: 'dodaj / pokaż komentarze',
+  disqusShortName: 'bloggrzegorztomickipl',
+};

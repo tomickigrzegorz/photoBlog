@@ -7,11 +7,24 @@ const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+
+function devProdOption(dev, prod, argv) {
+  return argv.mode === 'development' ? dev : prod;
+}
+
+function prodPlugin(plugin, argv) {
+  return argv.mode === 'production' ? plugin : () => {};
+}
+
+function devPlugin(plugin, argv) {
+  return argv.mode === 'development' ? plugin : () => {};
+}
 
 const PUBLIC_PATH = 'http://somesite.com/';
 
 const ENTRY = require('./entry.js');
+
 const OUTPUT_DIR = 'dist';
 
 const optimization = {
@@ -32,29 +45,31 @@ const optimization = {
       uglifyOptions: {
         warnings: false,
         output: {
-          comments: false
-        }
-      }
-    })
-  ]
+          comments: false,
+        },
+      },
+    }),
+  ],
 };
 
 module.exports = (env, argv) => {
   const type =
-    argv.mode === 'production' ? {
-      pathToDist: '../dist',
-      mode: 'production',
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeScriptTypeAttributes: true,
-        minifyCSS: true
-      }
-    } : {
-        pathToDist: 'dist',
-        mode: 'development',
-        minify: false
-      };
+    argv.mode === 'production'
+      ? {
+          pathToDist: '../dist',
+          mode: 'production',
+          minify: {
+            removeComments: true,
+            collapseWhitespace: true,
+            removeScriptTypeAttributes: true,
+            minifyCSS: true,
+          },
+        }
+      : {
+          pathToDist: 'dist',
+          mode: 'development',
+          minify: false,
+        };
 
   const entryHtmlPlugins = Object.keys(ENTRY.html).map(entryName => {
     const templateName = entryName === 'index' ? 'index' : 'article';
@@ -64,7 +79,7 @@ module.exports = (env, argv) => {
       file: require(`../sources/data/${entryName}.json`),
       chunks: [entryName],
       minify: type.minify,
-      mode: type.mode
+      mode: type.mode,
     });
   });
   //   filename: 'vendor/js/[name].[chunkhash].bundle.js'
@@ -81,7 +96,7 @@ module.exports = (env, argv) => {
   return {
     devtool: devProdOption('source-map', 'none', argv),
     entry: ENTRY.html,
-    output: output,
+    output,
     module: {
       rules: [
         {
@@ -89,8 +104,8 @@ module.exports = (env, argv) => {
           test: /\.js$/,
           exclude: /node_modules/,
           use: {
-            loader: 'babel-loader'
-          }
+            loader: 'babel-loader',
+          },
         },
         {
           // HTML
@@ -99,59 +114,61 @@ module.exports = (env, argv) => {
             {
               loader: 'html-loader',
               options: {
-                minimize:
-                  argv.mode === 'development' ? false : true
-              }
-            }
-          ]
+                minimize: argv.mode !== 'development',
+              },
+            },
+          ],
         },
         {
           // CSS SASS SCSS
           test: /\.(css|sass|scss)$/,
           use: [
-            argv.mode === 'development' ?
-              'style-loader' :
-              MiniCssExtractPlugin.loader,
+            argv.mode === 'development'
+              ? 'style-loader'
+              : MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',
               options: {
                 importLoaders: 2,
-                sourceMap: true
-              }
+                sourceMap: true,
+              },
             },
             {
               loader: 'postcss-loader',
               options: {
                 sourceMap: true,
                 config: {
-                  path: './config/'
-                }
-              }
+                  path: './config/',
+                },
+              },
             },
             {
               loader: 'sass-loader',
               options: {
-                sourceMap: true
-              }
+                sourceMap: true,
+              },
             },
             {
               loader: 'sass-resources-loader',
               options: {
-                resources: ['./sources/scss/modules/_config.scss', './sources/scss/modules/_mixins.scss']
-              }
-            }
-          ]
+                resources: [
+                  './sources/scss/modules/_config.scss',
+                  './sources/scss/modules/_mixins.scss',
+                ],
+              },
+            },
+          ],
         },
         {
           // IMAGES
           test: /\.(jpe?g|png|gif|svg)$/i,
           loader: 'file-loader',
           options: {
-            name: "[name].[ext]",
+            name: '[name].[ext]',
             outputPath: argv.mode === 'production' ? './images/' : '',
             publicPath: argv.mode === 'production' ? '../../images/' : '',
-            useRelativePath: true
-          }
+            useRelativePath: true,
+          },
         },
         {
           // PUG
@@ -159,17 +176,17 @@ module.exports = (env, argv) => {
           loader: 'pug-loader',
           options: {
             pretty: true,
-            self: true
-          }
-        }
-      ]
+            self: true,
+          },
+        },
+      ],
     },
     optimization: argv.mode === 'production' ? optimization : {},
     // optimization: {},
     plugins: [
       prodPlugin(
         new CleanWebpackPlugin({
-          verbose: true
+          verbose: true,
         }),
         argv
       ),
@@ -186,7 +203,7 @@ module.exports = (env, argv) => {
           dontCacheBustUrlsMatching: /\.\w{8}\./,
           filename: 'sw.js',
           minify: false,
-          navigateFallback: PUBLIC_PATH + 'index.html',
+          navigateFallback: `${PUBLIC_PATH}index.html`,
           stripPrefix: OUTPUT_DIR,
           staticFileGlobs: [
             `${OUTPUT_DIR}/assets/manifest.json`,
@@ -194,7 +211,7 @@ module.exports = (env, argv) => {
             `${OUTPUT_DIR}/vendor/js/*.js`,
             `${OUTPUT_DIR}/vendor/css/*.css`,
             `${OUTPUT_DIR}/images/static/*.png`,
-            `${OUTPUT_DIR}/images/*.ico`
+            `${OUTPUT_DIR}/images/*.ico`,
           ],
         }),
         argv
@@ -207,11 +224,12 @@ module.exports = (env, argv) => {
         argv
       ),
       new webpack.DefinePlugin({
-        PRODUCTION: argv.mode === "development" ?
-          JSON.stringify(false) : JSON.stringify(true)
+        PRODUCTION:
+          argv.mode === 'development'
+            ? JSON.stringify(false)
+            : JSON.stringify(true),
       }),
-    ]
-      .concat(entryHtmlPlugins)
+    ].concat(entryHtmlPlugins),
     // .concat(
     //   prodPlugin(
     //     new ScriptExtHtmlWebpackPlugin({
@@ -231,15 +249,3 @@ module.exports = (env, argv) => {
     // )
   };
 };
-
-function devProdOption(dev, prod, argv) {
-  return argv.mode === 'development' ? dev : prod;
-}
-
-function prodPlugin(plugin, argv) {
-  return argv.mode === 'production' ? plugin : () => { };
-}
-
-function devPlugin(plugin, argv) {
-  return argv.mode === 'development' ? plugin : () => { };
-}
