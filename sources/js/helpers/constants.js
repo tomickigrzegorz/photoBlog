@@ -1,5 +1,5 @@
 export const navOptions = {
-  navHeaderMenu: 'header-menu',
+  navHeaderMenu: '.hamburger',
   navContact: '#contact',
   navPortfolio: '#portfolio',
 };

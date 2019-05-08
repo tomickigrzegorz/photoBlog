@@ -3,37 +3,41 @@ import { navOptions } from '../helpers/constants';
 class NavMenu {
   constructor() {
     this.header = navOptions.navHeaderMenu;
-    this.contact = navOptions.navContact;
-    this.portfolio = navOptions.navPortfolio;
-    this.buildMenu();
+    this.body = document.body;
+    this.hamburger = document.querySelector('.hamburger');
+    this.class = {
+      showmenu: 'showMenu',
+      isopen: 'is-open',
+    };
+    this.addToHeaderMenu();
   }
 
   addToHeaderMenu() {
+    const header = document.querySelector(this.header);
+    const overlay = document.createElement('div');
+    overlay.id = 'overlaymenu';
+    overlay.className = 'overlaymenu';
+
     const menu = `
-        <nav id="overlaymenu">
-          <input type="checkbox" id="toggle-nav">
-          <label id="toggle-nav-label" for="toggle-nav">Zadaj pytanie</label>
-          <div class="box">
-              <ul>
-                  <li><a href="/index.html">home</a></li>
-                  <li><a href="mailto:info@grzegorztomicki.pl" id="contact">kontakt</a></li>
-                  <li><a href="http://www.grzegorztomicki.pl" id="portfolio" target="_blank" rel="noopener">portfolio</a></li>
-              </ul>
-          </div>
-        </nav>
+      <ul>
+          <li><a href="/index.html">home</a></li>
+          <li><a href="mailto:info@grzegorztomicki.pl" id="contact">kontakt</a></li>
+          <li><a href="http://www.grzegorztomicki.pl" id="portfolio" target="_blank" rel="noopener">portfolio</a></li>
+      </ul>
     `;
-    document.getElementById(this.header).innerHTML = menu;
-  }
+    overlay.innerHTML = menu;
 
-  buildMenu() {
-    this.addToHeaderMenu();
-    const elements = document.querySelectorAll(this.contact, this.portfolio);
-
-    elements.forEach(item => {
-      item.addEventListener('click', function() {
-        document.getElementById('toggle-nav').click();
-      });
+    overlay.addEventListener('click', () => {
+      this.body.classList.remove(this.class.showmenu);
+      this.hamburger.classList.remove(this.class.isopen);
     });
+
+    this.hamburger.addEventListener('click', () => {
+      this.hamburger.classList.toggle(this.class.isopen);
+      this.body.classList.toggle(this.class.showmenu);
+    });
+
+    header.parentNode.insertBefore(overlay, header.nextSibling);
   }
 }
 

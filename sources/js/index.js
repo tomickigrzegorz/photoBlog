@@ -5,7 +5,6 @@ import '../scss/modules/_grid.scss';
 import '../scss/style.scss';
 import './modules/ForeachPolyfill';
 import backToTop from './modules/BackToTop';
-import hamburgerMenu from './modules/HamburgerMenu';
 import NavMenu from './modules/NavMenu';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,6 +14,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   new NavMenu();
 
-  hamburgerMenu();
   backToTop();
 });

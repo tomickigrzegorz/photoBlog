@@ -1,0 +1,107 @@
+.hamburger {
+  position: relative;
+  padding: 20px;
+  background-color: #00aeff;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+
+  &.is-open {
+    .hamburger-center {
+      background-color: transparent;
+      transition: background-color 0.25s ease-in;
+    }
+
+    &::before {
+      transform: translateY(0) rotate(45deg);
+      transition: transform 0.25s ease-in;
+    }
+
+    &::after {
+      transform: translateY(0) rotate(-45deg);
+      transition: transform 0.25s ease-in;
+    }
+
+  }
+
+  .hamburger-center {
+    position: absolute;
+    content: '';
+    width: 30px;
+    height: 2px;
+    background-color: #fff;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%);
+    transition: background-color 0.5s ease-in;
+    z-index: 9999;
+  }
+
+  &::before,
+  &::after {
+    position: absolute;
+    content: '';
+    width: 30px;
+    height: 2px;
+    left: 5px;
+    top: 50%;
+    margin: auto;
+    background-color: #fff;
+    z-index: 9999;
+  }
+
+  &::before {
+    transform: translateY(6px) rotate(0);
+    transition: transform 0.25s ease-in;
+  }
+
+  &::after {
+    transform: translateY(-6px) rotate(0);
+    transition: transform 0.25s ease-in;
+  }
+
+}
+
+.overlaymenu {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 9;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  transition: opacity .3s ease-in;
+  opacity: 0;
+
+  ul {
+    top: 50%;
+    transform: translateY(-50%);
+    position: relative;
+    padding: 0;
+
+    li {
+      display: block;
+      padding: 15px;
+      text-transform: uppercase;
+
+      a {
+        color: #fff;
+        @include font-size(25);
+      }
+    }
+  }
+}
+
+.showMenu {
+  overflow: hidden;
+
+  .overlaymenu {
+    display: block;
+    opacity: 1;
+    transition: opacity .3s ease-in-out;
+  }
+}

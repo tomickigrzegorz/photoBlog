@@ -7,11 +7,13 @@
 }
 
 @mixin clearfix() {
+
   &:before,
   &:after {
     content: "";
     display: table;
   }
+
   &:after {
     clear: both;
   }
@@ -32,25 +34,27 @@
   transition: $transition;
 }
 
-$breakpoints: (
-  xs: 512px,
-  sm: 768px,
-  md: 896px,
-  lg: 1152px,
-  xl: 1280px
-);
+$breakpoints: (xs: 512px,
+sm: 768px,
+md: 896px,
+lg: 1152px,
+xl: 1280px);
 
-@mixin breakpoint( $breakpoint ) {
-  @if map-has-key( $breakpoints, $breakpoint ) {
-     @media ( min-width: #{ map-get( $breakpoints, $breakpoint ) } ) {
-       @content;
-     }
-  } @else if type_of( $breakpoint ) == number and unit( $breakpoint ) == px or unit( $breakpoint ) == em or unit( $breakpoint ) == rem {
-     @media (min-width: $breakpoint ) {
-       @content;
-     }
-   } @else {
-     @warn "Nie można pobrać żadnej wartości z `#{$breakpoint}`. Nie jest zdefiniowany w mapie `$breakpoints` lub jest nieprawidłową liczbą px, em, lub rem.";
+@mixin breakpoint($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: #{ map-get( $breakpoints, $breakpoint ) }) {
+      @content;
+    }
+  }
+
+  @else if type_of($breakpoint)==number and unit($breakpoint)==px or unit($breakpoint)==em or unit($breakpoint)==rem {
+    @media (min-width: $breakpoint) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn "Nie można pobrać żadnej wartości z `#{$breakpoint}`. Nie jest zdefiniowany w mapie `$breakpoints` lub jest nieprawidłową liczbą px, em, lub rem.";
   }
 }
 
