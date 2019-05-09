@@ -13,3 +13,16 @@ img[data-sizes="auto"] {
     line-height: 150%;
   }
 }
+
+figure {
+  display: block;
+
+  img {
+    @include img-responsive;
+    margin: 0 auto;
+  }
+
+  figcaption {
+    margin: 0;
+  }
+}

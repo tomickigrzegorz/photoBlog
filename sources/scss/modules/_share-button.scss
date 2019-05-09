@@ -8,7 +8,8 @@
 
   .share {
     display: inline-block;
-    &:hover > div {
+
+    &:hover>div {
       opacity: 0.5;
 
       &:hover {
@@ -16,20 +17,28 @@
       }
     }
 
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+
     &__content {
       display: inline-block;
       overflow: hidden;
     }
+
     &__icon {
       fill: #fff;
       border: 0;
     }
+
     &__btn {
       cursor: pointer;
       display: inline-block;
       overflow: hidden;
       @include transition(all 0.2s ease-in-out);
       background-color: transparent;
+
       &--hidden {
         position: absolute;
         clip: rect(1px, 1px, 1px, 1px);
@@ -37,9 +46,11 @@
         border: 0;
         overflow: hidden;
       }
+
       &--wrapper {
         line-height: 42px;
       }
+
       &--facebook {
         background-color: $share-facebook;
       }

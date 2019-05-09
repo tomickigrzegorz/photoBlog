@@ -9,7 +9,7 @@ import NavMenu from './modules/NavMenu';
 
 document.addEventListener('DOMContentLoaded', () => {
   const scroll = new SmoothScroll('a[href*="#"]', {
-    speed: 300,
+    speed: 100,
   });
 
   new NavMenu();

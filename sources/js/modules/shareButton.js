@@ -37,7 +37,7 @@ class ShareButton {
     const addComment =
       place === 'share-button-bottom'
         ? ''
-        : '<div title="Dodaj opinię." data-share="opinion" class="share__btn share__btn--add-opinion"><span class="share__btn--wrapper">Dodaj komentarz</span></div>';
+        : '<div title="Dodaj opinię." data-share="opinion" class="share__btn share__btn--add-opinion"><span class="share__btn--wrapper"><a href="#disqus_thread">Dodaj komentarz</a></span></div>';
 
     const html = `
         <h3>${this.option.title}</h3>
@@ -64,27 +64,31 @@ class ShareButton {
     const winTop = screen.height / 2 - winHeight / 2;
     const winLeft = screen.width / 2 - winWidth / 2;
 
-    buttonShare.forEach(el => {
-      const typeSocial = el.getAttribute('data-share');
-      el.addEventListener('click', () => {
-        if (typeSocial === 'print') {
-          window.print();
-        } else if (typeSocial === 'opinion') {
-          const h = document.body.scrollHeight;
-          window.scrollTo(0, h);
-          document.querySelectorAll('.comments-button')[0].click();
-        } else if (typeSocial === 'mail') {
-          const mailtoLink = `mailto:?subject=Zobacz może Ci się spodoba&body=${this.getTitle()} %20%0A ${this.getUrl()}`;
-          const win = window.open(mailtoLink, 'mail');
-          setTimeout(function() {
-            win.close();
-          }, 500);
-        } else {
-          window.open(
-            this.showShareLink(typeSocial),
-            'sharer',
-            `top=${winTop}, left=${winLeft}, toolbar=0, status=0, width=${winWidth}, height=${winHeight}`
-          );
+    buttonShare.forEach(element => {
+      const typeSocial = element.getAttribute('data-share');
+      element.addEventListener('click', () => {
+        switch (typeSocial) {
+          case 'mail': {
+            const mailtoLink = `mailto:?subject=Zobacz może Ci się spodoba&body=${this.getTitle()} %20%0A ${this.getUrl()}`;
+            const win = window.open(mailtoLink, 'mail');
+            setTimeout(() => {
+              win.close();
+            }, 500);
+            break;
+          }
+          case 'opinion': {
+            document.querySelector('.comments-button').click();
+            break;
+          }
+          default: {
+            // alert(typeSocial);
+            window.open(
+              this.showShareLink(typeSocial),
+              'sharer',
+              `top=${winTop}, left=${winLeft}, toolbar=0, status=0, width=${winWidth}, height=${winHeight}`
+            );
+            break;
+          }
         }
       });
     });
@@ -94,7 +98,7 @@ class ShareButton {
     let url;
     switch (typeSocial) {
       case 'facebook':
-        url = `https://www.facebook.com/sharer/sharer.php?u=${this.getUrl()}&p=${this.getDescription()}`;
+        url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURI(this.getUrl())}&p=${encodeURI(this.getDescription())}`;
         break;
       case 'twitter':
         url = `http://twitter.com/share?text=${this.getTitle()}&url=${this.getUrl()}`;
@@ -105,15 +109,18 @@ class ShareButton {
     return url;
   }
 
-  static getUrl() {
+  // eslint-disable-next-line class-methods-use-this
+  getUrl() {
     return window.location.href;
   }
 
-  static getTitle() {
+  // eslint-disable-next-line class-methods-use-this
+  getTitle() {
     return document.title;
   }
 
-  static getDescription() {
+  // eslint-disable-next-line class-methods-use-this
+  getDescription() {
     let description;
     const meta = document.getElementsByTagName('meta');
 

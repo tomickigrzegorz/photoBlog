@@ -3,6 +3,7 @@
   margin: 0 auto 0;
   display: flex;
   flex-wrap: wrap;
+
   &__items {
     position: relative;
 
@@ -13,7 +14,10 @@
     @media (min-width: 890px) {
       flex: 33.333333%;
     }
-    transition: transform 0.3s linear 0.1s, z-index 1s linear 0s;
+
+    transition: transform 0.3s linear 0.1s,
+    z-index 1s linear 0s;
+
     @media (min-width: 601px) {
       &:hover {
         z-index: 3;
@@ -38,6 +42,7 @@
         opacity: 0.3;
         background: #3dc0f1;
       }
+
       .gallery__text {
         opacity: 0.9;
         top: 40%;
@@ -56,10 +61,12 @@
     top: 30%;
     opacity: 0;
     @include font-size(18);
+
     @media (max-width: 890px) {
       opacity: 1;
       top: 40%;
     }
+
     @media (max-width: 600px) {
       @include font-size(20);
     }
@@ -68,6 +75,18 @@
   &__cell {
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
   }
+
+  figure {
+    img {
+      @include img-responsive;
+      margin: 0 auto;
+    }
+
+    figcaption {
+      margin: 0;
+    }
+  }
+
 }
 
 @media (max-width: 600px) {

@@ -7,11 +7,20 @@ mixin image(path, src, className)
         var img1200 = path + "1200/" + src
 
     picture
-        | <!--[if IE 9]><video style="display: none;><![endif]-->
         source(data-srcset=img400 media="(max-width: 400px)")
         source(data-srcset=img600 media="(max-width: 600px)")
         source(data-srcset=img800 media="(max-width: 800px)")
         source(data-srcset=img1000 media="(max-width: 1000px)")
-        source(data-srcset=img1200)
-        | <!--[if IE 9]></video><![endif]-->
-        img(data-src=img1200 class="lazyload")
+        source(data-srcset=img1200 media="(max-width: 1200px)")
+        img(data-src=img1200)
+
+
+    //- picture
+    //-     | <!--[if IE 9]><video style="display: none;><![endif]-->
+    //-     source(data-srcset=img400 media="(max-width: 400px)")
+    //-     source(data-srcset=img600 media="(max-width: 600px)")
+    //-     source(data-srcset=img800 media="(max-width: 800px)")
+    //-     source(data-srcset=img1000 media="(max-width: 1000px)")
+    //-     source(data-srcset=img1200)
+    //-     | <!--[if IE 9]></video><![endif]-->
+    //-     img(data-src=img1200 class="lazyload")
