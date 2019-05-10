@@ -77,6 +77,8 @@
   }
 
   figure {
+    margin-bottom: 0;
+
     img {
       @include img-responsive;
       margin: 0 auto;

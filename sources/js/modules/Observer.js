@@ -10,6 +10,7 @@ if ('IntersectionObserver' in window) {
     threshold: 0.5,
   };
 
+  // eslint-disable-next-line no-inner-declarations
   function onChange(changes, observer) {
     changes.forEach(function(change) {
       // console.log(change);
