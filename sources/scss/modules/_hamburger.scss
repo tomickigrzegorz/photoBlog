@@ -27,7 +27,7 @@
   .hamburger-center {
     position: absolute;
     content: '';
-    width: 30px;
+    width: 20px;
     height: 2px;
     background-color: #fff;
     left: 50%;
@@ -41,9 +41,9 @@
   &::after {
     position: absolute;
     content: '';
-    width: 30px;
+    width: 20px;
     height: 2px;
-    left: 5px;
+    left: 10px;
     top: 50%;
     margin: auto;
     background-color: #fff;
