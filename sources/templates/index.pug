@@ -24,7 +24,7 @@ html(lang="pl", dir="ltr" itemscope itemtype="http://schema.org/WebPage")
                         div.gallery__items
                             a(href=val.href)
                                 figure
-                                    img(class="gallery__img" src=(pathToFile+val.img), alt=val.alt)
+                                    img(class="gallery__img" data-src=(pathToFile+val.img), alt=val.alt)
                                     figcaption
                                         div.gallery__overlay
                                         div.gallery__text

@@ -5,6 +5,8 @@ class ShareButton {
   constructor() {
     this.option = shareButtonOptions;
     this.init();
+    this.getTitle = document.title;
+    this.getUrl = window.location.href;
   }
 
   init() {
@@ -34,10 +36,10 @@ class ShareButton {
         '<svg class="share__icon share__btn--add"><use xlink:href="#share-icon-add-opinion"></use></svg>',
     };
 
-    const addComment =
-      place === 'share-button-bottom'
-        ? ''
-        : '<div title="Dodaj opinię." data-share="opinion" class="share__btn share__btn--add-opinion"><span class="share__btn--wrapper"><a href="#disqus_thread">Dodaj komentarz</a></span></div>';
+    // const addComment =
+    //   place === 'share-button-bottom'
+    //     ? ''
+    //     : '<div title="Dodaj opinię." data-share="opinion" class="share__btn share__btn--add-opinion"><span class="share__btn--wrapper">Dodaj komentarz</span></div>';
 
     const html = `
         <h3>${this.option.title}</h3>
@@ -51,7 +53,7 @@ class ShareButton {
             <div title="Wyślij maila." data-share="mail" class="share__btn btn-mail">
                 <span class="share__btn--wrapper">${social.mail}</span>
             </div>
-            ${addComment}
+
         </div>
         `;
     return html;
@@ -64,22 +66,31 @@ class ShareButton {
     const winTop = screen.height / 2 - winHeight / 2;
     const winLeft = screen.width / 2 - winWidth / 2;
 
-    buttonShare.forEach(element => {
-      const typeSocial = element.getAttribute('data-share');
-      element.addEventListener('click', () => {
+    for (let i = 0; i < buttonShare.length; i++) {
+      // const typeSocial = buttonShare[i].getAttribute('data-share');
+      buttonShare[i].addEventListener('click', e => {
+        const typeSocial = e.currentTarget.getAttribute('data-share');
         switch (typeSocial) {
           case 'mail': {
-            const mailtoLink = `mailto:?subject=Zobacz może Ci się spodoba&body=${this.getTitle()} %20%0A ${this.getUrl()}`;
+            const mailtoLink = `mailto:?subject=Zobacz może Ci się spodoba&body=${
+              this.getTitle
+            } %20%0A ${this.getUrl}`;
             const win = window.open(mailtoLink, 'mail');
             setTimeout(() => {
               win.close();
             }, 500);
             break;
           }
-          case 'opinion': {
-            document.querySelector('.comments-button').click();
-            break;
-          }
+          // case 'opinion': {
+          // const imageLength = document.querySelectorAll('figure').length;
+          // const imageHeight = document.querySelectorAll('figure img')[0]
+          //   .clientHeight;
+          // console.log(imageLength * imageHeight);
+          // window.scrollBy(0, imageLength * imageHeight);
+          // window.scrollTo(0, imageLength * imageHeight + 1000);
+          // document.querySelector('.comments-button').click();
+          //   break;
+          // }
           default: {
             // alert(typeSocial);
             window.open(
@@ -91,32 +102,26 @@ class ShareButton {
           }
         }
       });
-    });
+    }
   }
 
   showShareLink(typeSocial) {
     let url;
     switch (typeSocial) {
       case 'facebook':
-        url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURI(this.getUrl())}&p=${encodeURI(this.getDescription())}`;
+        url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURI(
+          this.getUrl
+        )}&p=${encodeURI(this.getDescription())}`;
         break;
       case 'twitter':
-        url = `http://twitter.com/share?text=${this.getTitle()}&url=${this.getUrl()}`;
+        url = `http://twitter.com/share?text=${this.getTitle}&url=${
+          this.getUrl
+        }`;
         break;
       default:
         break;
     }
     return url;
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  getUrl() {
-    return window.location.href;
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  getTitle() {
-    return document.title;
   }
 
   // eslint-disable-next-line class-methods-use-this

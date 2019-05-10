@@ -2,12 +2,23 @@ import '../../scss/modules/_observer.scss';
 
 let images = document.querySelectorAll('source, img');
 
+function loadImage(image) {
+  image.classList.add('fade-in');
+  if (image.dataset && image.dataset.src) {
+    image.src = image.dataset.src;
+  }
+
+  if (image.dataset && image.dataset.srcset) {
+    image.srcset = image.dataset.srcset;
+  }
+}
+
 if ('IntersectionObserver' in window) {
   // IntersectionObserver Supported
   let config = {
     root: null,
     rootMargin: '0px',
-    threshold: 0.5,
+    threshold: 0,
   };
 
   // eslint-disable-next-line no-inner-declarations
@@ -29,16 +40,5 @@ if ('IntersectionObserver' in window) {
 } else {
   for (let i = 0; i < images.length; i++) {
     loadImage(images[i]);
-  }
-}
-
-function loadImage(image) {
-  image.classList.add('fade-in');
-  if (image.dataset && image.dataset.src) {
-    image.src = image.dataset.src;
-  }
-
-  if (image.dataset && image.dataset.srcset) {
-    image.srcset = image.dataset.srcset;
   }
 }
