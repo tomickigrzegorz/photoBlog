@@ -28,6 +28,7 @@
     line-height: 168%;
     padding-top: 10px;
     @include font-size(22);
+
     @media (max-width: 770px) {
       @include font-size(16);
     }
@@ -49,6 +50,7 @@
     line-height: 168%;
     max-width: 990px;
     margin: 15px auto;
+
     @media (max-width: 770px) {
       @include font-size(16);
     }

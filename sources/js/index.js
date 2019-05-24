@@ -3,7 +3,6 @@ import SmoothScroll from 'smooth-scroll';
 import '../scss/modules/_gallery.scss';
 import '../scss/modules/_grid.scss';
 import '../scss/style.scss';
-// import './modules/ForeachPolyfill';
 import './modules/Observer';
 import backToTop from './modules/BackToTop';
 import NavMenu from './modules/NavMenu';

@@ -1,9 +1,6 @@
 import SmoothScroll from 'smooth-scroll';
 import '../scss/modules/_article.scss';
 import '../scss/style.scss';
-// import './modules/ForeachPolyfill';
-// import './modules/Lazy';
-// import './modules/intersection-observer';
 import './modules/Observer';
 import backToTop from './modules/BackToTop';
 import DisqusLoader from './modules/DisqusLoader';

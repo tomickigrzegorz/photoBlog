@@ -16,7 +16,11 @@
 }
 
 figure {
-  margin-bottom: 2px;
+  margin: 0 -15px 2px;
+
+  @include breakpoint(md) {
+    margin: 0 0 2px;
+  }
 
   picture,
   img {
@@ -27,14 +31,3 @@ figure {
     min-height: 200px;
   }
 }
-
-// figure {
-//   img {
-//     @include img-responsive;
-//     margin: 0 auto;
-//   }
-
-//   figcaption {
-//     margin: 0;
-//   }
-// }
