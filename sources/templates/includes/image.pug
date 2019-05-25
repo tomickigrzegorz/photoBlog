@@ -1,26 +1,13 @@
 mixin image(path, src, className)
     -
-        var img400 = path + "400/" + src
-        var img600 = path + "600/" + src
-        var img800 = path + "800/" + src
-        var img1000 = path + "1000/" + src
+        var img576 = path + "576/" + src
+        var img768 = path + "768/" + src
+        var img992 = path + "992/" + src
         var img1200 = path + "1200/" + src
 
     picture
-        source(data-srcset=img400 media="(max-width: 400px)")
-        source(data-srcset=img600 media="(max-width: 600px)")
-        source(data-srcset=img800 media="(max-width: 800px)")
-        source(data-srcset=img1000 media="(max-width: 1000px)")
+        source(data-srcset=img576 media="(max-width: 576px)")
+        source(data-srcset=img768 media="(max-width: 768px)")
+        source(data-srcset=img992 media="(max-width: 992px)")
         source(data-srcset=img1200 media="(max-width: 1200px)")
         img(data-src=img1200)
-
-
-    //- picture
-    //-     | <!--[if IE 9]><video style="display: none;><![endif]-->
-    //-     source(data-srcset=img400 media="(max-width: 400px)")
-    //-     source(data-srcset=img600 media="(max-width: 600px)")
-    //-     source(data-srcset=img800 media="(max-width: 800px)")
-    //-     source(data-srcset=img1000 media="(max-width: 1000px)")
-    //-     source(data-srcset=img1200)
-    //-     | <!--[if IE 9]></video><![endif]-->
-    //-     img(data-src=img1200 class="lazyload")
