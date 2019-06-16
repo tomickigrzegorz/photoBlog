@@ -1,0 +1,160 @@
+{
+  "head": {
+    "title": "Zdjęcia zebrane",
+    "description": "Blog fotograficzny, ciekawe nietuzinkowe zdjęcia, niezapomniane chwile."
+  },
+  "items": [
+    {
+      "img": "./images/lwow/576/IMG_0202.jpg",
+      "alt": "Lwów - Ukraina",
+      "href": "lwow.html",
+      "text": "Lwów - Ukraina",
+      "date": "2-3.06.2018"
+    },
+    {
+      "img": "./images/lucja-komunia-i-plener/576/IMG_0079.jpg",
+      "alt": "Łucja komunia i plner",
+      "href": "lucja-komunia-i-plener.html",
+      "text": "Łucja komunia i plener",
+      "date": "20.05.2018"
+    },
+    {
+      "img": "./images/chiny/576/IMG_8413.jpg",
+      "alt": "Chiny z Itaką",
+      "href": "chiny.html",
+      "text": "Chiny Itaka",
+      "date": "07-17.10.2016"
+    },
+    {
+      "img": "./images/agnieszka-andrzej/576/IMG_6274.jpg",
+      "alt": "Agnieszka i Andrzej reportaż ślubny",
+      "href": "agnieszka-i-andrzej-slub-i-plener.html",
+      "text": "Agnieszka i Andrzej",
+      "date": "09.07.2016"
+    },
+    {
+      "img": "./images/gotania/576/IMG_5074.jpg",
+      "alt": "Międzynarodowy Festiwal Kultury Antycznej – Gotania 2015",
+      "href": "miedzynarodowy-festiwal-kultury-antycznej-gotania.html",
+      "text": "Gotania",
+      "date": "30.06.2015"
+    },
+    {
+      "img": "./images/izrael/576/IMG_2071.jpg",
+      "alt": "Izrael",
+      "href": "izrael-jerozolima-tel-aviv.html",
+      "text": "Izrael",
+      "date": "23-27.01.2014"
+    },
+    {
+      "img": "./images/monika-i-pawel/576/IMG_2459.jpg",
+      "alt": "Monika i Paweł reportaż ślubny",
+      "href": "monika-i-pawel-reportaz-chelm.html",
+      "text": "Monika i Paweł",
+      "date": "28.06.2014"
+    },
+    {
+      "img": "./images/maroko/576/IMG_0738.jpg",
+      "alt": "Maroko",
+      "href": "maroko.html",
+      "text": "Maroko Itaka",
+      "date": "13-20.09.2013"
+    },
+    {
+      "img": "./images/rzym/576/IMG_9008.jpg",
+      "alt": "Rzym",
+      "href": "rzym-w-majowy-weekend.html",
+      "text": "Rzym",
+      "date": "27.04 – 04.05.2013"
+    },
+    {
+      "img": "./images/dorota-i-piotrek/576/IMG_1429.jpg",
+      "alt": "Dorota i Piotrek reportaż ślubny",
+      "href": "dorota-i-piotrek-slub-i-plener.html",
+      "text": "Dorota i Piotrek",
+      "date": "11.08.2012"
+    },
+    {
+      "img": "./images/zamek-krupe-sesja-pokomunijna/576/IMG_5317.jpg",
+      "alt": "Krupe sesja",
+      "href": "zamek-krupe-sesja-pokomunijna.html",
+      "text": "Krupe sesja",
+      "date": "11.06.2016"
+    },
+    {
+      "img": "./images/piknik-lotniczy-depultycze/576/IMG_5287.jpg",
+      "alt": "Piknik lotniczy Depułtycze",
+      "href": "piknik-lotniczy-depultycze.html",
+      "text": "Piknik lotniczy Depułtycze",
+      "date": "11.06.2016"
+    },
+    {
+      "img": "./images/turcja/576/IMG_2331.jpg",
+      "alt": "Turcja z Logostour",
+      "href": "turcja.html",
+      "text": "Turcja Logostour",
+      "date": "29.05.2011 | 09.06.2011"
+    },
+    {
+      "img": "./images/magda-i-grzesiek/576/IMG_3466.jpg",
+      "alt": "Magda i Grzesiek reportaż ślubny",
+      "href": "magda-i-grzesiek.html",
+      "text": "Magda i Grzesiek",
+      "date": "15.08.2014"
+    },
+    {
+      "img": "./images/egipt/576/IMG_9703.jpg",
+      "alt": "Egipt z Rainbow Tours",
+      "href": "egipt.html",
+      "text": "Egipt Rainbow Tours",
+      "date": "05 - 19.02.2010"
+    },
+    {
+      "img": "./images/gorka-chelmska-sesja-pokomunijna/576/IMG_4744.jpg",
+      "alt": "Górka Chełmska Sesja",
+      "href": "gorka-chelmska-sesja-pokomunijna.html",
+      "text": "Górka Chełmska Sesja",
+      "date": "27.06.2017"
+    },
+    {
+      "img": "./images/jeden-dzien-w-berlinie/576/IMG_0579.jpg",
+      "alt": "Jeden dzień w Berlinie",
+      "href": "jeden-dzien-w-berlinie.html",
+      "text": "Jeden dzień w Berlinie",
+      "date": "03.06.2009"
+    },
+    {
+      "img": "./images/ania-i-kamil-slub-i-plener/576/IMG_1332.jpg",
+      "alt": "Ania i Kamil reportaż ślubny",
+      "href": "ania-i-kamil-slub-i-plener.html",
+      "text": "Ania i Kamil",
+      "date": "03.07.2010"
+    },
+    {
+      "img": "./images/wieden/576/IMG_6420.jpg",
+      "alt": "Wiedeń",
+      "href": "wieden.html",
+      "text": "Wieden",
+      "date": "22.08.2007"
+    },
+    {
+      "img": "./images/bratyslawa/576/IMG_5002.jpg",
+      "alt": "Bratysława",
+      "href": "bratyslawa.html",
+      "text": "Bratysława",
+      "date": "18.08.2007"
+    },
+    {
+      "img": "./images/lublin/576/IMG_4969.jpg",
+      "alt": "Lublin",
+      "href": "lublin.html",
+      "text": "lublin",
+      "date": "29.01.2011"
+    }
+  ],
+  "schema": {
+    "datePublished": "2016-06-23",
+    "dateModified": "2017-06-22",
+    "author": "Grzegorz Tomicki"
+  }
+}
