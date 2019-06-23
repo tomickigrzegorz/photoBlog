@@ -50,6 +50,7 @@
     line-height: 168%;
     max-width: 990px;
     margin: 15px auto;
+    padding: 0 10px;
 
     @media (max-width: 770px) {
       @include font-size(16);
