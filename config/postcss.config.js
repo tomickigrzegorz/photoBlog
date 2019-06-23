@@ -1,12 +1,12 @@
 module.exports = {
   plugins: {
-    'autoprefixer': {  },
+    autoprefixer: {},
     'postcss-url': {
       url: 'inline',
-      maxSize: 50
+      maxSize: 50,
     },
-    'cssnano': {
-      safe: true
-    }
-  }
+    cssnano: {
+      safe: true,
+    },
+  },
 };
