@@ -9,16 +9,16 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
-function devProdOption(dev, prod, argv) {
+const devProdOption = (dev, prod, argv) => {
   return argv.mode === 'development' ? dev : prod;
 }
 
-function prodPlugin(plugin, argv) {
-  return argv.mode === 'production' ? plugin : () => {};
+const prodPlugin = (plugin, argv) => {
+  return argv.mode === 'production' ? plugin : () => { };
 }
 
-function devPlugin(plugin, argv) {
-  return argv.mode === 'development' ? plugin : () => {};
+const devPlugin = (plugin, argv) => {
+  return argv.mode === 'development' ? plugin : () => { };
 }
 
 const PUBLIC_PATH = 'http://somesite.com/';
@@ -30,14 +30,38 @@ const OUTPUT_DIR = 'dist';
 const optimization = {
   splitChunks: {
     cacheGroups: {
+      // commons: {
+      //   name: 'vendors',
+      //   test: /[\\/]node_modules[\\/]/,
+      //   chunks: 'all',
+      //   minChunks: 3,
+      //   reuseExistingChunk: false,
+      //   enforce: true,
+      // },
       styles: {
         name: 'commons',
         test: /\.s?css$/,
         chunks: 'all',
         minChunks: 2,
-        reuseExistingChunk: false,
+        // reuseExistingChunk: false,
         enforce: true,
       },
+      // commons: {
+      //   name: 'vendors',
+      //   test: /[\\/]node_modules[\\/]/,
+      //   chunks: 'all',
+      //   minChunks: 2,
+      //   reuseExistingChunk: false,
+      //   enforce: true,
+      // },
+      // styles: {
+      //   name: 'styles',
+      //   test: /\.s?css$/,
+      //   chunks: 'all',
+      //   minChunks: 2,
+      //   reuseExistingChunk: true,
+      //   enforce: true,
+      // },
     },
   },
   minimizer: [
@@ -56,20 +80,20 @@ module.exports = (env, argv) => {
   const type =
     argv.mode === 'production'
       ? {
-          pathToDist: '../dist',
-          mode: 'production',
-          minify: {
-            removeComments: true,
-            collapseWhitespace: true,
-            removeScriptTypeAttributes: true,
-            minifyCSS: true,
-          },
-        }
+        pathToDist: '../dist',
+        mode: 'production',
+        minify: {
+          removeComments: true,
+          collapseWhitespace: true,
+          removeScriptTypeAttributes: true,
+          minifyCSS: true,
+        },
+      }
       : {
-          pathToDist: 'dist',
-          mode: 'development',
-          minify: false,
-        };
+        pathToDist: 'dist',
+        mode: 'development',
+        minify: false,
+      };
 
   const entryHtmlPlugins = Object.keys(ENTRY.html).map(entryName => {
     const templateName = entryName === 'index' ? 'index' : 'article';
@@ -79,7 +103,7 @@ module.exports = (env, argv) => {
       file: require(`../sources/data/${entryName}.json`),
       chunks: [entryName],
       minify: type.minify,
-      mode: type.mode,
+      mode: type.mode
     });
   });
   //   filename: 'vendor/js/[name].[chunkhash].bundle.js'
@@ -130,7 +154,7 @@ module.exports = (env, argv) => {
               loader: 'css-loader',
               options: {
                 importLoaders: 2,
-                sourceMap: true,
+                sourceMap: true
               },
             },
             {
