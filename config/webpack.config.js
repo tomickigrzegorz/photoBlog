@@ -30,8 +30,16 @@ const OUTPUT_DIR = 'dist';
 const optimization = {
   splitChunks: {
     cacheGroups: {
+      commons: {
+        name: 'vendors',
+        test: /[\\/]node_modules[\\/]/,
+        chunks: 'all',
+        minChunks: 2,
+        // reuseExistingChunk: false,
+        enforce: true,
+      },
       styles: {
-        name: 'commons',
+        name: 'vendors',
         test: /\.s?css$/,
         chunks: 'all',
         minChunks: 2,
