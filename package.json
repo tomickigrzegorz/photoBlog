@@ -3,8 +3,8 @@
   "version": "1.0.1",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --config ./config/webpack.config.js --mode development --open",
-    "prod": "webpack --config ./config/webpack.config.js --mode production",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack/dev.config.js --open",
+    "prod": "cross-env NODE_ENV=production webpack --config ./webpack/prod.config.js",
     "sitemap": "node ./sources/helpers/sitemap.js",
     "json": "node ./sources/helpers/list_images.js"
   },
@@ -19,7 +19,6 @@
   "browserslist": [
     "last 2 version",
     "> 1%",
-    "maintained node versions",
     "not dead"
   ],
   "author": "Grzegorz Tomicki <gtomik@gmail.com>",
@@ -37,6 +36,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.0.3",
     "core-js": "3.1.4",
+    "cross-env": "^5.2.0",
     "css-loader": "^3.1.0",
     "cssnano": "^4.1.10",
     "eslint": "^6.1.0",
@@ -65,6 +65,7 @@
     "webpack": "^4.38.0",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.6",
-    "webpack-dev-server": "^3.7.2"
+    "webpack-dev-server": "^3.7.2",
+    "webpack-merge": "^4.2.1"
   }
 }
