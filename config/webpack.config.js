@@ -43,7 +43,7 @@ const optimization = {
         test: /\.s?css$/,
         chunks: 'all',
         minChunks: 2,
-        // reuseExistingChunk: false,
+        reuseExistingChunk: false,
         enforce: true,
       },
       // commons: {
@@ -102,6 +102,10 @@ module.exports = (env, argv) => {
       template: `./sources/templates/${templateName}.pug`,
       file: require(`../sources/data/${entryName}.json`),
       chunks: [entryName],
+      // https://stackoverflow.com/a/57222598/10424385
+      // excludeAssets: [
+      //   /(commons.*|availability.*|press.*|legal.*|accessibility.*|visit.*)/
+      // ],
       minify: type.minify,
       mode: type.mode
     });
@@ -254,6 +258,10 @@ module.exports = (env, argv) => {
             : JSON.stringify(true),
       }),
     ].concat(entryHtmlPlugins),
+      // .concat(
+      //   prodPlugin(
+      //     new HtmlWebpackExcludeAssetsPlugin(), argv)
+      // )
     // .concat(
     //   prodPlugin(
     //     new ScriptExtHtmlWebpackPlugin({
