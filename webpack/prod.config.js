@@ -55,7 +55,7 @@ module.exports = merge(baseConfig, {
               options: {
                 sourceMap: true,
                 config: {
-                  path: './config/',
+                  path: './webpack/',
                 },
               },
             },
