@@ -36,11 +36,6 @@ class ShareButton {
         '<svg class="share__icon share__btn--add"><use xlink:href="#share-icon-add-opinion"></use></svg>',
     };
 
-    // const addComment =
-    //   place === 'share-button-bottom'
-    //     ? ''
-    //     : '<div title="Dodaj opinię." data-share="opinion" class="share__btn share__btn--add-opinion"><span class="share__btn--wrapper">Dodaj komentarz</span></div>';
-
     const html = `
         <h3>${this.option.title}</h3>
         <div class="share fl">
@@ -72,27 +67,15 @@ class ShareButton {
         const typeSocial = e.currentTarget.getAttribute('data-share');
         switch (typeSocial) {
           case 'mail': {
-            const mailtoLink = `mailto:?subject=Zobacz może Ci się spodoba&body=${
-              this.getTitle
-            } %20%0A ${this.getUrl}`;
+            const mailtoLink = `mailto:?subject=Zobacz może Ci się spodoba&body=${this.getTitle} %20%0A ${this.getUrl}`;
             const win = window.open(mailtoLink, 'mail');
             setTimeout(() => {
               win.close();
             }, 500);
             break;
           }
-          // case 'opinion': {
-          // const imageLength = document.querySelectorAll('figure').length;
-          // const imageHeight = document.querySelectorAll('figure img')[0]
-          //   .clientHeight;
-          // console.log(imageLength * imageHeight);
-          // window.scrollBy(0, imageLength * imageHeight);
-          // window.scrollTo(0, imageLength * imageHeight + 1000);
-          // document.querySelector('.comments-button').click();
-          //   break;
-          // }
+
           default: {
-            // alert(typeSocial);
             window.open(
               this.showShareLink(typeSocial),
               'sharer',
@@ -114,9 +97,7 @@ class ShareButton {
         )}&p=${encodeURI(this.getDescription())}`;
         break;
       case 'twitter':
-        url = `http://twitter.com/share?text=${this.getTitle}&url=${
-          this.getUrl
-        }`;
+        url = `http://twitter.com/share?text=${this.getTitle}&url=${this.getUrl}`;
         break;
       default:
         break;

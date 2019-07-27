@@ -3,7 +3,7 @@ import '../scss/modules/_article.scss';
 import '../scss/style.scss';
 import './modules/Observer';
 import backToTop from './modules/BackToTop';
-import DisqusLoader from './modules/DisqusLoader';
+import DisqusLoader from './modules/Disqusloader';
 import NavMenu from './modules/NavMenu';
 import ShareButton from './modules/ShareButton';
 
