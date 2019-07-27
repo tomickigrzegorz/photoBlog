@@ -24,7 +24,7 @@ class ShareButton {
     }
   }
 
-  htmlTemplate(place) {
+  htmlTemplate() {
     const social = {
       facebook:
         '<svg class="share__icon share__btn--facebook"><use xlink:href="#share-icon-facebook"></use></svg>',
