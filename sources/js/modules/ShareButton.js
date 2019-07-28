@@ -4,14 +4,8 @@ import { shareButtonOptions } from '../helpers/constants';
 class ShareButton {
   constructor() {
     this.option = shareButtonOptions;
-    this.init();
     this.getTitle = document.title;
     this.getUrl = window.location.href;
-  }
-
-  init() {
-    this.renderHTML();
-    this.eventButton();
   }
 
   renderHTML() {
@@ -22,6 +16,7 @@ class ShareButton {
       placeStick.innerHTML = this.htmlTemplate(this.option.place.stick);
       placeBottom.innerHTML = this.htmlTemplate(this.option.place.bottom);
     }
+    this.eventButton();
   }
 
   htmlTemplate() {
@@ -58,10 +53,12 @@ class ShareButton {
     const buttonShare = document.querySelectorAll('.share__btn');
     const winWidth = 520;
     const winHeight = 320;
+    // eslint-disable-next-line no-restricted-globals
     const winTop = screen.height / 2 - winHeight / 2;
+    // eslint-disable-next-line no-restricted-globals
     const winLeft = screen.width / 2 - winWidth / 2;
 
-    for (let i = 0; i < buttonShare.length; i++) {
+    for (let i = 0; i < buttonShare.length; i += 1) {
       // const typeSocial = buttonShare[i].getAttribute('data-share');
       buttonShare[i].addEventListener('click', e => {
         const typeSocial = e.currentTarget.getAttribute('data-share');
@@ -110,7 +107,7 @@ class ShareButton {
     let description;
     const meta = document.getElementsByTagName('meta');
 
-    for (let x = 0, y = meta.length; x < y; x++) {
+    for (let x = 0, y = meta.length; x < y; x += 1) {
       if (meta[x].name.toLowerCase() === 'description') {
         description = meta[x];
       }

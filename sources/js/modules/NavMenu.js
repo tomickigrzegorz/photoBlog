@@ -9,7 +9,6 @@ class NavMenu {
       showmenu: 'showMenu',
       isopen: 'is-open',
     };
-    this.addToHeaderMenu();
   }
 
   addToHeaderMenu() {

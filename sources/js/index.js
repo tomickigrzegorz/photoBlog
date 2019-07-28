@@ -8,11 +8,14 @@ import backToTop from './modules/BackToTop';
 import NavMenu from './modules/NavMenu';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const scroll = new SmoothScroll('a[href*="#"]', {
+  const option = {
     speed: 100,
-  });
+    easing: 'easeOutCubic',
+  };
+  const scroll = new SmoothScroll('.scroll', option);
 
-  new NavMenu();
+  const navMenu = new NavMenu();
+  navMenu.addToHeaderMenu();
 
   backToTop();
 });

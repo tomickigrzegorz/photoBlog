@@ -4,7 +4,6 @@ import { disqusOptions } from '../helpers/constants';
 class DisqusLoader {
   constructor() {
     this.option = disqusOptions;
-    this.init();
   }
 
   init() {

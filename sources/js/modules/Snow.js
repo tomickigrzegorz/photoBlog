@@ -17,7 +17,7 @@ class Hohoho {
 
     this.getWidth();
 
-    for (let i = 0; i < this.ns; i++) {
+    for (let i = 0; i < this.ns; i += 1) {
       this.partivles.push({
         x: Math.random() * this.W,
         y: Math.random() * this.H,
@@ -56,7 +56,7 @@ class Hohoho {
         this.ctx.clearRect(0, 0, this.W, this.H);
         this.ctx.fillStyle = `rgba(${this.snowColor},${this.snowOpacity})`;
         this.ctx.beginPath();
-        for (let i = 0; i < this.ns; i++) {
+        for (let i = 0; i < this.ns; i += 1) {
           const p = this.partivles[i];
           this.ctx.moveTo(p.x, p.y);
           this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
@@ -69,7 +69,7 @@ class Hohoho {
 
   updateSnowflakes() {
     this.angle += 0.01;
-    for (let i = 0; i < this.ns; i++) {
+    for (let i = 0; i < this.ns; i += 1) {
       const p = this.partivles[i];
       p.y += Math.cos(this.angle + p.d) + 1 + p.r / 2;
       p.x += Math.sin(this.angle) * 2;

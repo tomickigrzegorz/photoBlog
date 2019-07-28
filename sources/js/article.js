@@ -8,15 +8,20 @@ import NavMenu from './modules/NavMenu';
 import ShareButton from './modules/ShareButton';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const scroll = new SmoothScroll('a[href*="#"]', {
+  const option = {
     speed: 100,
-  });
+    easing: 'easeOutCubic',
+  };
+  const scroll = new SmoothScroll('.scroll', option);
 
-  new NavMenu();
+  const navMenu = new NavMenu();
+  navMenu.addToHeaderMenu();
 
-  new ShareButton();
+  const sharebutton = new ShareButton();
+  sharebutton.renderHTML();
 
-  new DisqusLoader();
+  const disqusloader = new DisqusLoader();
+  disqusloader.init();
 
   backToTop();
 });
