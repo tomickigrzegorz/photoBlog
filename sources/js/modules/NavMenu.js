@@ -21,7 +21,6 @@ class NavMenu {
       <ul>
           <li><a href="/index.html">home</a></li>
           <li><a href="mailto:info@grzegorztomicki.pl" id="contact">kontakt</a></li>
-          <li><a href="http://www.grzegorztomicki.pl" id="portfolio" target="_blank" rel="noopener">portfolio</a></li>
       </ul>
     `;
     overlay.innerHTML = menu;
