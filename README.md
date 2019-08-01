@@ -5,9 +5,7 @@ The page consists of the pictures themselves, therefore I load the photos dynami
 
 To generate such a number of photos I used my script which, based on the original, generates folders with appropriate image sizes -> [sharp-images](https://github.com/tomik23/sharp-images)
 
-```
-The json files have been prepared by this [application](https://github.com/tomik23/json-generator)
-```
+>The json files have been prepared by this [application](https://github.com/tomik23/json-generator)
 
 ```html
 <picture>
