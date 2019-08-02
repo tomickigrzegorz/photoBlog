@@ -58,10 +58,7 @@ module.exports = merge(baseConfig, {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]',
-          outputPath: './sources/images/',
-          publicPath: './sources/images/',
-          useRelativePath: true,
+          name: '[name].[ext]'
         },
       },
     ],

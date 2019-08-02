@@ -1,5 +1,12 @@
 import '../../scss/modules/_share-button.scss';
-import { shareButtonOptions } from '../helpers/constants';
+
+const shareButtonOptions = {
+  place: {
+    stick: 'share-button-stick',
+    bottom: 'share-button-bottom',
+  },
+  title: 'Podziel się:',
+};
 
 class ShareButton {
   constructor() {
@@ -19,16 +26,15 @@ class ShareButton {
     this.eventButton();
   }
 
+  svgFile(name) {
+    return `<svg class="share__icon share__btn--${name}"><use xlink:href="#share-icon-${name}"></use></svg>`;
+  }
+
   htmlTemplate() {
     const social = {
-      facebook:
-        '<svg class="share__icon share__btn--facebook"><use xlink:href="#share-icon-facebook"></use></svg>',
-      twitter:
-        '<svg class="share__icon share__btn--twitter"><use xlink:href="#share-icon-twitter"></use></svg>',
-      mail:
-        '<svg class="share__icon share__btn--mail"><use xlink:href="#share-icon-mail"></use></svg>',
-      add:
-        '<svg class="share__icon share__btn--add"><use xlink:href="#share-icon-add-opinion"></use></svg>',
+      facebook: this.svgFile('facebook'),
+      twitter: this.svgFile('twitter'),
+      mail: this.svgFile('mail'),
     };
 
     const html = `
@@ -43,7 +49,6 @@ class ShareButton {
             <div title="Wyślij maila." data-share="mail" class="share__btn btn-mail">
                 <span class="share__btn--wrapper">${social.mail}</span>
             </div>
-
         </div>
         `;
     return html;

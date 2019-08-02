@@ -3,6 +3,12 @@ import '../../scss/modules/_observer.scss';
 const images = document.querySelectorAll('source, img');
 
 function loadImage(image) {
+  console.log(
+    `image: ${image}`,
+    `dataset: ${image.dataset}`,
+    `srcset: ${image.dataset.srcset}`,
+    `src: ${image.dataset.src}`
+  );
   image.classList.add('fade-in');
   if (image.dataset && image.dataset.src) {
     image.src = image.dataset.src;
@@ -24,7 +30,7 @@ if ('IntersectionObserver' in window) {
   // eslint-disable-next-line no-inner-declarations
   function onChange(changes, observer) {
     changes.forEach(change => {
-      // console.log(change);
+      // console.log(change.target);
       if (change.intersectionRatio > 0) {
         // Stop watching and load the image
         loadImage(change.target);

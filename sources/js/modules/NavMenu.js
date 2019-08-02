@@ -1,4 +1,8 @@
-import { navOptions } from '../helpers/constants';
+const navOptions = {
+  navHeaderMenu: '.hamburger',
+  navContact: '#contact',
+  navPortfolio: '#portfolio',
+};
 
 class NavMenu {
   constructor() {
