@@ -1,5 +1,11 @@
 import '../../scss/modules/_discus-button.scss';
-import { disqusOptions } from '../helpers/constants';
+
+const disqusOptions = {
+  disqusThread: 'disqus_thread',
+  commentsButton: 'comments-button',
+  buttonName: 'dodaj / pokaż komentarze',
+  disqusShortName: 'bloggrzegorztomickipl',
+};
 
 class DisqusLoader {
   constructor() {

@@ -1,5 +1,12 @@
 import '../../scss/modules/_share-button.scss';
-import { shareButtonOptions } from '../helpers/constants';
+
+const shareButtonOptions = {
+  place: {
+    stick: 'share-button-stick',
+    bottom: 'share-button-bottom',
+  },
+  title: 'Podziel się:',
+};
 
 class ShareButton {
   constructor() {

@@ -7,7 +7,6 @@ module.exports = {
   module: {
     rules: [
       {
-        // JS
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
@@ -15,7 +14,6 @@ module.exports = {
         },
       },
       {
-        // PUG
         test: /\.pug$/,
         loader: 'pug-loader',
         options: {
@@ -23,6 +21,13 @@ module.exports = {
           self: true,
         },
       },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]'
+        },
+      }
     ],
   },
   plugins: Object.keys(ENTRY.html).map(entryName => {

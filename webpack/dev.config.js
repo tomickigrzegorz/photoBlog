@@ -7,16 +7,6 @@ module.exports = merge(baseConfig, {
   module: {
     rules: [
       {
-        // HTML
-        test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader'
-          },
-        ],
-      },
-      {
-        // CSS SASS SCSS
         test: /\.(css|sass|scss)$/,
         use: [
           'style-loader',
@@ -52,18 +42,7 @@ module.exports = merge(baseConfig, {
             },
           },
         ],
-      },
-      {
-        // IMAGES
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
-          outputPath: './sources/images/',
-          publicPath: './sources/images/',
-          useRelativePath: true,
-        },
-      },
+      }
     ],
   },
   plugins: [
