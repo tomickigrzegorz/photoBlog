@@ -15,6 +15,7 @@ const PUBLIC_PATH = 'http://somesite.com/';
 const OUTPUT_DIR = 'dist';
 
 module.exports = merge(baseConfig, {
+  mode: 'production',
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: chunkData => {
@@ -124,7 +125,8 @@ module.exports = merge(baseConfig, {
       PRODUCTION: JSON.stringify(true)
     }),
     new BundleAnalyzerPlugin({
-      openAnalyzer: true
+      openAnalyzer: true,
+      generateStatsFile: true
     }),
   ]
 });
