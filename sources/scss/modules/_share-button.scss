@@ -83,7 +83,7 @@
     }
   }
 
-  @media (min-width: $screen-ss) {
+  @include breakpoint($screen-ss) {
     .share__btn {
       margin: 4px 0 0;
     }
@@ -95,7 +95,7 @@
     }
   }
 
-  @media (min-width: $screen-md) {
+  @include breakpoint($screen-md) {
     margin-left: -2px;
   }
 }

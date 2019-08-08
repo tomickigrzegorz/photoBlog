@@ -4,21 +4,25 @@
   display: flex;
   flex-wrap: wrap;
 
+  &__img {
+    object-fit: cover;
+  }
+
   &__items {
     position: relative;
 
-    @media (min-width: 600px) {
+    @include breakpoint(600px) {
       flex: 50%;
     }
 
-    @media (min-width: 890px) {
+    @include breakpoint(890px) {
       flex: 33.333333%;
     }
 
     transition: transform 0.3s linear 0.1s,
     z-index 1s linear 0s;
 
-    @media (min-width: 601px) {
+    @include breakpoint(601px) {
       &:hover {
         z-index: 3;
         transform: scale(1.1);
@@ -77,7 +81,11 @@
   }
 
   figure {
-    margin-bottom: 0;
+    margin-bottom: 2px;
+
+    @include breakpoint(600px) {
+      margin-bottom: 0;
+    }
 
     picture,
     img {
@@ -92,7 +100,7 @@
 
 }
 
-@media (max-width: 600px) {
+@include breakpoint(600px) {
   .home {
     &.container {
       padding-left: 0;

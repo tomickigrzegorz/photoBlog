@@ -16,7 +16,6 @@
 }
 
 figure {
-  margin: 0 -15px 2px;
 
   @include breakpoint(md) {
     margin: 0 0 2px;
@@ -33,7 +32,5 @@ figure {
     object-fit: contain;
     margin: auto;
   }
-
-
 
 }
