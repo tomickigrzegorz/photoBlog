@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack/dev.config.js --progress --open",
-    "prod": "cross-env NODE_ENV=production webpack --config ./webpack/prod.config.js --progress",
+    "prod": "cross-env NODE_ENV=production webpack --config ./webpack/prod.config.js --progress --hide-modules",
     "sitemap": "node ./sources/helpers/sitemap.js",
     "json": "node ./sources/helpers/list_images.js"
   },

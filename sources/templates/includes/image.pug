@@ -1,4 +1,4 @@
-mixin image(path, src, className)
+mixin image(path, src, className, alt)
     -
         var img576 = path + "576/" + src
         var img768 = path + "768/" + src
@@ -10,6 +10,6 @@ mixin image(path, src, className)
         source(data-srcset=img768 media="(max-width: 768px)")
         source(data-srcset=img992 media="(max-width: 992px)")
         source(data-srcset=img1200 media="(max-width: 1200px)")
-        img(data-src=img1200)
+        img(data-src=img1200 alt=alt)
         noscript
-            img(src=img1200)
+            img(src=img1200 alt=alt)

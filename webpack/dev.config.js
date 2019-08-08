@@ -4,6 +4,7 @@ const baseConfig = require('./base.config.js');
 
 module.exports = merge(baseConfig, {
   devtool: 'source-map',
+  mode: 'development',
   module: {
     rules: [
       {
@@ -48,7 +49,7 @@ module.exports = merge(baseConfig, {
   plugins: [
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(false)
-    }),
+    })
   ]
 });
 

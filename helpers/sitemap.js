@@ -7,12 +7,12 @@ fs.readdir(`${htmlPlace}`, function(err, files) {
   if (err) throw err;
 
   files.forEach(file => {
-    let rest = file.split('.')[1];
-    let name = file.split('.')[0];
+    const rest = file.split('.')[1];
+    const name = file.split('.')[0];
 
-    let changeFreq = 'monthly';
+    const changeFreq = 'monthly';
     if (rest === 'html') {
-      let path = `
+      const path = `
   <url>
     <loc>http://www.grzegorztomicki.pl/${file}</loc>
     <changefreq>${changeFreq}</changefreq>
