@@ -35,10 +35,10 @@
 }
 
 $breakpoints: (xs: 512px,
-sm: 768px,
-md: 896px,
-lg: 1152px,
-xl: 1280px);
+  sm: 768px,
+  md: 896px,
+  lg: 1152px,
+  xl: 1280px);
 
 @mixin breakpoint($breakpoint) {
   @if map-has-key($breakpoints, $breakpoint) {
