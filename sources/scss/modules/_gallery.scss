@@ -4,6 +4,10 @@
   display: flex;
   flex-wrap: wrap;
 
+  &__img {
+    object-fit: cover;
+  }
+
   &__items {
     position: relative;
 
