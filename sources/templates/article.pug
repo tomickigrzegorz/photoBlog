@@ -1,6 +1,5 @@
 block variables
 - var path = self.htmlWebpackPlugin.options
-- var pathToFile = (path.mode == 'development') ? "../sources/" : ""
 
 doctype html
 html(lang="pl", dir="ltr" itemscope itemtype="http://schema.org/WebPage")
@@ -31,7 +30,7 @@ html(lang="pl", dir="ltr" itemscope itemtype="http://schema.org/WebPage")
                     each val, i in path.file.body.items
                         figure
                             .item__img
-                                +image(pathToFile+val.path, val.img, "responsively-lazy", val.alt)
+                                +image(val.path, val.img, "responsively-lazy", val.alt)
                             if val.text
                                 figcaption!= val.text
                         
