@@ -1,6 +1,5 @@
 block variables
 - var path = self.htmlWebpackPlugin.options
-- var pathToFile = (path.mode == 'development') ? "../sources/" : ""
 
 doctype html
 html(lang="pl", dir="ltr" itemscope itemtype="http://schema.org/WebPage")
@@ -24,7 +23,7 @@ html(lang="pl", dir="ltr" itemscope itemtype="http://schema.org/WebPage")
                         div.gallery__items
                             a(href=val.href)
                                 figure
-                                    img(class="gallery__img" data-src=(pathToFile+val.img), alt=val.alt)
+                                    img(class="gallery__img" data-src=(val.img), alt=val.alt)
                                     figcaption
                                         div.gallery__overlay
                                         div.gallery__text

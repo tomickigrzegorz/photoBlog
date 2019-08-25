@@ -5,6 +5,13 @@ const baseConfig = require('./base.config.js');
 module.exports = merge(baseConfig, {
   devtool: 'source-map',
   mode: 'development',
+  devServer: {
+    contentBase: "./sources",
+    open: true,
+    port: 3000,
+    overlay: true,
+    hot: true
+  },
   module: {
     rules: [
       {

@@ -8,41 +8,181 @@
     "date": "22.06.2009",
     "text": "Szybki wypad do Berlina przy okazji dłuższej wycieczki.",
     "items": [
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0432.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0455.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0459.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0465.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0475.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0479.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0484.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0490.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0498.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0512.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0513.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0516.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0519.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0523.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0536.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0539.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0546.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0556.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0557.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0558-HDR.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0564.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0570.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0579.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0594.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0600-Edit.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0607.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0611.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0617.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0636.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0639.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0640.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0653.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0655.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0660.jpg","alt":""},
-      {"path":"./images/jeden-dzien-w-berlinie/","img":"IMG_0670.jpg","alt":""}
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0432.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0455.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0459.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0465.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0475.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0479.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0484.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0490.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0498.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0512.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0513.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0516.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0519.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0523.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0536.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0539.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0546.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0556.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0557.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0558-HDR.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0564.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0570.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0579.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0594.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0600-Edit.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0607.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0611.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0617.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0636.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0639.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0640.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0653.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0655.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0660.jpg",
+        "alt": ""
+      },
+      {
+        "path": "./images/jeden-dzien-w-berlinie/",
+        "img": "IMG_0670.jpg",
+        "alt": ""
+      }
     ]
   },
   "schema": {

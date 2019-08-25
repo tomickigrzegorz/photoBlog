@@ -119,7 +119,7 @@ module.exports = merge(baseConfig, {
     new CopyWebpackPlugin([
       { from: 'sources/assets/', to: 'assets/' },
       { from: 'sources/assets/favicon.ico', to: './' },
-      // { from: "sources/images/", to: "images/" }
+      { from: "sources/images/", to: "images/" }
     ]),
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(true)
