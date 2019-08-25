@@ -69,6 +69,12 @@
         border-bottom: none;
       }
     }
+
+    @media (max-width: 896px) {
+      figure {
+        margin: 1px -15px;
+      }
+    }
   }
 }
 
