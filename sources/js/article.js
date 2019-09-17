@@ -4,7 +4,8 @@ import '../scss/style.scss';
 import './modules/Observer';
 import backToTop from './modules/BackToTop';
 import DisqusLoader from './modules/Disqusloader';
-import NavMenu from './modules/NavMenu';
+// import NavMenu from './modules/NavMenu';
+import mail from './modules/Mail';
 import ShareButton from './modules/ShareButton';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const scroll = new SmoothScroll('.scroll', option);
 
-  const navMenu = new NavMenu();
-  navMenu.addToHeaderMenu();
+  // const navMenu = new NavMenu();
+  // navMenu.addToHeaderMenu();
 
   const sharebutton = new ShareButton();
   sharebutton.renderHTML();
@@ -23,5 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const disqusloader = new DisqusLoader();
   disqusloader.init();
 
+  mail();
   backToTop();
 });
