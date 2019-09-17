@@ -3,8 +3,26 @@
   max-width: $max-width;
   @include font-size(12);
   padding: 15px 5px;
+
   .text-small {
     margin-bottom: 5px;
   }
+
   margin: auto;
+
+  a {
+    text-decoration: none;
+    color: $share-add-opinion-fill;
+
+    &.copyright {
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    &.mail {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }

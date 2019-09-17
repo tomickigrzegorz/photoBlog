@@ -5,7 +5,8 @@ import '../scss/modules/_grid.scss';
 import '../scss/style.scss';
 import './modules/Observer';
 import backToTop from './modules/BackToTop';
-import NavMenu from './modules/NavMenu';
+import mail from './modules/Mail';
+// import NavMenu from './modules/NavMenu';
 
 document.addEventListener('DOMContentLoaded', () => {
   const option = {
@@ -14,8 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const scroll = new SmoothScroll('.scroll', option);
 
-  const navMenu = new NavMenu();
-  navMenu.addToHeaderMenu();
+  // const navMenu = new NavMenu();
+  // navMenu.addToHeaderMenu();
 
+  mail();
   backToTop();
 });
