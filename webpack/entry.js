@@ -15,6 +15,7 @@ module.exports.html = {
     "bratyslawa": "./sources/js/article.js",
     "wieden": "./sources/js/article.js",
     "magda-i-grzesiek": "./sources/js/article.js",
+    "kilkudniowa-wycieczka": "./sources/js/article.js",
     "maroko": "./sources/js/article.js",
     "miedzynarodowy-festiwal-kultury-antycznej-gotania": "./sources/js/article.js",
     "monika-i-pawel-reportaz-chelm": "./sources/js/article.js",
