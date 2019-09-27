@@ -58,15 +58,6 @@
   }
 
   &__content {
-
-    figure {
-      margin: 0 0 2px;
-    }
-
-    @include breakpoint(lg) {
-      margin: auto -15px;
-    }
-
     a {
       color: #f13d3d;
       text-decoration: none;
