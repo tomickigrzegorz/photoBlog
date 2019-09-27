@@ -1,8 +1,8 @@
 .gallery {
   max-width: $max-width;
-  margin: 0 auto 0;
   display: flex;
   flex-wrap: wrap;
+  margin: auto -15px;
 
   &__img {
     object-fit: cover;
