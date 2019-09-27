@@ -58,6 +58,15 @@
   }
 
   &__content {
+
+    figure {
+      margin-bottom: 2px;
+    }
+
+    @media (max-width: 1152px) {
+      margin: auto -15px;
+    }
+
     a {
       color: #f13d3d;
       text-decoration: none;
