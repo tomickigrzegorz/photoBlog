@@ -5,6 +5,13 @@
   },
   "items": [
     {
+      "img": "./images/antek/576/IMG_0175.jpg",
+      "alt": "Antek w Warszawie",
+      "href": "antek.html",
+      "text": "Antek w Warszawie",
+      "date": "18-19.02.2019"
+    },
+    {
       "img": "./images/lwow/576/IMG_0202.jpg",
       "alt": "Lwów - Ukraina",
       "href": "lwow.html",
@@ -52,6 +59,13 @@
       "href": "monika-i-pawel-reportaz-chelm.html",
       "text": "Monika i Paweł",
       "date": "28.06.2014"
+    },
+    {
+      "img": "./images/kiku/576/IMG_3326.jpg",
+      "alt": "Kiku Restauracja",
+      "href": "kiku.html",
+      "text": "Kiku Restauracja",
+      "date": "23.01.2013"
     },
     {
       "img": "./images/maroko/576/IMG_0738.jpg",
