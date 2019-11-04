@@ -3,6 +3,8 @@ module.exports.html = {
     "agnieszka-i-andrzej-slub-i-plener": "./sources/js/article.js",
     "ania-i-kamil-slub-i-plener": "./sources/js/article.js",
     "chiny": "./sources/js/article.js",
+    "antek": "./sources/js/article.js",
+    "kiku": "./sources/js/article.js",
     "depultycze-piknik-lotniczy": "./sources/js/article.js",
     "dorota-i-piotrek-slub-i-plener": "./sources/js/article.js",
     "egipt": "./sources/js/article.js",

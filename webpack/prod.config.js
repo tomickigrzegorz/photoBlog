@@ -28,6 +28,17 @@ module.exports = merge(baseConfig, {
   module: {
     rules: [
       {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html-loader',
+            options: {
+              minimize: true,
+            },
+          },
+        ],
+      },
+      {
         test: /\.(css|sass|scss)$/,
         use: [
           MiniCssExtractPlugin.loader,
@@ -92,13 +103,13 @@ module.exports = merge(baseConfig, {
       dry: false,
       verbose: true,
       cleanOnceBeforeBuildPatterns: [
-        'vendor/*.*',
-        '!images/*.*'
+        'vendor/**/*',
+        '!images/**/*'
       ]
     }),
     new MiniCssExtractPlugin({
       filename: 'vendor/css/[name].[hash].css',
-      chunkFilename: 'vendor/css/[name].[hash].css',
+      chunkFilename: 'vendor/css/[name].[hash].css'
     }),
     new SWPrecacheWebpackPlugin({
       cacheId: 'gt',

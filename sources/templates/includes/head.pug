@@ -1,4 +1,4 @@
-mixin head(data)
+mixin head(data, type)
     link(rel="dns-prefetch", href="//google-analytics.com")
     meta(charset="utf-8")
     meta(http-equiv="x-ua-compatible", content="ie=edge")
@@ -12,4 +12,6 @@ mixin head(data)
     title= data.head.title
     link(rel="manifest",href="/assets/manifest.json")
     link(rel="icon" type="image/x-icon" href="/favicon.ico")
+    if type === 'article' 
+      include googleAdsense
     include googleAnalytics

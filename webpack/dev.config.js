@@ -15,6 +15,14 @@ module.exports = merge(baseConfig, {
   module: {
     rules: [
       {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html-loader'
+          },
+        ],
+      },
+      {
         test: /\.(css|sass|scss)$/,
         use: [
           'style-loader',
