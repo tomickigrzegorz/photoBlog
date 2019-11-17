@@ -1,9 +1,9 @@
-const fs = require('fs');
+const { readdir, writeFile } = require('fs');
 
 const htmlPlace = './dist';
 const ulrPart = [];
 
-fs.readdir(`${htmlPlace}`, function(err, files) {
+readdir(`${htmlPlace}`, function (err, files) {
   if (err) throw err;
 
   files.forEach(file => {
@@ -29,5 +29,5 @@ fs.readdir(`${htmlPlace}`, function(err, files) {
   )}
 </urlset>`;
 
-  fs.writeFile('./dist/sitemap.xml', template, function(error) {});
+  writeFile('./dist/sitemap.xml', template, (err) => { });
 });
