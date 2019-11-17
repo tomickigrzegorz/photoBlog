@@ -1,2 +1,4 @@
-User-agent: *
-Disallow:
+user-agent: * 
+allow: /
+
+sitemap: http://grzegorztomicki.pl/sitemap.xml
