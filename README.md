@@ -24,7 +24,7 @@ sources
 ```
 
 ## Optimization
-Although the site consists of 99% of photos in `PageSpeed Insights` has 100/100 points in both desktop and mobile versions.
+Of course, this 100/100 is when there is no `google adsense` code and that here it is only the main page has 100/100 ;)
 
 ### Clone the repo and install dependencies
 ```bash
