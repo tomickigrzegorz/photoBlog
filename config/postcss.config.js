@@ -1,4 +1,3 @@
-const purgecss = require('@fullhuman/postcss-purgecss')
 const cssnano = require('cssnano')
 const autoprefixer = require('autoprefixer')
 const postcssUrl = require('postcss-url')

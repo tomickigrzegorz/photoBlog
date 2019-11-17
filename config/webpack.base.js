@@ -2,7 +2,7 @@ const buildMode =
   process.env.NODE_ENV === 'production' ? 'production' : 'development';
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
-const ENTRY = require('./entry.js.js');
+const ENTRY = require('./entry.js');
 
 // Configure Html Loader
 const configureHtmlLoader = () => {
