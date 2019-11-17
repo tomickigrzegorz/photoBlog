@@ -33,7 +33,7 @@ cd node-sharp-images
 npm i
 ```
 
-## How to run
+### How to run
 Dev
 ```
 npm run dev
