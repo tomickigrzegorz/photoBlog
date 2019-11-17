@@ -1,6 +1,57 @@
 ## My photo blog
 
-The whole environment is based on `webpack 4`, `pug templates` and the input data are `json files`.
+The whole environment is based on `webpack 4`, `pug templates` and the input data are `json` files.
+
+```
+sources
+├── data
+│   ├── index.json
+│   └── jeden-dzien-w-berlinie.json
+└── images
+    └── jeden-dzien-w-berlinie
+        ├── 1200
+        │   ├── IMG_0432.jpg
+        │   └── ...
+        ├── 576
+        │   ├── IMG_0432.jpg
+        │   └── ...
+        ├── 768
+        │   ├── IMG_0432.jpg
+        │   └── ...
+        └── 992
+            ├── IMG_0432.jpg
+            └── ...
+```
+
+### Clone the repo and install dependencies
+```bash
+git clone 
+cd node-sharp-images
+npm i
+```
+
+## How to run
+Dev
+```
+npm run dev
+or
+yarn dev
+```
+Prod
+```
+npm run prod
+or
+yarn prod
+```
+It is also possible to generate a sitemap based on html files
+```
+npm run sitemap
+or
+yarn sitemap
+```
+
+### Photo optimization
+
 The page consists of the pictures themselves, therefore I load the photos dynamically using 'IntersectionObserver'. In addition, each picture is served in several sizes depending on the width of the window.
 
 To generate such a number of photos I used my script which, based on the original, generates folders with appropriate image sizes -> [sharp-images](https://github.com/tomik23/sharp-images)
@@ -21,9 +72,6 @@ The addition is an essential element `<noscript><img src="./images/1200/img.jpg"
 
 After optimizing images, the page `PageSpeed Insight` shows **`100/100`** in the results.
 
-
-
 ### Production version
 
 Visit online: [http://www.grzegorztomicki.pl](http://www.grzegorztomicki.pl)
-
