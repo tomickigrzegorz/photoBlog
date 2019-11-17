@@ -23,6 +23,9 @@ sources
             └── ...
 ```
 
+## Optimization
+Although the site consists of 99% of photos in `PageSpeed Insights` has 100/100 points in both desktop and mobile versions.
+
 ### Clone the repo and install dependencies
 ```bash
 git clone 
