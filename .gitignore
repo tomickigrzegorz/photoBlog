@@ -1,5 +1,14 @@
 .history
 .vscode
 
+sitemap.xml
+
 dist
-node_modules
+node_modules/
+
+sources/data/*
+!sources/data/jeden-dzien-w-berlinie.json
+!sources/data/index.json
+
+sources/images/*
+!sources/images/jeden-dzien-w-berlinie/
