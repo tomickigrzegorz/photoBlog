@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const htmlPlace = '../dist';
+const htmlPlace = './dist';
 const ulrPart = [];
 
 fs.readdir(`${htmlPlace}`, function(err, files) {
@@ -29,5 +29,5 @@ fs.readdir(`${htmlPlace}`, function(err, files) {
   )}
 </urlset>`;
 
-  fs.writeFile('../sitemap.xml', template, function(error) {});
+  fs.writeFile('./dist/sitemap.xml', template, function(error) {});
 });

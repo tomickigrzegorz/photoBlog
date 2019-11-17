@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.dev.js --progress --open",
     "prod": "cross-env NODE_ENV=production webpack --config ./config/webpack.prod.js --progress --hide-modules",
-    "sitemap": "node ./sources/helpers/sitemap.js",
-    "json": "node ./sources/helpers/list_images.js"
+    "sitemap": "node ./helpers/sitemap-generator.js"
   },
   "keywords": [
     "webpack 4",
