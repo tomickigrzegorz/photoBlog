@@ -106,13 +106,14 @@ const configureSWPrecacheWebpack = (PATH, DIR) => {
 
 // Configure Copy Webpack
 const configureCopyWebpack = () => {
-  const COPTYIMAGE = checkFolder(IMAGE_FOLDER) === false
-    ? { from: 'sources/images/', to: 'images/' }
-    : {};
+  const COPTYIMAGE =
+    checkFolder(IMAGE_FOLDER) === false
+      ? { from: 'sources/images/', to: 'images/' }
+      : {};
   return [
     { from: 'sources/assets/', to: 'assets/' },
     { from: 'sources/assets/favicon.ico', to: './' },
-    COPTYIMAGE
+    COPTYIMAGE,
   ];
 };
 
