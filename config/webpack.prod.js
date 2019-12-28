@@ -181,15 +181,23 @@ module.exports = merge(baseConfig, {
     rules: [configureCssLoader(buildMode)],
   },
   plugins: [
-    new CleanWebpackPlugin(configureCleanWebpack()),
-    new MiniCssExtractPlugin(configureMiniCssExtract()),
+    new CleanWebpackPlugin(
+      configureCleanWebpack()
+    ),
+    new MiniCssExtractPlugin(
+      configureMiniCssExtract()
+    ),
     new SWPrecacheWebpackPlugin(
       configureSWPrecacheWebpack(PUBLIC_PATH, OUTPUT_DIR)
     ),
-    new CopyWebpackPlugin(configureCopyWebpack()),
+    new CopyWebpackPlugin(
+      configureCopyWebpack()
+    ),
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(true),
     }),
-    new BundleAnalyzerPlugin(configureBundleAnalyzer()),
+    new BundleAnalyzerPlugin(
+      configureBundleAnalyzer()
+    ),
   ],
 });
