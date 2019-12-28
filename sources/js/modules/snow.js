@@ -34,7 +34,7 @@ class Hohoho {
     this.canvas.height = this.H;
   }
 
-  static createCanvas() {
+  createCanvas() {
     const canv = document.createElement('canvas');
     canv.id = 'canvas';
     canv.setAttribute(
@@ -56,7 +56,7 @@ class Hohoho {
         this.ctx.clearRect(0, 0, this.W, this.H);
         this.ctx.fillStyle = `rgba(${this.snowColor},${this.snowOpacity})`;
         this.ctx.beginPath();
-        for (let i = 0; i < this.ns; i += 1) {
+        for (let i = 0; i < this.ns; i++) {
           const p = this.partivles[i];
           this.ctx.moveTo(p.x, p.y);
           this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
@@ -69,7 +69,7 @@ class Hohoho {
 
   updateSnowflakes() {
     this.angle += 0.01;
-    for (let i = 0; i < this.ns; i += 1) {
+    for (let i = 0; i < this.ns; i++) {
       const p = this.partivles[i];
       p.y += Math.cos(this.angle + p.d) + 1 + p.r / 2;
       p.x += Math.sin(this.angle) * 2;
@@ -105,7 +105,7 @@ const options = {
   canvas: 'canvas',
   snowColor: '255,255,255', // snowflakes color - white
   snowOpacity: '0.6', // snowflakes opacity
-  ns: 300, // the number of snowflakes
+  ns: 50, // the number of snowflakes
   radius: 3, // size snowflakes
   interval: 30, // falling speed
 };
