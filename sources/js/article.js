@@ -3,7 +3,7 @@ import '../scss/modules/_article.scss';
 import '../scss/style.scss';
 import './modules/Observer';
 import backToTop from './modules/BackToTop';
-import progressBar from './modules/ProgressBar';
+// import progressBar from './modules/ProgressBar';
 import DisqusLoader from './modules/Disqusloader';
 // import NavMenu from './modules/NavMenu';
 import mail from './modules/Mail';
@@ -28,5 +28,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   mail();
   backToTop();
-  progressBar();
+  // progressBar();
 });
