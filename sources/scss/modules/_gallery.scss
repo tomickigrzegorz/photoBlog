@@ -5,19 +5,18 @@
 
   @include breakpoint(600px) {
     grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(24, auto);
   }
 
   @include breakpoint(sm) {
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(12, auto);
   }
 
   @include breakpoint(md) {
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(8, auto);
   }
-
-
-  grid-gap: 0;
-
   figure {
     display: flex;
     justify-content: center;
@@ -34,6 +33,10 @@
     color: #fff;
     text-decoration: none;
     margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     width: 100%;
     @include font-size(20);
   }
@@ -75,7 +78,7 @@
 
       .gallery__text {
         opacity: 0.9;
-        top: 40%;
+        transform: translateY(50px);
         transition: opacity 0.3s linear 0.1s, top 0.4s linear;
       }
     }
@@ -123,5 +126,4 @@
   //     min-height: 200px;
   //   }
   // }
-
 }
