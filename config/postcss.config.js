@@ -11,6 +11,6 @@ module.exports = {
     cssnano({
       safe: true,
     }),
-    autoprefixer,
+    autoprefixer({ grid: "autoplace" }),
   ],
 };
