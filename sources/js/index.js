@@ -6,7 +6,7 @@ import '../scss/style.scss';
 import './modules/Observer';
 import backToTop from './modules/BackToTop';
 import mail from './modules/Mail';
-import './modules/snow';
+// import './modules/snow';
 // import NavMenu from './modules/NavMenu';
 
 document.addEventListener('DOMContentLoaded', () => {
