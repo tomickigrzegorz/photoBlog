@@ -7,7 +7,7 @@ import backToTop from './modules/BackToTop';
 import DisqusLoader from './modules/Disqusloader';
 // import NavMenu from './modules/NavMenu';
 import mail from './modules/Mail';
-import './modules/snow';
+// import './modules/snow';
 import ShareButton from './modules/ShareButton';
 
 document.addEventListener('DOMContentLoaded', () => {
