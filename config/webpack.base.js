@@ -1,3 +1,4 @@
+const path = require('path');
 const buildMode =
   process.env.NODE_ENV === 'production' ? 'production' : 'development';
 const HtmlWebPackPlugin = require('html-webpack-plugin');
@@ -79,6 +80,11 @@ const entryHtmlPlugins = Object.keys(ENTRY.html).map(entryName => {
 
 module.exports = {
   entry: ENTRY.html,
+  resolve: {
+    alias: {
+      Styles: path.resolve(__dirname, '../sources/scss/')
+    }
+  },
   module: {
     rules: [
       configureHtmlLoader(buildMode),

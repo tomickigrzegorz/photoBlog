@@ -1,4 +1,4 @@
-import '../../scss/modules/_discus-button.scss';
+import 'Styles/modules/_discus-button.scss';
 
 const disqusOptions = {
   disqusThread: 'disqus_thread',

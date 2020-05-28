@@ -1,4 +1,4 @@
-import '../../scss/modules/_share-button.scss';
+import 'Styles/modules/_share-button.scss';
 
 const shareButtonOptions = {
   place: {

@@ -106,13 +106,16 @@ const configureSWPrecacheWebpack = (PATH, DIR) => {
 
 // Configure Copy Webpack
 const configureCopyWebpack = () => {
-  console.log('-----------------------------\n' + 'check if images exist: ', checkFolder(IMAGE_FOLDER) + '\n-----------------------------\n');
   const images = { from: 'sources/images/', to: 'images/' };
-  let BASIC = [
-    { from: 'sources/assets/', to: 'assets/' },
-    { from: 'sources/assets/favicon.ico', to: './' }
-  ];
-  return checkFolder(IMAGE_FOLDER) ? BASIC : [...BASIC, images];
+  const check = checkFolder(IMAGE_FOLDER);
+
+  const config = {
+    patterns: [
+      { from: 'sources/assets/', to: 'assets/' },
+      { from: 'sources/assets/favicon.ico', to: './' }
+    ]
+  }
+  return check ? config : { patterns: [...config.patterns, images] };
 };
 
 // Configure Bundle Analyzer

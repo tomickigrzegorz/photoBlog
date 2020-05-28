@@ -1,4 +1,4 @@
-import '../../scss/modules/_observer.scss';
+import 'Styles/modules/_observer.scss';
 
 const images = document.querySelectorAll('source, img');
 
@@ -23,7 +23,7 @@ if ('IntersectionObserver' in window) {
 
   // eslint-disable-next-line no-inner-declarations
   function onChange(changes, observer) {
-    changes.forEach(change => {
+    changes.forEach((change) => {
       // console.log(change);
       if (change.intersectionRatio > 0) {
         // Stop watching and load the image
