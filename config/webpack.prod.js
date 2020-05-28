@@ -1,9 +1,7 @@
 // production builds
 const buildMode =
   process.env.NODE_ENV === 'production' ? 'production' : 'development';
-const PUBLIC_PATH = 'http://somesite.com/';
 const IMAGE_FOLDER = './dist/images/';
-const OUTPUT_DIR = 'dist';
 
 // node modules
 const fs = require('fs');
@@ -14,7 +12,7 @@ const merge = require('webpack-merge');
 // webpack plugins
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -71,8 +69,8 @@ const configureOptimization = () => {
 const configureCleanWebpack = () => {
   return {
     dry: false,
-    verbose: true,
-    cleanOnceBeforeBuildPatterns: ['vendor/**/*', '!images/**/*'],
+    verbose: false,
+    cleanOnceBeforeBuildPatterns: ['**/*.html', '**/*.js', '!assets/*', '!images/*'],
   };
 };
 
@@ -84,25 +82,16 @@ const configureMiniCssExtract = () => {
   };
 };
 
-// Configure SW Precache Webpack
-const configureSWPrecacheWebpack = (PATH, DIR) => {
+// configure SW
+const configureSW = () => {
   return {
-    cacheId: 'gt',
-    dontCacheBustUrlsMatching: /\.\w{8}\./,
-    filename: 'sw.js',
-    minify: false,
-    navigateFallback: `${PATH}index.html`,
-    stripPrefix: DIR,
-    staticFileGlobs: [
-      `${DIR}/assets/manifest.json`,
-      `${DIR}/favicon.ico`,
-      `${DIR}/vendor/js/*.js`,
-      `${DIR}/vendor/css/*.css`,
-      `${DIR}/images/static/*.png`,
-      `${DIR}/images/*.ico`,
-    ],
-  };
-};
+    clientsClaim: true,
+    skipWaiting: true,
+    directoryIndex: 'index.html',
+    offlineGoogleAnalytics: true,
+    exclude: ['images']
+  }
+}
 
 // Configure Copy Webpack
 const configureCopyWebpack = () => {
@@ -189,8 +178,8 @@ module.exports = merge(baseConfig, {
     new MiniCssExtractPlugin(
       configureMiniCssExtract()
     ),
-    new SWPrecacheWebpackPlugin(
-      configureSWPrecacheWebpack(PUBLIC_PATH, OUTPUT_DIR)
+    new WorkboxPlugin.GenerateSW(
+      configureSW()
     ),
     new CopyWebpackPlugin(
       configureCopyWebpack()
