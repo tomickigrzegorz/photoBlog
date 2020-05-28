@@ -16,9 +16,9 @@
     "service worker"
   ],
   "browserslist": [
-    "last 2 version",
-    "> 1%",
-    "not dead"
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
   ],
   "author": "Grzegorz Tomicki <gtomik@gmail.com>",
   "license": "MIT",
