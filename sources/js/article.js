@@ -1,25 +1,14 @@
-import SmoothScroll from 'smooth-scroll';
-import '../scss/modules/_article.scss';
-import '../scss/style.scss';
+/* eslint-disable import/no-unresolved */
+import 'Styles/modules/_article.scss';
+import 'Styles/style.scss';
 import './modules/Observer';
-import backToTop from './modules/BackToTop';
-// import progressBar from './modules/ProgressBar';
 import DisqusLoader from './modules/Disqusloader';
-// import NavMenu from './modules/NavMenu';
-import mail from './modules/Mail';
-// import './modules/snow';
 import ShareButton from './modules/ShareButton';
+import mail from './modules/Mail';
+import backToTop from './modules/BackToTop';
+import smoothScroll from './modules/SmoothScroll';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const option = {
-    speed: 100,
-    easing: 'easeOutCubic',
-  };
-  const scroll = new SmoothScroll('.scroll', option);
-
-  // const navMenu = new NavMenu();
-  // navMenu.addToHeaderMenu();
-
   const sharebutton = new ShareButton();
   sharebutton.renderHTML();
 
@@ -28,5 +17,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   mail();
   backToTop();
-  // progressBar();
+  smoothScroll();
 });
