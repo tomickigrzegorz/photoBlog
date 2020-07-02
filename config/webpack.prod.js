@@ -95,8 +95,8 @@ const configureSW = () => {
 
 // Configure Copy Webpack
 const configureCopyWebpack = () => {
-  const images = { from: 'sources/images/', to: 'images/' };
-  const check = checkFolder(IMAGE_FOLDER);
+  // const images = { from: 'sources/images/', to: 'images/' };
+  // const check = checkFolder(IMAGE_FOLDER);
 
   const config = {
     patterns: [
@@ -104,7 +104,8 @@ const configureCopyWebpack = () => {
       { from: 'sources/assets/favicon.ico', to: './' }
     ]
   }
-  return check ? config : { patterns: [...config.patterns, images] };
+  // return check ? config : { patterns: [...config.patterns, images] };
+  return config;
 };
 
 // Configure Bundle Analyzer
