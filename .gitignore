@@ -10,3 +10,4 @@ sources/data/*
 !sources/data/index.json
 
 sources/images/*
+!sources/images/.gitkeep
