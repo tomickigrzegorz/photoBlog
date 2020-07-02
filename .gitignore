@@ -1,4 +1,3 @@
-.history
 .vscode
 
 sitemap.xml
@@ -11,4 +10,3 @@ sources/data/*
 !sources/data/index.json
 
 sources/images/*
-!sources/images/jeden-dzien-w-berlinie/
