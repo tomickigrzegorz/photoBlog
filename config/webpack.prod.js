@@ -70,7 +70,6 @@ const configureCleanWebpack = () => {
   return {
     dry: false,
     verbose: false,
-    cleanOnceBeforeBuildPatterns: ['**/*.html', '**/*.js', '!assets/*', '!images/*'],
   };
 };
 
