@@ -12,6 +12,9 @@ const configureDevServer = () => {
     open: true,
     port: 3000,
     overlay: true,
+    // inline: false,
+    // stats: { colors: true },
+    clientLogLevel: 'silent',
     hot: true,
   };
 };
