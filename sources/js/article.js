@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
-import 'Styles/modules/_article.scss';
-import 'Styles/style.scss';
+import 'styles/modules/_article.scss';
+import 'styles/style.scss';
 import './modules/Observer';
 import DisqusLoader from './modules/Disqusloader';
 import ShareButton from './modules/ShareButton';

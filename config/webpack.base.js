@@ -82,7 +82,7 @@ module.exports = {
   entry: ENTRY.html,
   resolve: {
     alias: {
-      Styles: path.resolve(__dirname, '../sources/scss/')
+      'styles': path.resolve(__dirname, '../sources/scss')
     }
   },
   module: {

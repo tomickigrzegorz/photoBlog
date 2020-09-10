@@ -2,10 +2,10 @@
   "compilerOptions": {
     "target": "es6",
     "allowSyntheticDefaultImports": false,
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      "Styles/*": [
-        "./sources/scss/**/*"
+      "styles/*": [
+        "./sources/scss/*"
       ]
     }
   },

@@ -7,7 +7,7 @@ const IMAGE_FOLDER = './dist/images/';
 const fs = require('fs');
 const webpack = require('webpack');
 const path = require('path');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 
 // webpack plugins
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -132,8 +132,8 @@ const configureCssLoader = () => {
         loader: 'postcss-loader',
         options: {
           sourceMap: true,
-          config: {
-            path: './config/',
+          postcssOptions: {
+            config: path.resolve(__dirname, './postcss.config.js'),
           },
         },
       },
@@ -141,6 +141,7 @@ const configureCssLoader = () => {
         loader: 'sass-loader',
         options: {
           sourceMap: true,
+          webpackImporter: true
         },
       },
       {
