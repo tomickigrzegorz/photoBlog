@@ -55,6 +55,21 @@ html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
                 "headline": "Blog fotograficzny"
             }
 
+        script.
+            window.addEventListener('DOMContentLoaded', function() {
+                new Zooom('zooom', {
+                    zIndex: 9,
+                    animationTime: 300,
+                    cursor: {
+                    in: 'zoom-in',
+                    out: 'zoom-out',
+                    },
+                    overlay: {
+                    color: '#000',
+                    opacity: 100,
+                    },
+                });
+            });
 
         include ./includes/footer.pug
         include ./includes/backToTop.pug
