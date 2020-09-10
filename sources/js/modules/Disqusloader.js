@@ -1,4 +1,5 @@
-import 'Styles/modules/_discus-button.scss';
+/* eslint-disable import/no-unresolved */
+import 'styles/modules/_discus-button.scss';
 
 const disqusOptions = {
   disqusThread: 'disqus_thread',
@@ -31,7 +32,7 @@ class DisqusLoader {
     const disqusButton = document.querySelector(
       `.${this.option.commentsButton}`
     );
-    disqusButton.addEventListener('click', e => {
+    disqusButton.addEventListener('click', (e) => {
       e.preventDefault();
       const disqusContainer = document.createElement('div');
       disqusContainer.setAttribute('id', this.option.disqusThread);

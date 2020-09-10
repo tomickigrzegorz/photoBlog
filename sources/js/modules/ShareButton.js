@@ -1,4 +1,5 @@
-import 'Styles/modules/_share-button.scss';
+/* eslint-disable import/no-unresolved */
+import 'styles/modules/_share-button.scss';
 
 const shareButtonOptions = {
   place: {
@@ -67,8 +68,8 @@ class ShareButton {
 
     for (let i = 0; i < buttonShare.length; i += 1) {
       // const typeSocial = buttonShare[i].getAttribute('data-share');
-      buttonShare[i].addEventListener('click', e => {
-        const typeSocial = e.currentTarget.getAttribute('data-share');
+      buttonShare[i].addEventListener('click', ({ currentTarget }) => {
+        const typeSocial = currentTarget.getAttribute('data-share');
         switch (typeSocial) {
           case 'mail': {
             const mailtoLink = `mailto:?subject=Zobacz może Ci się spodoba&body=${this.getTitle} %20%0A ${this.getUrl}`;

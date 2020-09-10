@@ -1,4 +1,5 @@
-import 'Styles/modules/_observer.scss';
+/* eslint-disable import/no-unresolved */
+import 'styles/modules/_observer.scss';
 
 const images = document.querySelectorAll('source, img');
 
@@ -34,7 +35,7 @@ if ('IntersectionObserver' in window) {
   }
 
   const observer = new IntersectionObserver(onChange, config);
-  images.forEach(img => {
+  images.forEach((img) => {
     observer.observe(img);
   });
 } else {
