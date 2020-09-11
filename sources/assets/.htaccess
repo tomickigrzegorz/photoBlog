@@ -1,13 +1,14 @@
 RewriteEngine On
-RewriteBase /
-RewriteCond %{HTTP_HOST} ^grzegorztomicki.pl [NC]
-RewriteRule ^(.*)$ http://www.grzegorztomicki.pl/$1 [L,R=301]
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,NE,R=301]
 
-RewriteCond %{HTTP_HOST} ^blog.grzegorztomicki.pl [NC]
-RewriteRule ^(.*)$ http://www.grzegorztomicki.pl/$1 [L,R=301]
+# RewriteCond %{HTTP_HOST} ^blog.grzegorztomicki.pl [NC]
+# RewriteRule ^(.*)$ http://www.grzegorztomicki.pl/$1 [L,R=301]
 
-Redirect permanent /blog http://www.grzegorztomicki.pl
-Redirect permanent /react http://react.grzegorztomicki.pl
+# Redirect permanent /blog http://www.grzegorztomicki.pl
+# Redirect permanent /react http://react.grzegorztomicki.pl
 
 # RedirectMatch 301 ^/blog/(.*)$ http://www.grzegorztomicki.pl/$1
 # RedirectMatch 301 ^/react/(.*)$ http://react.grzegorztomicki.pl/$1

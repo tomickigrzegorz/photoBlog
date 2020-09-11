@@ -14,7 +14,7 @@ readdir(`${htmlPlace}`, function (err, files) {
     if (rest === 'html') {
       const path = `
   <url>
-    <loc>http://www.grzegorztomicki.pl/${file}</loc>
+    <loc>https://grzegorztomicki.pl/${file}</loc>
     <changefreq>${changeFreq}</changefreq>
   </url>
       `;
