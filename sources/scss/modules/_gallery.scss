@@ -1,22 +1,32 @@
 .gallery {
-  max-width: $max-width;
+  // max-width: $max-width;
   display: grid;
   margin: auto -15px;
 
   @include breakpoint(600px) {
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(24, auto);
-  }
-
-  @include breakpoint(sm) {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(12, auto);
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   }
 
   @include breakpoint(md) {
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(8, auto);
   }
+
+  @include breakpoint(xl) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  // @include breakpoint(800) {
+  //   grid-template-columns: repeat(3, 1fr);
+  //   grid-template-rows: repeat(12, auto);
+  // }
+
+  // @include breakpoint(md) {
+  //   // grid-template-columns: repeat(3, 1fr);
+  //   grid-template-columns: repeat(auto-fit, minmax(510px, 1fr));
+  //   grid-template-rows: repeat(8, auto);
+  //   margin: auto 15px;
+  // }
+
   figure {
     display: flex;
     justify-content: center;
@@ -77,6 +87,7 @@
       }
 
       .gallery__text {
+        font-size: 2rem;
         opacity: 0.9;
         transform: translateY(50px);
         transition: opacity 0.3s linear 0.1s, top 0.4s linear;
