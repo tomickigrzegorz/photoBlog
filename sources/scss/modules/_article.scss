@@ -1,92 +1,51 @@
+@import "./shareIcons";
+@import "./discus-button";
+
 .article {
-  &__title {
-    h1 {
-      @include font-size(34);
-      font-weight: 700;
+  max-width: 930px;
+  margin: auto;
 
-      @media (max-width: 480px) {
-        @include font-size(30);
-      }
+  .sweep-to-top {
+    color: red;
+    text-decoration: none;
+    padding-bottom: 2px;
+    padding: 0 5px;
+    border-bottom: 1px solid #ff7777;
+    transition: background 300ms ease-out, color 300ms ease-out;
 
-      line-height: 120%;
-      margin-top: 0;
-      margin-bottom: 0;
+    &:hover {
+      color: #fff;
+      background: #ff0000;
+      transition: background 300ms ease-in, color 300ms ease-in;
     }
   }
 
   &__date {
     small {
-      line-height: 32px;
-      vertical-align: middle;
-      margin-left: 5px;
-      @include font-size(14);
+      margin-left: 10px;
     }
   }
 
   &__text {
-    margin: 10px 0;
-    line-height: 168%;
-    padding-top: 10px;
-    // @include font-size(22);
-
-    // @media (max-width: 770px) {
-    //   @include font-size(16);
-    // }
-
-    a {
-      color: #f13d3d;
-      text-decoration: none;
-      border-bottom: 1px solid #f13d3d;
-      padding-bottom: 1px;
-
-      &:hover {
-        color: #fff;
-        border-bottom: none;
-      }
-    }
+    line-height: 150%;
+    margin-bottom: 15px;
   }
 
-  figcaption {
-    line-height: 168%;
-    max-width: 990px;
-    margin: 15px auto;
-    padding: 0 15px;
+}
 
-    @media (max-width: 770px) {
-      @include font-size(16);
-    }
-  }
+figure {
+  margin: 0 0 4px;
+}
 
-  &__content {
+figcaption {
+  padding: 20px 0;
 
-    figure {
-      margin-bottom: 2px;
-    }
-
-    @media (max-width: 1152px) {
-      margin: auto -15px;
-    }
-
-    a {
-      color: #f13d3d;
-      text-decoration: none;
-      border-bottom: 1px solid #f13d3d;
-      padding-bottom: 1px;
-
-      &:hover {
-        color: #fff;
-        border-bottom: none;
-      }
-    }
+  @media (min-width: 900px) {
+    padding: 20px 16px;
   }
 }
 
-.icon {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  stroke-width: 0;
-  stroke: currentColor;
-  fill: currentColor;
-  vertical-align: middle;
+h1 {
+  font-size: 2rem;
+  margin: 0;
 }

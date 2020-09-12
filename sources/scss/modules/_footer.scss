@@ -1,27 +1,26 @@
-.footer {
-  flex: 1;
-  max-width: $max-width;
-  @include font-size(12);
-  padding: 15px 5px;
-
-  .text-small {
-    margin-bottom: 5px;
-  }
-
-  margin: auto;
+footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.8rem;
 
   a {
     text-decoration: none;
-    color: $share-add-opinion-fill;
+    color: #000;
 
-    &.copyright {
-      text-transform: uppercase;
-      font-weight: bold;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  p {
+    &:first-of-type {
+      font-size: 0.7rem;
     }
 
-    &.mail {
-      &:hover {
-        text-decoration: underline;
+    &:last-of-type {
+      a {
+        text-transform: uppercase;
+        font-weight: 600;
       }
     }
   }

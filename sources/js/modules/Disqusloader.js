@@ -1,6 +1,3 @@
-/* eslint-disable import/no-unresolved */
-import 'styles/modules/_discus-button.scss';
-
 const disqusOptions = {
   disqusThread: 'disqus_thread',
   commentsButton: 'comments-button',
@@ -15,6 +12,7 @@ class DisqusLoader {
 
   init() {
     const discusContent = document.getElementById(this.option.disqusThread);
+
     if (discusContent) {
       discusContent.appendChild(this.disqusButtonCreate());
       this.disqusEvent();
@@ -32,6 +30,7 @@ class DisqusLoader {
     const disqusButton = document.querySelector(
       `.${this.option.commentsButton}`
     );
+
     disqusButton.addEventListener('click', (e) => {
       e.preventDefault();
       const disqusContainer = document.createElement('div');
@@ -43,7 +42,7 @@ class DisqusLoader {
       const dsq = document.createElement('script');
       dsq.type = 'text/javascript';
       dsq.async = true;
-      dsq.src = `//${disqusShortname}.disqus.com/embed.js`;
+      dsq.src = ` //${disqusShortname}.disqus.com/embed.js`;
 
       (
         document.getElementsByTagName('head')[0] ||

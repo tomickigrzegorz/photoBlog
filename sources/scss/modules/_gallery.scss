@@ -1,140 +1,68 @@
 .gallery {
-  // max-width: $max-width;
   display: grid;
-  margin: auto -15px;
 
-  @include breakpoint(600px) {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(12, auto);
   }
 
-  @include breakpoint(md) {
+  @media (min-width: 900px) {
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(8, auto);
   }
 
-  @include breakpoint(xl) {
+  @media (min-width: 1280px) {
     grid-template-columns: repeat(4, 1fr);
-  }
-
-  // @include breakpoint(800) {
-  //   grid-template-columns: repeat(3, 1fr);
-  //   grid-template-rows: repeat(12, auto);
-  // }
-
-  // @include breakpoint(md) {
-  //   // grid-template-columns: repeat(3, 1fr);
-  //   grid-template-columns: repeat(auto-fit, minmax(510px, 1fr));
-  //   grid-template-rows: repeat(8, auto);
-  //   margin: auto 15px;
-  // }
-
-  figure {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 2px;
-
-    @include breakpoint(sm) {
-      margin-bottom: 0;
-    }
-  }
-
-  figcaption {
-    position: absolute;
-    color: #fff;
-    text-decoration: none;
-    margin: auto;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    @include font-size(20);
-  }
-
-  &__overlay {
-    background: transparent;
-    opacity: 0;
-    transition: opacity 0.6s;
+    grid-template-rows: repeat(6, auto);
   }
 
   &__items {
     position: relative;
-    transition: transform 0.3s linear 0.1s, z-index 1s linear 0s;
+    margin: 0;
+    padding: 0;
+    transition: all 300ms linear;
 
-    @include breakpoint(601px) {
-      &:hover {
-        z-index: 3;
-        transform: scale(1.1);
-        transition: transform 0.3s linear 0.1s;
-        box-shadow: 0 28px 81px -7px rgba(0, 0, 0, 0.44);
+    figure {
+      margin: 0;
+
+      @media (max-width: 669px) {
+        margin-bottom: 2px;
       }
     }
 
-    &__overlay {
-      background: transparent;
+    figcaption {
+      display: none;
+      position: absolute;
+      text-align: center;
+      width: 100%;
+      margin: auto;
+      z-index: 9;
       opacity: 0;
-      transition: opacity 0.6s;
+      padding: 5px 0;
+      color: #fff;
     }
 
     &:hover {
-      .gallery__overlay {
+      transform: scale(1.1) translateZ(0);
+      z-index: 8;
+
+      figure:before {
         position: absolute;
-        top: 0;
+        content: "";
         width: 100%;
         height: 100%;
-        opacity: 0.3;
-        background: #3dc0f1;
+        z-index: 8;
+        background: rgba(59, 193, 241, 0.3);
+        transition: background 1s ease-in-out;
       }
 
-      .gallery__text {
-        font-size: 2rem;
+      figcaption {
+        display: block;
+        top: 45%;
         opacity: 0.9;
-        transform: translateY(50px);
-        transition: opacity 0.3s linear 0.1s, top 0.4s linear;
+        transition: opacity 400ms ease-in-out;
       }
+
     }
   }
-
-  &__text {
-    position: absolute;
-    width: 100%;
-    z-index: 2;
-    text-align: center;
-    text-transform: capitalize;
-    white-space: nowrap;
-    color: #fff;
-    top: 30%;
-    opacity: 0;
-    @include font-size(18);
-
-    @media (max-width: 890px) {
-      opacity: 1;
-      top: 40%;
-    }
-
-    @media (max-width: 600px) {
-      @include font-size(20);
-    }
-  }
-
-  &__cell {
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
-  }
-
-  // figure {
-  //   margin-bottom: 2px;
-
-  //   @include breakpoint(600px) {
-  //     margin-bottom: 0;
-  //   }
-
-  //   picture,
-  //   img {
-  //     display: block;
-  //     max-width: none;
-  //     width: 100%;
-  //     height: 100%;
-  //     min-height: 200px;
-  //   }
-  // }
 }
