@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import 'styles/modules/_observer.scss';
+// import 'styles/modules/_observer.scss';
 
 const images = document.querySelectorAll('source, img');
 
