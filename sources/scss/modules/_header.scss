@@ -5,6 +5,11 @@ header {
   a {
     display: inline-block;
 
+    @media (max-width: 900px) {
+      display: flex;
+      justify-content: center;
+    }
+
     svg {
       max-width: 255px;
     }
