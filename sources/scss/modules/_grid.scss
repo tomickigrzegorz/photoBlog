@@ -1,12 +1,25 @@
-.row {
-  overflow: hidden;
-  max-width: $max-width;
-  min-width: $min-width;
-  margin: 0 auto;
+.flex-grid {
+  display: flex;
 
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
+  &>* {
+    flex: 0 1 100%;
+
+    &:not(:first-child) {
+      margin-left: $gridGap;
+    }
+  }
+
+  @media (max-width: ($minColWidth * 3)) {
+    flex-wrap: wrap;
+
+    &>* {
+      margin: 2rem 0 0 !important;
+    }
+  }
+
+  @media (min-width: ($minColWidth * 3)) {
+    &+.flex-grid {
+      margin-top: $gridGap;
+    }
   }
 }
