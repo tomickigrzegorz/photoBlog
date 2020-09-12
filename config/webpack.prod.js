@@ -148,8 +148,7 @@ const configureCssLoader = () => {
         loader: 'sass-resources-loader',
         options: {
           resources: [
-            './sources/scss/modules/_config.scss',
-            './sources/scss/modules/_mixins.scss',
+            './sources/scss/modules/_config.scss'
           ],
         },
       },

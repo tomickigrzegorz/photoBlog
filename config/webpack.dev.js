@@ -12,10 +12,8 @@ const configureDevServer = () => {
     contentBase: './sources',
     open: true,
     port: 3000,
-    overlay: true,
-    // inline: false,
-    // stats: { colors: true },
-    clientLogLevel: 'silent',
+    inline: true,
+    stats: "errors-only",
     hot: true,
   };
 };
@@ -53,8 +51,7 @@ const configureCssLoader = () => {
         loader: 'sass-resources-loader',
         options: {
           resources: [
-            './sources/scss/modules/_config.scss',
-            './sources/scss/modules/_mixins.scss',
+            './sources/scss/modules/_config.scss'
           ],
         },
       },

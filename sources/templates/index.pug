@@ -6,39 +6,36 @@ html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
 
     include ./includes/head.pug
     include ./includes/header.pug
-    include ./includes/svgLogo.pug
+    include ./includes/svgLogos.pug
 
     head
         +head(path.file, 'index')
 
     body
+        .flex-wrap.home
 
-        +svgLogo()
-        +header()
+            +svgLogos()
+            +header()
 
-        main(class="container home")
-            .body
-                div.gallery
-                    each val, i in path.file.items
-                        div.gallery__items
-                            a(href=val.href)
-                                figure
-                                    img(class="gallery__img" data-src=(val.img), alt=val.alt)
-                                    figcaption
-                                        div.gallery__overlay
-                                        div.gallery__text
-                                            = val.text
+            main.gallery
+                each val, i in path.file.items
+                    div.gallery__items
+                        a(href=val.href)
+                            figure
+                                img(data-src=(val.img), alt=val.alt)
+                                figcaption
+                                    = val.text
 
-        script(type='application/ld+json').
-            {
-                "@context": "http://schema.org/",
-                "@type": "Blog",
-                "publisher": "grzegorztomicki.pl",
-                "author": "#{path.file.schema.author}",
-                "datePublished": "#{path.file.schema.datePublished}",
-                "dateModified": "#{path.file.schema.dateModified}",
-                "headline": "Blog fotograficzny"
-            }
+            script(type='application/ld+json').
+                {
+                    "@context": "http://schema.org/",
+                    "@type": "Blog",
+                    "publisher": "grzegorztomicki.pl",
+                    "author": "#{path.file.schema.author}",
+                    "datePublished": "#{path.file.schema.datePublished}",
+                    "dateModified": "#{path.file.schema.dateModified}",
+                    "headline": "Blog fotograficzny"
+                }
 
-        include ./includes/footer.pug
-        include ./includes/backToTop.pug
+            include ./includes/footer.pug
+            include ./includes/backToTop.pug

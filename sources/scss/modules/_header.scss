@@ -1,41 +1,24 @@
-.header {
-  position: relative;
+header {
+  max-width: 930px;
+  margin: -16px auto 10px;
 
   a {
-    text-decoration: none;
+    display: inline-block;
+
+    svg {
+      max-width: 255px;
+    }
   }
-
-  padding: 0 15px;
-  max-width: $max-width;
-  margin: 0 auto;
-
-  .logo {
-    max-width: 225px;
-  }
-
-  .header-sentence {
-    position: absolute;
-    color: #3e3e3e;
-    font-size: 9px;
-    line-height: 100%;
-    margin-left: 45px;
-    top: 110px;
-    bottom: 9px;
-  }
-
-  // .hamburger {
-  //   position: absolute;
-  //   right: 15px;
-  //   top: 20px;
-  // }
 }
 
-#header-menu {
-  position: absolute;
-  top: 0;
-  right: 21px;
+.home {
+  header {
+    max-width: 900px;
+  }
 }
 
-.hide-overflow {
-  overflow: hidden;
+.header-sentence {
+  color: #313131;
+  font-size: 9px;
+  margin: auto;
 }
