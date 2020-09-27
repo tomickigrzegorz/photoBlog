@@ -40,14 +40,16 @@ class ShareButton {
     }
 
     if (navigator.share) {
-      const btn = document.querySelector('.share-mobile__btn');
-      btn.addEventListener('click', async () => {
-        try {
-          await navigator.share(shareData);
-        } catch (err) {
-          console.log(err);
-        }
-      });
+      const btns = document.querySelectorAll('.share-mobile__btn');
+      for (let i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('click', async () => {
+          try {
+            await navigator.share(shareData);
+          } catch (err) {
+            console.log(err);
+          }
+        });
+      }
     } else {
       this.handlerEvent();
     }
