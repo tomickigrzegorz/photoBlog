@@ -1,13 +1,6 @@
 /* eslint-disable import/no-unresolved */
 // import 'styles/modules/_share-button.scss';
 
-const shareData = {
-  title: 'Zdjęcia zebrane',
-  text:
-    '📸 Blog fotograficzny, ciekawe nietuzinkowe zdjęcia, niezapomniane chwile.',
-  url: 'https://grzegorztomicki.pl',
-};
-
 const shareButtonOptions = {
   place: {
     stick: 'share-button-stick',
@@ -21,6 +14,12 @@ class ShareButton {
     this.option = shareButtonOptions;
     this.getTitle = document.title;
     this.getUrl = window.location.href;
+
+    this.shareData = {
+      title: this.getTitle,
+      text: `📸 ${this.getDescription()}`,
+      url: this.getUrl,
+    };
   }
 
   initial() {
@@ -44,7 +43,7 @@ class ShareButton {
       for (let i = 0; i < btns.length; i++) {
         btns[i].addEventListener('click', async () => {
           try {
-            await navigator.share(shareData);
+            await navigator.share(this.shareData);
           } catch (err) {
             console.log(err);
           }
@@ -139,7 +138,7 @@ class ShareButton {
       case 'facebook':
         url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURI(
           this.getUrl
-        )}&p=${encodeURI(this.getDescription())}`;
+        )}&p=${encodeURI(this.getDescription().replace(/ /g, '%20'))}`;
         break;
       case 'twitter':
         url = `http://twitter.com/share?text=${this.getTitle}&url=${this.getUrl}`;
@@ -159,7 +158,7 @@ class ShareButton {
         description = meta[x];
       }
     }
-    const content = description.content.replace(/ /g, '%20');
+    const { content } = description;
     return content;
   }
 }
