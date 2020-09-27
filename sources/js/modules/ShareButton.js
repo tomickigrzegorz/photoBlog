@@ -1,12 +1,19 @@
 /* eslint-disable import/no-unresolved */
 // import 'styles/modules/_share-button.scss';
 
+const shareData = {
+  title: 'Zdjęcia zebrane',
+  text:
+    '📸 Blog fotograficzny, ciekawe nietuzinkowe zdjęcia, niezapomniane chwile.',
+  url: 'https://grzegorztomicki.pl',
+};
+
 const shareButtonOptions = {
   place: {
     stick: 'share-button-stick',
     bottom: 'share-button-bottom',
   },
-  title: 'Podziel się:',
+  title: 'Podziel się',
 };
 
 class ShareButton {
@@ -16,15 +23,34 @@ class ShareButton {
     this.getUrl = window.location.href;
   }
 
-  renderHTML() {
+  initial() {
     const placeStick = document.getElementById(this.option.place.stick);
     const placeBottom = document.getElementById(this.option.place.bottom);
 
     if (placeStick || placeBottom) {
-      placeStick.innerHTML = this.htmlTemplate(this.option.place.stick);
-      placeBottom.innerHTML = this.htmlTemplate(this.option.place.bottom);
+      placeStick.innerHTML = navigator.share
+        ? this.shareButtonNavigation()
+        : this.htmlTemplate();
+      placeBottom.innerHTML = navigator.share
+        ? this.shareButtonNavigation()
+        : this.htmlTemplate();
+
+      // placeStick.innerHTML = this.shareButtonNavigation();
+      // placeBottom.innerHTML = this.shareButtonNavigation();
     }
-    this.eventButton();
+
+    if (navigator.share) {
+      const btn = document.querySelector('.share-mobile__btn');
+      btn.addEventListener('click', async () => {
+        try {
+          await navigator.share(shareData);
+        } catch (err) {
+          console.log(err);
+        }
+      });
+    } else {
+      this.handlerEvent();
+    }
   }
 
   htmlTemplate() {
@@ -39,8 +65,8 @@ class ShareButton {
         '<svg class="share__icon share__btn--add"><use xlink:href="#share-icon-add-opinion"></use></svg>',
     };
 
-    const html = `
-        <h3>${this.option.title}</h3>
+    const template = `
+        <h2>${this.option.title}</h2>
         <div class="share fl">
             <div title="Udostępnij w serwisie Facebook. Strona otworzy się w nowym oknie." data-share="facebook" class="share__btn btn-facebook">
                 <span class="share__btn--wrapper">${social.facebook}</span>
@@ -54,20 +80,32 @@ class ShareButton {
 
         </div>
         `;
-    return html;
+    return template;
   }
 
-  eventButton() {
+  shareButtonNavigation() {
+    const share = `
+      <div class="share-mobile fl">
+        <div class="share-mobile__btn">
+          <svg class="share__icon">
+            <use xlink:href="#share-icon"></use>
+          </svg>
+          <h2>${this.option.title}</h2>
+        </div>
+      </div>
+    `;
+
+    return share;
+  }
+
+  handlerEvent() {
     const buttonShare = document.querySelectorAll('.share__btn');
     const winWidth = 520;
     const winHeight = 320;
-    // eslint-disable-next-line no-restricted-globals
-    const winTop = screen.height / 2 - winHeight / 2;
-    // eslint-disable-next-line no-restricted-globals
-    const winLeft = screen.width / 2 - winWidth / 2;
+    const winTop = window.screen.height / 2 - winHeight / 2;
+    const winLeft = window.screen.width / 2 - winWidth / 2;
 
     for (let i = 0; i < buttonShare.length; i += 1) {
-      // const typeSocial = buttonShare[i].getAttribute('data-share');
       buttonShare[i].addEventListener('click', ({ currentTarget }) => {
         const typeSocial = currentTarget.getAttribute('data-share');
         switch (typeSocial) {
@@ -110,7 +148,6 @@ class ShareButton {
     return url;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   getDescription() {
     let description;
     const meta = document.getElementsByTagName('meta');
