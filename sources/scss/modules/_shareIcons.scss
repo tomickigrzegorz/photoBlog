@@ -76,6 +76,36 @@
         }
       }
     }
+
+    &-mobile__btn {
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+      background: #1da1f2;
+      max-width: 190px;
+      color: #fff;
+      border-radius: 4px;
+      margin: auto;
+      line-height: 100%;
+      padding: 10px 10px;
+
+      svg {
+        width: 25px;
+        height: 25px;
+      }
+
+      h2 {
+        margin: auto;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 1rem;
+      }
+    }
+
+  }
+
+  @media (max-width: 900px) {
+    text-align: center;
   }
 }
 

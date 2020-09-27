@@ -1,24 +1,19 @@
-header {
+.header {
   max-width: 930px;
-  margin: -16px auto 10px;
+  margin: auto;
+  margin-top: -15px;
 
   a {
     display: inline-block;
-
-    @media (max-width: 900px) {
-      display: flex;
-      justify-content: center;
-    }
-
-    svg {
-      max-width: 255px;
-    }
   }
-}
 
-.home {
-  header {
-    max-width: 900px;
+  @media (max-width: 900px) {
+    display: flex;
+    justify-content: center;
+  }
+
+  svg {
+    max-width: 255px;
   }
 }
 

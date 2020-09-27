@@ -15,7 +15,7 @@ html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
     body
         .flex-wrap.article
             +svgLogos()
-            +header()
+            +header('article')
             div(id="progress" class="bar")
             main(class="container")
                 article(class="article")
@@ -65,7 +65,7 @@ html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
                         out: 'zoom-out',
                         },
                         overlay: {
-                        color: '#000',
+                        color: '#f5f5f5',
                         opacity: 100,
                         },
                     });

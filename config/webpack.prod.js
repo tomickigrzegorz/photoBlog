@@ -111,7 +111,7 @@ const configureCopyWebpack = () => {
 const configureBundleAnalyzer = () => {
   return {
     openAnalyzer: true,
-    generateStatsFile: true,
+    // generateStatsFile: true,
   };
 };
 
@@ -133,7 +133,7 @@ const configureCssLoader = () => {
         options: {
           sourceMap: true,
           postcssOptions: {
-            config: path.resolve(__dirname, './postcss.config.js'),
+            config: path.resolve(__dirname, 'postcss.config.js'),
           },
         },
       },
@@ -147,9 +147,7 @@ const configureCssLoader = () => {
       {
         loader: 'sass-resources-loader',
         options: {
-          resources: [
-            './sources/scss/modules/_config.scss'
-          ],
+          resources: './sources/scss/modules/_config.scss',
         },
       },
     ],
