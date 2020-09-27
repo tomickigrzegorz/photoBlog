@@ -1,6 +1,11 @@
 .gallery {
   display: grid;
 
+  @media (max-width: 639px) {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(24, auto);
+  }
+
   @media (min-width: 640px) {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(12, auto);
