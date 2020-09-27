@@ -10,7 +10,7 @@ import smoothScroll from './modules/SmoothScroll';
 
 document.addEventListener('DOMContentLoaded', () => {
   const sharebutton = new ShareButton();
-  sharebutton.renderHTML();
+  sharebutton.initial();
 
   const disqusloader = new DisqusLoader();
   disqusloader.init();

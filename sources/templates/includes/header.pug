@@ -1,5 +1,9 @@
-mixin header()
-    header
-        a(href="./" class="header-logo")
+mixin header(type)
+    header.header
+        if type === 'article'
+            a(href="./" class="header-logo" title="strona główna")
+                svg(class="logo")
+                    use(xlink:href="#logo")
+        else
             svg(class="logo")
                 use(xlink:href="#logo")

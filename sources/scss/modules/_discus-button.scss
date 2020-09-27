@@ -8,10 +8,12 @@
   background-color: #60b044;
   border: none;
   border-radius: 4px;
-  color: #fff;
+  color: rgb(0, 0, 0);
   padding: 15px 20px;
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
+  text-transform: uppercase;
+  font-size: 1.1rem;
 
   &:hover {
     transform: scale(1.1) translateZ(0);
