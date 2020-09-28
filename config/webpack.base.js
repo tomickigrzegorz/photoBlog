@@ -93,5 +93,7 @@ module.exports = {
       configureFileLoader(),
     ],
   },
-  plugins: entryHtmlPlugins,
+  plugins: [
+    ...entryHtmlPlugins
+  ]
 };
