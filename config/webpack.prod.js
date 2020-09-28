@@ -14,6 +14,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -90,7 +91,39 @@ const configureSW = () => {
     offlineGoogleAnalytics: true,
     exclude: ['images']
   }
-}
+};
+
+const configureFavicons = () => {
+  return {
+    logo: './sources/assets/logo.png',
+    prefix: 'assets/',
+    cache: true,
+    inject: true,
+    favicons: {
+      appName: 'Fotoblog Grzegorz Tomicki',
+      appShortName: 'Fotoblog GT',
+      appDescription: 'Blog fotograficzny, ciekawe nietuzinkowe zdjęcia, niezapomniane chwile',
+      background: '#FFF',
+      theme_color: '#FFF',
+      display: 'standalone',
+      lang: 'PL',
+      appleStatusBarStyle: 'black-translucent',
+      orientation: 'portrait',
+      start_url: "/?source=pwa",
+      scope: '/',
+      icons: {
+        android: true,
+        appleIcon: true,
+        favicons: true,
+        appleStartup: false,
+        coast: false,
+        firefox: false,
+        window: false,
+        yandex: false
+      }
+    }
+  }
+};
 
 // Configure Copy Webpack
 const configureCopyWebpack = () => {
@@ -179,8 +212,8 @@ module.exports = merge(baseConfig, {
     new WorkboxPlugin.GenerateSW(
       configureSW()
     ),
-    new CopyWebpackPlugin(
-      configureCopyWebpack()
+    new FaviconsWebpackPlugin(
+      configureFavicons()
     ),
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(true),
