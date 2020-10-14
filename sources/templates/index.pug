@@ -1,41 +1,41 @@
 block variables
-- var path = self.htmlWebpackPlugin.options
+- var path = self.htmlWebpackPlugin.options.DATA
 
 doctype html
 html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
 
-    include ./includes/head.pug
-    include ./includes/header.pug
-    include ./includes/svgLogos.pug
+  include ./includes/head.pug
+  include ./includes/header.pug
+  include ./includes/svgLogos.pug
 
-    head
-        +head(path.file, 'index')
+  head
+    +head(path, 'index')
 
-    body
-        .flex-wrap.home
+  body
+    .flex-wrap.home
 
-            +svgLogos()
-            +header('homepage')
+      +svgLogos()
+      +header('homepage')
 
-            main.gallery
-                each val, i in path.file.items
-                    div.gallery__items
-                        a(href=val.href)
-                            figure
-                                img(data-src=(val.img), alt=val.alt)
-                                figcaption
-                                    = val.text
+      main.gallery
+        each val, i in path.items
+          div.gallery__items
+            a(href=val.href)
+              figure
+                img(data-src=(val.img), alt=val.alt)
+                figcaption
+                  = val.text
 
-            script(type='application/ld+json').
-                {
-                    "@context": "http://schema.org/",
-                    "@type": "Blog",
-                    "publisher": "grzegorztomicki.pl",
-                    "author": "#{path.file.schema.author}",
-                    "datePublished": "#{path.file.schema.datePublished}",
-                    "dateModified": "#{path.file.schema.dateModified}",
-                    "headline": "Blog fotograficzny"
-                }
+      script(type='application/ld+json').
+        {
+          "@context": "http://schema.org/",
+          "@type": "Blog",
+          "publisher": "grzegorztomicki.pl",
+          "author": "#{path.schema.author}",
+          "datePublished": "#{path.schema.datePublished}",
+          "dateModified": "#{path.schema.dateModified}",
+          "headline": "Blog fotograficzny"
+        }
 
-            include ./includes/footer.pug
-            include ./includes/backToTop.pug
+      include ./includes/footer.pug
+      include ./includes/backToTop.pug

@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   sharebutton.initial();
 
   const disqusloader = new DisqusLoader();
-  disqusloader.init();
+  disqusloader.initial();
 
   mail();
   backToTop();

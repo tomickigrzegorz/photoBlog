@@ -6,11 +6,10 @@
   margin: auto;
 
   .sweep-to-top {
-    color: red;
+    color: #000;
     text-decoration: none;
     padding-bottom: 2px;
-    padding: 0 5px;
-    border-bottom: 1px solid #ff7777;
+    border-bottom: 2px solid #ff7777;
     transition: background 300ms ease-out, color 300ms ease-out;
 
     &:hover {
