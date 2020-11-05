@@ -1,6 +1,6 @@
 ## My photo blog
 
-The whole environment is based on `webpack 4`, `pug templates` and the input data are `json` files.
+The whole environment is based on `webpack 5`, `pug templates` and the input data are `json` files. [Webpack 4](https://github.com/tomik23/photoBlog/tree/webpack-4) is still available.
 
 ```
 sources
