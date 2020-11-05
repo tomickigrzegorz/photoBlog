@@ -1,10 +1,11 @@
-const path = require('path');
 const buildMode =
   process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
 const webpack = require('webpack');
 const baseConfig = require('./webpack.base.js');
 const { merge } = require('webpack-merge');
+
+const { cssLoaders } = require('./util');
 
 // Configure Dev Server
 const configureDevServer = () => {
@@ -24,34 +25,7 @@ const configureCssLoader = () => {
     test: /\.(css|sass|scss)$/,
     use: [
       'style-loader',
-      {
-        loader: 'css-loader',
-        options: {
-          importLoaders: 2,
-          sourceMap: true,
-        },
-      },
-      {
-        loader: 'postcss-loader',
-        options: {
-          postcssOptions: {
-            config: path.resolve(__dirname, 'postcss.config.js'),
-          },
-        },
-      },
-      {
-        loader: 'sass-loader',
-        options: {
-          sourceMap: true,
-          webpackImporter: true
-        },
-      },
-      {
-        loader: 'sass-resources-loader',
-        options: {
-          resources: './sources/scss/modules/_config.scss',
-        },
-      },
+      ...cssLoaders
     ],
   };
 };

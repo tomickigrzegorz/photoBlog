@@ -6,30 +6,19 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const ENTRY = require('./entry.js');
 
 // Configure Html Loader
-const configureHtmlLoader = () => {
-  if (buildMode === 'production') {
-    return {
-      test: /\.html$/,
-      use: [
-        {
-          loader: 'html-loader',
-          options: {
-            minimize: true,
-          },
-        },
-      ],
-    };
-  }
-  if (buildMode === 'development') {
-    return {
-      test: /\.html$/,
-      use: [
-        {
-          loader: 'html-loader',
-        },
-      ],
-    };
-  }
+const configureHtmlLoader = (mode) => {
+  const type = mode === 'production' ? true : false;
+  return {
+    test: /\.html$/,
+    use: [
+      {
+        loader: 'html-loader',
+        options: {
+          minimize: type
+        }
+      },
+    ],
+  };
 };
 
 // Configure Babel Loader
@@ -69,12 +58,13 @@ const configureFileLoader = () => {
 // Multiple Entry
 const entryHtmlPlugins = Object.keys(ENTRY.html).map(entryName => {
   const templateName = entryName === 'index' ? 'index' : 'article';
+
   return new HtmlWebPackPlugin({
     filename: `${entryName}.html`,
     template: `./sources/templates/${templateName}.pug`,
-    file: require(`../sources/data/${entryName}.json`),
+    DATA: require(`../sources/data/${entryName}.json`),
     chunks: [entryName],
-    mode: buildMode,
+    cache: true
   });
 });
 

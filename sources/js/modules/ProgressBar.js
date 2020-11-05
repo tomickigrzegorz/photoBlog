@@ -14,7 +14,7 @@ function scrollHandler() {
 
 window.addEventListener(
   'scroll',
-  function (ev) {
+  () => {
     window.requestAnimationFrame(scrollHandler);
   },
   { passive: true }

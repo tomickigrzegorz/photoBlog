@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 // import 'styles/modules/_share-button.scss';
 
 const shareButtonOptions = {
