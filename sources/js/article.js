@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import 'styles/modules/_article.scss';
 import 'styles/style.scss';
 import './modules/Observer';
@@ -13,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   sharebutton.initial();
 
   const disqusloader = new DisqusLoader();
-  disqusloader.init();
+  disqusloader.initial();
 
   mail();
   backToTop();

@@ -21,6 +21,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // config files
 const baseConfig = require('./webpack.base.js');
 
+const { cssLoaders } = require('./util');
+
 const checkFolder = folder => {
   try {
     if (fs.existsSync(folder)) {
@@ -35,33 +37,17 @@ const checkFolder = folder => {
 // Configure Terser
 const configureTerser = () => {
   return {
-    cache: true,
-    parallel: true,
-    sourceMap: true,
+    terserOptions: {
+      // cache: true,
+      // parallel: true,
+      sourceMap: true
+    }
   };
 };
 
 // Configure Optimization
 const configureOptimization = () => {
   return {
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
-          chunks: 'all',
-          enforce: true,
-        },
-        styles: {
-          name: 'styles',
-          test: /\.s?css$/,
-          chunks: 'all',
-          minChunks: 2,
-          reuseExistingChunk: true,
-          enforce: true,
-        },
-      },
-    },
     minimizer: [new TerserPlugin(configureTerser())],
   };
 };
@@ -77,8 +63,9 @@ const configureCleanWebpack = () => {
 // Configure Mini Css Extract
 const configureMiniCssExtract = () => {
   return {
-    filename: 'vendor/css/[name].[hash].css',
-    chunkFilename: 'vendor/css/[name].[hash].css',
+    filename: ({ chunk }) => `${chunk.name === 'index'
+      ? 'vendor/css/index.[fullhash].css'
+      : 'vendor/css/article.[fullhash].css'}`
   };
 };
 
@@ -154,49 +141,22 @@ const configureCssLoader = () => {
     test: /\.(css|sass|scss)$/,
     use: [
       MiniCssExtractPlugin.loader,
-      {
-        loader: 'css-loader',
-        options: {
-          importLoaders: 2,
-          sourceMap: true,
-        },
-      },
-      {
-        loader: 'postcss-loader',
-        options: {
-          sourceMap: true,
-          postcssOptions: {
-            config: path.resolve(__dirname, 'postcss.config.js'),
-          },
-        },
-      },
-      {
-        loader: 'sass-loader',
-        options: {
-          sourceMap: true,
-          webpackImporter: true
-        },
-      },
-      {
-        loader: 'sass-resources-loader',
-        options: {
-          resources: './sources/scss/modules/_config.scss',
-        },
-      },
+      ...cssLoaders
     ],
   };
 };
 
 module.exports = merge(baseConfig, {
   mode: 'production',
+  target: 'es5',
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: chunkData => {
-      return chunkData.chunk.name === 'index'
-        ? 'vendor/js/index.[hash].js'
-        : 'vendor/js/article.[hash].js';
+    filename: ({ chunk }) => {
+      return chunk.name === 'index'
+        ? 'vendor/js/index.[fullhash].js'
+        : 'vendor/js/article.[fullhash].js'
     },
-    chunkFilename: 'vendor/js/[name].[hash].js',
+    chunkFilename: 'vendor/js/[name].[fullhash].js',
   },
   optimization: configureOptimization(),
   module: {

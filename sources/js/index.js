@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import 'styles/modules/_gallery.scss';
 import 'styles/modules/_grid.scss';
 import 'styles/style.scss';

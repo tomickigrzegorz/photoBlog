@@ -10,7 +10,7 @@ class DisqusLoader {
     this.option = disqusOptions;
   }
 
-  init() {
+  initial() {
     const discusContent = document.getElementById(this.option.disqusThread);
 
     if (discusContent) {
