@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import 'styles/modules/_article.scss';
 import 'styles/style.scss';
 import './modules/Observer';
