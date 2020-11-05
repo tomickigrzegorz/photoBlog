@@ -14,7 +14,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-// const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -38,8 +38,8 @@ const checkFolder = folder => {
 const configureTerser = () => {
   return {
     terserOptions: {
-      cache: true,
-      parallel: true,
+      // cache: true,
+      // parallel: true,
       sourceMap: true
     }
   };
@@ -172,10 +172,9 @@ module.exports = merge(baseConfig, {
     new WorkboxPlugin.GenerateSW(
       configureSW()
     ),
-    // not compatible with webpack 5
-    // new FaviconsWebpackPlugin(
-    //   configureFavicons()
-    // ),
+    new FaviconsWebpackPlugin(
+      configureFavicons()
+    ),
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(true),
     }),
