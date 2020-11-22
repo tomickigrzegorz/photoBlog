@@ -10,11 +10,11 @@ const path = require('path');
 const { merge } = require('webpack-merge');
 
 // webpack plugins
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -48,6 +48,24 @@ const configureTerser = () => {
 // Configure Optimization
 const configureOptimization = () => {
   return {
+    // splitChunks: {
+    //   cacheGroups: {
+    //     vendor: {
+    //       test: /[\\/]node_modules[\\/]/,
+    //       name: 'vendor',
+    //       chunks: 'all',
+    //       enforce: true,
+    //     },
+    //     styles: {
+    //       name: 'styles',
+    //       test: /\.s?css$/,
+    //       chunks: 'all',
+    //       minChunks: 2,
+    //       reuseExistingChunk: true,
+    //       enforce: true,
+    //     },
+    //   },
+    // },
     minimizer: [new TerserPlugin(configureTerser())],
   };
 };
@@ -149,15 +167,6 @@ const configureCssLoader = () => {
 module.exports = merge(baseConfig, {
   mode: 'production',
   target: 'es5',
-  output: {
-    path: path.resolve(__dirname, '../dist'),
-    filename: ({ chunk }) => {
-      return chunk.name === 'index'
-        ? 'vendor/js/index.[fullhash].js'
-        : 'vendor/js/article.[fullhash].js'
-    },
-    chunkFilename: 'vendor/js/[name].[fullhash].js',
-  },
   optimization: configureOptimization(),
   module: {
     rules: [configureCssLoader(buildMode)],

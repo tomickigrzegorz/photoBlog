@@ -2,6 +2,7 @@ const path = require('path');
 const buildMode =
   process.env.NODE_ENV === 'production' ? 'production' : 'development';
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 const ENTRY = require('./entry.js');
 
@@ -56,20 +57,37 @@ const configureFileLoader = () => {
 };
 
 // Multiple Entry
-const entryHtmlPlugins = Object.keys(ENTRY.html).map(entryName => {
+const entryHtmlPlugins = ENTRY.html.map(entryName => {
   const templateName = entryName === 'index' ? 'index' : 'article';
 
   return new HtmlWebPackPlugin({
     filename: `${entryName}.html`,
     template: `./sources/templates/${templateName}.pug`,
     DATA: require(`../sources/data/${entryName}.json`),
-    chunks: [entryName],
+    chunks: ['share', templateName],
+    inject: true,
     cache: true
   });
 });
 
 module.exports = {
-  entry: ENTRY.html,
+  target: process.env.NODE_ENV === 'development' ? 'web' : 'browserslist',
+  entry: {
+    index: './sources/js/index.js',
+    article: './sources/js/article.js',
+    share: './sources/js/share.js'
+  },
+  output: {
+    path: path.resolve(__dirname, '../dist'),
+    filename: 'vendor/js/[name].[fullhash].js',
+    // filename: ({ chunk }) => {
+    //   return chunk.name === 'index'
+    //     ? 'vendor/js/index.[fullhash].js'
+    //     : 'vendor/js/article.[fullhash].js'
+    // },
+    // publicPath: '/',
+    chunkFilename: 'vendor/js/[name].[fullhash].chunk.js',
+  },
   resolve: {
     alias: {
       'styles': path.resolve(__dirname, '../sources/scss')
