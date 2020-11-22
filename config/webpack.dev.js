@@ -1,3 +1,4 @@
+const path = require('path');
 const buildMode =
   process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
@@ -10,12 +11,13 @@ const { cssLoaders } = require('./util');
 // Configure Dev Server
 const configureDevServer = () => {
   return {
-    contentBase: './sources',
+    contentBase: path.resolve(__dirname, '../sources'),
     open: true,
     port: 3000,
-    inline: true,
-    stats: "errors-only",
+    liveReload: true,
     hot: true,
+    publicPath: "/",
+    watchContentBase: true,
   };
 };
 
@@ -41,5 +43,6 @@ module.exports = merge(baseConfig, {
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(false),
     }),
+    new webpack.HotModuleReplacementPlugin()
   ],
 });
