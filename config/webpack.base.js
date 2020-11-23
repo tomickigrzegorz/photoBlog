@@ -71,7 +71,6 @@ const entryHtmlPlugins = ENTRY.html.map(entryName => {
 });
 
 module.exports = {
-  target: process.env.NODE_ENV === 'development' ? 'web' : 'browserslist',
   entry: {
     index: './sources/js/index.js',
     article: './sources/js/article.js',
