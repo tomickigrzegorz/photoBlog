@@ -35,6 +35,7 @@ const configureCssLoader = () => {
 module.exports = merge(baseConfig, {
   devtool: 'eval-source-map',
   mode: 'development',
+  target: 'web',
   devServer: configureDevServer(),
   module: {
     rules: [configureCssLoader(buildMode)],

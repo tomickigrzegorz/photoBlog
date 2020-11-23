@@ -166,7 +166,7 @@ const configureCssLoader = () => {
 
 module.exports = merge(baseConfig, {
   mode: 'production',
-  target: 'es5',
+  target: 'browserslist',
   optimization: configureOptimization(),
   module: {
     rules: [configureCssLoader(buildMode)],
