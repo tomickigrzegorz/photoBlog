@@ -45,29 +45,45 @@
       opacity: 0;
       padding: 5px 0;
       color: #fff;
+
+      @media (max-width: 699px) {
+        opacity: 1;
+        bottom: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &::before {
+          content: "";
+          z-index: -1;
+          position: absolute;
+        }
+      }
     }
 
-    &:hover {
-      transform: scale(1.1) translateZ(0);
-      z-index: 8;
-
-      figure:before {
-        position: absolute;
-        content: "";
-        width: 100%;
-        height: 100%;
+    @media (min-width: 700px) {
+      &:hover {
+        transform: scale(1.1) translateZ(0);
         z-index: 8;
-        background: rgba(59, 193, 241, 0.3);
-        transition: background 1s ease-in-out;
-      }
 
-      figcaption {
-        display: block;
-        top: 45%;
-        opacity: 0.9;
-        transition: opacity 400ms ease-in-out;
-      }
+        figure:before {
+          position: absolute;
+          content: "";
+          width: 100%;
+          height: 100%;
+          z-index: 8;
+          background: rgba(59, 193, 241, 0.3);
+          transition: background 1s ease-in-out;
+        }
 
+        figcaption {
+          display: block;
+          top: 45%;
+          opacity: 0.9;
+          transition: opacity 400ms ease-in-out;
+        }
+      }
     }
   }
 }
