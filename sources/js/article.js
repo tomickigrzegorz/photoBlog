@@ -28,12 +28,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   new ReadingTime({
     wordsPerMinute: 215,
-    elements: ['.article__text', 'figcaption'],
+    imagesTime: 12,
+    elements: ['.article__text', 'figcaption', 'picture'],
 
-    template: function (minutes, words) {
+    template: function (minutes, words, images) {
       const element = document.querySelector('.reading-time');
       const text = minutes > 1 ? 'minut czytania' : 'minuta czytania';
-      element.innerHTML = `~${minutes} ${text} (słów: ${words})`;
+      // eslint-disable-next-line prettier/prettier
+      element.textContent = `~${Math.ceil(minutes)} ${text} (słów: ${words}, zdjęć: ${images / 2})`;
     },
   });
 });
