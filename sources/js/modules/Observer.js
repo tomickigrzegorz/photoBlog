@@ -18,17 +18,17 @@ if ('IntersectionObserver' in window) {
   const config = {
     root: null,
     rootMargin: '0px',
-    threshold: 0,
+    threshold: 1.0,
   };
 
   // eslint-disable-next-line no-inner-declarations
-  function onChange(changes, observer) {
-    changes.forEach((change) => {
+  function onChange(entries, observer) {
+    entries.forEach((entrie) => {
       // console.log(change);
-      if (change.intersectionRatio > 0) {
+      if (entrie.isIntersecting) {
         // Stop watching and load the image
-        loadImage(change.target);
-        observer.unobserve(change.target);
+        loadImage(entrie.target);
+        observer.unobserve(entrie.target);
       }
     });
   }
