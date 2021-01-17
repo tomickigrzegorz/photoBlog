@@ -27,6 +27,10 @@
     padding: 0;
     transition: all 300ms linear;
 
+    img {
+      min-height: 100px;
+    }
+
     figure {
       margin: 0;
 

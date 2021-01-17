@@ -22,6 +22,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const baseConfig = require('./webpack.base.js');
 
 const { cssLoaders } = require('./util');
+const copyWebpackPlugin = require('copy-webpack-plugin');
 
 const checkFolder = folder => {
   try {
@@ -40,6 +41,8 @@ const configureTerser = () => {
     terserOptions: {
       // cache: true,
       // parallel: true,
+      // keep_classnames: true,
+      // keep_fnames: true,
       sourceMap: true
     }
   };
@@ -66,6 +69,7 @@ const configureOptimization = () => {
     //     },
     //   },
     // },
+    minimize: true,
     minimizer: [new TerserPlugin(configureTerser())],
   };
 };
@@ -137,8 +141,7 @@ const configureCopyWebpack = () => {
 
   const config = {
     patterns: [
-      { from: 'sources/assets/', to: 'assets/' },
-      { from: 'sources/assets/favicon.ico', to: './' }
+      { from: 'sources/assets/js', to: 'assets/js' }
     ]
   }
   // return check ? config : { patterns: [...config.patterns, images] };
@@ -183,6 +186,9 @@ module.exports = merge(baseConfig, {
     ),
     new FaviconsWebpackPlugin(
       configureFavicons()
+    ),
+    new copyWebpackPlugin(
+      configureCopyWebpack()
     ),
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(true),
