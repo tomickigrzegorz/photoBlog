@@ -56,6 +56,37 @@ html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
           "dateModified": "#{path.schema.dateModified}",
           "headline": "Blog fotograficzny"
         }
+      script.
+        document.addEventListener('DOMContentLoaded', function() {
+          new Zooom('zooom', {
+            zIndex: 9,
+            animationTime: 300,
+            cursor: {
+              in: 'zoom-in',
+              out: 'zoom-out',
+            },
+            overlay: {
+              color: '#f5f5f5',
+              opacity: 100,
+            },
+          });
+
+          new ReadingTime({
+            wordsPerMinute: 215,
+            photosPerMinute: 12,
+
+            elements: ['article'],
+
+            onResult: function (index, minutes, words, images) {
+              const element = document.querySelector('.reading-time');
+              const text = minutes > 1 ? 'minut czytania' : 'minuta czytania';
+              element.textContent = `~${Math.ceil(minutes)} ${text} (słów: ${words}, zdjęć: ${images})`;
+            },
+          });
+        });
 
       include ./includes/footer.pug
       include ./includes/backToTop.pug
+
+      script(src="./assets/js/zooom.min.js")
+      script(src="./assets/js/readingTime.min.js")

@@ -77,4 +77,4 @@ After optimizing images, the page `PageSpeed Insight` shows **`100/100`** in the
 
 ### Production version
 
-Visit online: [http://www.grzegorztomicki.pl](http://www.grzegorztomicki.pl)
+Visit online: [https://www.grzegorztomicki.pl](https://www.grzegorztomicki.pl)
