@@ -1,10 +1,11 @@
 const path = require('path');
+const fs = require('fs');
 const buildMode =
   process.env.NODE_ENV === 'production' ? 'production' : 'development';
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
 
-const ENTRY = require('./entry.js');
+const dataFiles = fs.readdirSync(path.resolve(__dirname, '../sources/', 'data'));
 
 // Configure Html Loader
 const configureHtmlLoader = (mode) => {
@@ -57,14 +58,15 @@ const configureFileLoader = () => {
 };
 
 // Multiple Entry
-const entryHtmlPlugins = ENTRY.html.map(entryName => {
-  const templateName = entryName === 'index' ? 'index' : 'article';
+const entryHtmlPlugins = dataFiles.map(entryName => {
+  const nameData = entryName.split('.')[0];
+  const templateName = nameData === 'index' ? 'index' : 'article';
 
   return new HtmlWebPackPlugin({
-    filename: `${entryName}.html`,
+    filename: `${nameData}.html`,
     template: `./sources/templates/${templateName}.pug`,
-    DATA: require(`../sources/data/${entryName}.json`),
-    chunks: ['share', templateName],
+    DATA: require(`../sources/data/${entryName}`),
+    chunks: [templateName, 'share'],
     inject: true,
     cache: true
   });
@@ -72,19 +74,19 @@ const entryHtmlPlugins = ENTRY.html.map(entryName => {
 
 module.exports = {
   entry: {
-    index: './sources/js/index.js',
-    article: './sources/js/article.js',
+    index: {
+      import: './sources/js/index.js',
+      dependOn: 'share',
+    },
+    article: {
+      import: './sources/js/article.js',
+      dependOn: 'share',
+    },
     share: './sources/js/share.js'
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: 'vendor/js/[name].[fullhash].js',
-    // filename: ({ chunk }) => {
-    //   return chunk.name === 'index'
-    //     ? 'vendor/js/index.[fullhash].js'
-    //     : 'vendor/js/article.[fullhash].js'
-    // },
-    // publicPath: '/',
     chunkFilename: 'vendor/js/[name].[fullhash].chunk.js',
   },
   resolve: {
