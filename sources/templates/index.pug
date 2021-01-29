@@ -22,7 +22,6 @@ html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
           div.gallery__items
             a(href=val.href)
               figure
-                //- img(data-src=(val.img), alt=val.alt)
                 img(data-src=(val.img) alt=val.alt loading="lazy")
                 noscript
                   img(src=(val.img) loading="lazy")
