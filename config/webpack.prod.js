@@ -39,10 +39,6 @@ const checkFolder = folder => {
 const configureTerser = () => {
   return {
     terserOptions: {
-      // cache: true,
-      // parallel: true,
-      // keep_classnames: true,
-      // keep_fnames: true,
       sourceMap: true
     }
   };
@@ -51,24 +47,6 @@ const configureTerser = () => {
 // Configure Optimization
 const configureOptimization = () => {
   return {
-    // splitChunks: {
-    //   cacheGroups: {
-    //     vendor: {
-    //       test: /[\\/]node_modules[\\/]/,
-    //       name: 'vendor',
-    //       chunks: 'all',
-    //       enforce: true,
-    //     },
-    //     styles: {
-    //       name: 'styles',
-    //       test: /\.s?css$/,
-    //       chunks: 'all',
-    //       minChunks: 2,
-    //       reuseExistingChunk: true,
-    //       enforce: true,
-    //     },
-    //   },
-    // },
     minimize: true,
     minimizer: [new TerserPlugin(configureTerser())],
   };
