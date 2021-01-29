@@ -4,14 +4,12 @@ module.exports.cssLoaders = [
   {
     loader: 'css-loader',
     options: {
-      importLoaders: 2,
-      sourceMap: true,
+      importLoaders: 2
     },
   },
   {
     loader: 'postcss-loader',
     options: {
-      sourceMap: true,
       postcssOptions: {
         config: path.resolve(__dirname, 'postcss.config.js'),
       },
@@ -20,14 +18,10 @@ module.exports.cssLoaders = [
   {
     loader: 'sass-loader',
     options: {
-      sourceMap: true,
-      webpackImporter: true
+      webpackImporter: true,
+      additionalData: `
+        @import "sources/scss/modules/_config.scss";
+      `
     },
   },
-  {
-    loader: 'sass-resources-loader',
-    options: {
-      resources: './sources/scss/modules/_config.scss',
-    },
-  }
 ];
