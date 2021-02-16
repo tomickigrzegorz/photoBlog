@@ -19,7 +19,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 // config files
-const baseConfig = require('./webpack.base.js');
+const baseConfig = require('./webpack.common.js');
 
 const { cssLoaders } = require('./util');
 const copyWebpackPlugin = require('copy-webpack-plugin');
@@ -49,6 +49,15 @@ const configureOptimization = () => {
   return {
     minimize: true,
     minimizer: [new TerserPlugin(configureTerser())],
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
   };
 };
 

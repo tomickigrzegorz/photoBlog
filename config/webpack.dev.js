@@ -3,7 +3,7 @@ const buildMode =
   process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
 const webpack = require('webpack');
-const baseConfig = require('./webpack.base.js');
+const baseConfig = require('./webpack.common.js');
 const { merge } = require('webpack-merge');
 
 const { cssLoaders } = require('./util');
