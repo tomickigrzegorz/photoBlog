@@ -1,3 +1,15 @@
+:root {
+  --font-color: #202124;
+  --bg-color: #fbfbfb;
+  --bg-zooom: #fbfbfb;
+}
+
+body[data-theme=dark] {
+  --font-color: #d8d8f6;
+  --bg-color: #242424;
+  --bg-zooom: #242424;
+}
+
 *,
 :after,
 :before {
@@ -16,10 +28,10 @@ body {
   line-height: 1.6;
   font-style: normal;
   min-height: 100%;
-  color: #000;
+  color: var(--font-color);
   margin: 0;
   padding: 15px;
-  background-color: #F5F5F5;
+  background-color: var(--bg-color);
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
@@ -58,5 +70,21 @@ svg:not(:root) {
 
   to {
     opacity: 1;
+  }
+}
+
+.container {
+  position: relative;
+}
+
+#zooom-overlay {
+  background-color: var(--bg-zooom) !important;
+}
+
+.disqus-contet {
+  &.is-active {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: #fbfbfb;
   }
 }

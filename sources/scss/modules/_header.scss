@@ -14,6 +14,11 @@
 
   svg {
     max-width: 255px;
+
+    @media (max-width: 600px) {
+      max-width: 180px;
+      height: 100px;
+    }
   }
 }
 

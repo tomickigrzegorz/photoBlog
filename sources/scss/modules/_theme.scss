@@ -1,0 +1,39 @@
+.theme {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 25px;
+
+  @media (min-width: 600px) {
+    top: 45px;
+
+    &:before {
+      position: absolute;
+      content: "przełącz";
+      left: -55px;
+      font-size: 0.8rem;
+    }
+  }
+
+  svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+body:not([data-theme="dark"]) {
+  .theme-dark {
+    display: none;
+  }
+}
+
+body[data-theme="dark"] {
+  .theme-dark {
+    fill: #fff;
+  }
+
+  .theme-light {
+    display: none;}
+}
