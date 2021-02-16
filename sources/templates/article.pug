@@ -5,6 +5,7 @@ doctype html
 html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
 
   include ./includes/head.pug
+  include ./includes/theme.pug
   include ./includes/header.pug
   include ./includes/svgLogos.pug
   include ./includes/image.pug
@@ -13,8 +14,15 @@ html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
     +head(path, 'article')
 
   body
-    .flex-wrap.article
+    script. 
+      try { 
+        document.body.dataset.theme = localStorage.getItem('theme')
+      } catch (e) {
+        document.body.dataset.theme = null
+      }
+    .flex-wrap.container.article
       +svgLogos()
+      +theme()
       +header('article')
       div(id="progress" class="bar")
       main(class="container")

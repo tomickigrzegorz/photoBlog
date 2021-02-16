@@ -1,4 +1,5 @@
 const disqusOptions = {
+  disqusContent: 'disqus-contet',
   disqusThread: 'disqus_thread',
   commentsButton: 'comments-button',
   buttonName: 'dodaj / pokaż komentarze',
@@ -33,9 +34,12 @@ class DisqusLoader {
 
     disqusButton.addEventListener('click', (e) => {
       e.preventDefault();
+      const content = document.querySelector(`.${this.option.disqusContent}`);
       const disqusContainer = document.createElement('div');
       disqusContainer.setAttribute('id', this.option.disqusThread);
       document.body.appendChild(disqusContainer);
+
+      content.classList.add('is-active');
 
       const disqusShortname = this.option.disqusShortName;
 

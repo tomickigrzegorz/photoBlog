@@ -6,16 +6,17 @@
   margin: auto;
 
   .sweep-to-top {
-    color: #000;
+    display: inline-block;
+    color: var(--font-color);
     text-decoration: none;
-    padding-bottom: 2px;
+    padding-bottom: 1px;
     border-bottom: 2px solid #ff7777;
-    transition: background 300ms ease-out, color 300ms ease-out;
+    transition: color 300ms ease-out, color 300ms ease-out;
 
     &:hover {
       color: #fff;
-      background: #ff0000;
-      transition: background 300ms ease-in, color 300ms ease-in;
+      color: #ff0000;
+      transition: color 300ms ease-in, color 300ms ease-in;
     }
   }
 
