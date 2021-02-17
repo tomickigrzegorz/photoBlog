@@ -5,6 +5,9 @@
   position: absolute;
   right: 0;
   top: 25px;
+  border: none;
+  padding: 0;
+  background: transparent;
 
   @media (min-width: 600px) {
     top: 45px;
@@ -14,6 +17,7 @@
       content: "przełącz";
       left: -55px;
       font-size: 0.8rem;
+      color: var(--font-color);
     }
   }
 
@@ -35,5 +39,6 @@ body[data-theme="dark"] {
   }
 
   .theme-light {
-    display: none;}
+    display: none;
+  }
 }
