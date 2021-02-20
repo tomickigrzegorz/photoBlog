@@ -4,13 +4,12 @@
   cursor: pointer;
   position: absolute;
   right: 0;
-  top: 25px;
   border: none;
   padding: 0;
   background: transparent;
 
   @media (min-width: 600px) {
-    top: 45px;
+    top: 55px;
 
     &:before {
       position: absolute;
