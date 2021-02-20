@@ -5,7 +5,6 @@ doctype html
 html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
 
   include ./includes/head.pug
-  include ./includes/theme.pug
   include ./includes/header.pug
   include ./includes/svgLogos.pug
 
@@ -22,7 +21,6 @@ html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
 
     .flex-wrap.container.home
       +svgLogos()
-      +theme()
       +header('homepage')
 
       main.gallery
