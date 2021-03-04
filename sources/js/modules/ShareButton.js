@@ -26,15 +26,14 @@ class ShareButton {
     const placeBottom = document.getElementById(this.option.place.bottom);
 
     if (placeStick || placeBottom) {
-      placeStick.innerHTML = navigator.share
-        ? this.shareButtonNavigation()
-        : this.htmlTemplate();
-      placeBottom.innerHTML = navigator.share
-        ? this.shareButtonNavigation()
-        : this.htmlTemplate();
-
-      // placeStick.innerHTML = this.shareButtonNavigation();
-      // placeBottom.innerHTML = this.shareButtonNavigation();
+      placeStick.innerHTML =
+        navigator.share && this.isMobile()
+          ? this.shareButtonNavigation()
+          : this.htmlTemplate();
+      placeBottom.innerHTML =
+        navigator.share && this.isMobile()
+          ? this.shareButtonNavigation()
+          : this.htmlTemplate();
     }
 
     if (navigator.share) {
@@ -53,6 +52,31 @@ class ShareButton {
     }
   }
 
+  isMobile() {
+    // sprawdzenie czy jest mobilny
+    let hasTouchScreen = false;
+    if ('maxTouchPoints' in navigator) {
+      hasTouchScreen = navigator.maxTouchPoints > 0;
+    } else if ('msMaxTouchPoints' in navigator) {
+      hasTouchScreen = navigator.msMaxTouchPoints > 0;
+    } else {
+      let mQ = window.matchMedia && matchMedia('(pointer:coarse)');
+      if (mQ && mQ.media === '(pointer:coarse)') {
+        hasTouchScreen = !!mQ.matches;
+      } else if ('orientation' in window) {
+        hasTouchScreen = true; // deprecated, but good fallback
+      } else {
+        // Only as a last resort, fall back to user agent sniffing
+        let UA = navigator.userAgent;
+        hasTouchScreen =
+          /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) ||
+          /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA);
+      }
+    }
+
+    return hasTouchScreen;
+  }
+
   htmlTemplate() {
     const social = {
       facebook:
@@ -66,7 +90,7 @@ class ShareButton {
     };
 
     const template = `
-        <h2>${this.option.title}</h2>
+        <h4>${this.option.title}</h4>
         <div class="share fl">
             <div title="Udostępnij w serwisie Facebook. Strona otworzy się w nowym oknie." data-share="facebook" class="share__btn btn-facebook">
                 <span class="share__btn--wrapper">${social.facebook}</span>
