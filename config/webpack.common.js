@@ -76,13 +76,13 @@ module.exports = {
   entry: {
     index: {
       import: './sources/js/index.js',
-      dependOn: 'share',
+      dependOn: 'share'
     },
     article: {
       import: './sources/js/article.js',
-      dependOn: 'share',
+      dependOn: 'share'
     },
-    share: './sources/js/share.js'
+    share: ['./sources/js/share.js']
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
