@@ -28,12 +28,15 @@ html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
         article(class="article")
           header(class="article__title")
             h1= path.body.title
-            time.article__date
-              svg(class="icon" viewBox="0 0 32 32")
-                path(class="path1" d="M10 12h4v4h-4zM16 12h4v4h-4zM22 12h4v4h-4zM4 24h4v4h-4zM10 24h4v4h-4zM16 24h4v4h-4zM10 18h4v4h-4zM16 18h4v4h-4zM22 18h4v4h-4zM4 18h4v4h-4zM26 0v2h-4v-2h-14v2h-4v-2h-4v32h30v-32h-4zM28 30h-26v-22h26v22z")
+            .article__date
+              svg(class="icon" viewBox="0 0 24 24")
+                g(fill="none" )
+                  g(class="clock" fill-rule="nonzero")
+                    path(d="M20.473 11.473a.527.527 0 00-.528.527c0 4.381-3.564 7.945-7.945 7.945S4.055 16.381 4.055 12 7.619 4.055 12 4.055c1.336 0 2.635.331 3.795.963l-.659.66a.527.527 0 00.373.9h2.523a.527.527 0 00.528-.527V3.527a.528.528 0 00-.901-.372l-1.09 1.09A8.96 8.96 0 0012 3a8.94 8.94 0 00-6.364 2.636C3.936 7.336 3 9.596 3 12s.936 4.664 2.636 6.364C7.336 20.064 9.596 21 12 21s4.664-.936 6.364-2.636A8.94 8.94 0 0021 12a.527.527 0 00-.527-.527z")
+                    path(d="M15.701 11.35h-3.05V8.298a.563.563 0 00-1.125 0v3.613c0 .31.252.562.562.562h3.613a.562.562 0 000-1.125z")
+                  path(d="M0 0h24v24H0z")
+              small.reading-time
               small= path.body.date
-            || 
-            small.reading-time
             #share-button-stick.share-button-temp
           //- .article__text!= path.file.body.text.replace(/\n?\r\n/g, '<br />' )
           .article__text!= path.body.text.replace(/<a\s+href=/gi, '<a rel="noopener" target="_blank" class="sweep-to-top" href=')
@@ -87,13 +90,11 @@ html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
             onResult: function (index, minutes, words, images) {
               const element = document.querySelector('.reading-time');
               const text = minutes > 1 ? 'minut czytania' : 'minuta czytania';
-              element.textContent = `~${Math.ceil(minutes)} ${text} (słów: ${words}, zdjęć: ${images})`;
+              element.textContent = `${Math.ceil(minutes)} ${text}`;
+              //- element.textContent = `~${Math.ceil(minutes)} ${text} (słów: ${words}, zdjęć: ${images})`;
             },
           });
         });
 
       include ./includes/footer.pug
       include ./includes/backToTop.pug
-
-      script(src="./assets/js/zooom.min.js")
-      script(src="./assets/js/readingTime.min.js")
