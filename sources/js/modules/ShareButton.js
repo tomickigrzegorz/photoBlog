@@ -1,5 +1,3 @@
-// import 'styles/modules/_share-button.scss';
-
 const shareButtonOptions = {
   place: {
     stick: 'share-button-stick',
@@ -36,8 +34,8 @@ class ShareButton {
           : this.htmlTemplate();
     }
 
-    if (navigator.share) {
-      const btns = document.querySelectorAll('.share-mobile__btn');
+    if (navigator.share && this.isMobile()) {
+      const btns = document.querySelectorAll('.social-buttons__btn');
       for (let i = 0; i < btns.length; i++) {
         btns[i].addEventListener('click', async () => {
           try {
@@ -80,28 +78,19 @@ class ShareButton {
   htmlTemplate() {
     const social = {
       facebook:
-        '<svg class="share__icon share__btn--facebook"><use xlink:href="#share-icon-facebook"></use></svg>',
+        '<svg class="share-icon"><use xlink:href="#facebook-icon"></use></svg>',
       twitter:
-        '<svg class="share__icon share__btn--twitter"><use xlink:href="#share-icon-twitter"></use></svg>',
+        '<svg class="share-icon"><use xlink:href="#twitter-icon"></use></svg>',
       mail:
-        '<svg class="share__icon share__btn--mail"><use xlink:href="#share-icon-mail"></use></svg>',
-      add:
-        '<svg class="share__icon share__btn--add"><use xlink:href="#share-icon-add-opinion"></use></svg>',
+        '<svg class="share-icon"><use xlink:href="#mail-icon"></use></svg>',
     };
 
     const template = `
         <h4>${this.option.title}</h4>
-        <div class="share fl">
-            <div title="Udostępnij w serwisie Facebook. Strona otworzy się w nowym oknie." data-share="facebook" class="share__btn btn-facebook">
-                <span class="share__btn--wrapper">${social.facebook}</span>
-            </div>
-            <div title="Udostępnij w serwisie Twitter. Strona otworzy się w nowym oknie." data-share="twitter" class="share__btn btn-twitter">
-                <span class="share__btn--wrapper">${social.twitter}</span>
-            </div>
-            <div title="Wyślij maila." data-share="mail" class="share__btn btn-mail">
-                <span class="share__btn--wrapper">${social.mail}</span>
-            </div>
-
+        <div class="share-mobile">
+            <div title="Udostępnij w serwisie Facebook. Strona otworzy się w nowym oknie." data-share="facebook" class="icon">${social.facebook}</div>
+            <div title="Udostępnij w serwisie Twitter. Strona otworzy się w nowym oknie." data-share="twitter" class="icon">${social.twitter}</div>
+            <div title="Wyślij maila." data-share="mail" class="icon">${social.mail}</div>
         </div>
         `;
     return template;
@@ -109,13 +98,11 @@ class ShareButton {
 
   shareButtonNavigation() {
     const share = `
-      <div class="share-mobile fl">
-        <div class="share-mobile__btn">
-          <svg class="share__icon">
-            <use xlink:href="#share-icon"></use>
-          </svg>
-          <h2>${this.option.title}</h2>
-        </div>
+      <div class="social-buttons__btn">
+        <svg class="share__icon">
+          <use xlink:href="#share-icon"></use>
+        </svg>
+        <h2>${this.option.title}</h2>
       </div>
     `;
 
@@ -123,7 +110,7 @@ class ShareButton {
   }
 
   handlerEvent() {
-    const buttonShare = document.querySelectorAll('.share__btn');
+    const buttonShare = document.querySelectorAll('.icon');
     const winWidth = 520;
     const winHeight = 320;
     const winTop = window.screen.height / 2 - winHeight / 2;

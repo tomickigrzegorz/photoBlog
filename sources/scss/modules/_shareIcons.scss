@@ -1,112 +1,72 @@
+:root {
+  --bg-social: #d3d3d3;
+  --svg-color: #4d4d4d;
+}
+
+.share-mobile {
+  display: flex;
+
+  .icon {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 5px;
+    margin-right: 8px;
+    border-radius: 3px;
+    background: var(--bg-social);
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      --svg-color: #fff;
+      --bg-social: #4d4d4d;
+    }
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.social-buttons__btn {
+  display: flex;
+  border-radius: 3px;
+  align-items: center;
+  max-width: 200px;
+  margin: auto;
+  padding: 5px;
+  color: var(--svg-color);
+  background: var(--bg-social);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  text-transform: uppercase;
+
+  h2 {
+    font-size: 95%;
+  }
+
+  svg {
+    margin-left: 10px;
+    width: 18px;
+    height: 18px;
+  }
+
+  &:hover {
+    color: #fff;
+    --svg-color: #fff;
+    --bg-social: #4d4d4d;
+  }
+}
+
 .share-button-temp {
   margin: 20px 0;
 
   h4 {
     margin-bottom: 5px;
     font-weight: inherit;
-  }
-
-  .share {
-    display: inline-block;
-
-    &:hover>div {
-      opacity: 0.5;
-
-      &:hover {
-        opacity: 1;
-      }
-    }
-
-    a {
-      color: #fff;
-      text-decoration: none;
-      padding: 11px;
-    }
-
-    &__content {
-      display: inline-block;
-      overflow: hidden;
-    }
-
-    &__icon {
-      fill: #fff;
-      border: 0;
-      width: 42px;
-      height: 42px;
-    }
-
-    &__btn {
-      width: 42px;
-      height: 42px;
-      cursor: pointer;
-      display: inline-block;
-      overflow: hidden;
-      transition: all 0.2s ease-in-out;
-      background-color: transparent;
-
-      &--hidden {
-        position: absolute;
-        clip: rect(1px, 1px, 1px, 1px);
-        padding: 0;
-        border: 0;
-        overflow: hidden;
-      }
-
-      &--wrapper {
-        line-height: 42px;
-      }
-
-      &--facebook {
-        background-color: #3b5998;
-      }
-
-      &--twitter {
-        background-color: #1da1f2;
-      }
-
-      &--mail {
-        background-color: #dc4e41;
-      }
-
-      &--add-opinion {
-        background-color: #2a9300;
-        color: #fff;
-        min-width: 125px;
-        text-align: center;
-        font-size: 1.2rem;
-        border-bottom: 4px solid #236800;
-
-        &:hover {
-          background-color: #236800;
-        }
-      }
-    }
-
-    &-mobile__btn {
-      display: flex;
-      justify-content: center;
-      cursor: pointer;
-      background: #1da1f2;
-      max-width: 190px;
-      color: #fff;
-      border-radius: 4px;
-      margin: auto;
-      line-height: 100%;
-      padding: 10px 10px;
-
-      svg {
-        width: 25px;
-        height: 25px;
-      }
-
-      h2 {
-        margin: auto;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-size: 1rem;
-      }
-    }
-
   }
 
   @media (max-width: 900px) {
