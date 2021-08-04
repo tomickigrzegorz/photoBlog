@@ -34,7 +34,7 @@ body:not([data-theme="dark"]) {
 
 body[data-theme="dark"] {
   .theme-dark {
-    fill: #fff;
+    fill: hsl(0, 0%, 100%);
   }
 
   .theme-light {

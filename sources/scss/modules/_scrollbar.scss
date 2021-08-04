@@ -1,31 +1,31 @@
 body {
   &::-webkit-scrollbar {
-    background-color: #fff;
-    width: 16px
+    background-color: hsl(0, 0%, 100%);
+    width: 16px;
   }
 
   /* background of the scrollbar except button or resizer */
   &::-webkit-scrollbar-track {
-    background-color: #fff
+    background-color: hsl(0, 0%, 100%);
   }
 
   &::-webkit-scrollbar-track:hover {
-    background-color: #f4f4f4
+    background-color: hsl(0, 0%, 96%);
   }
 
   /* scrollbar itself */
   &::-webkit-scrollbar-thumb {
-    background-color: #babac0;
+    background-color: hsl(240, 5%, 74%);
     border-radius: 16px;
-    border: 2px solid #fff
+    border: 2px solid hsl(0, 0%, 100%);
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background-color: #a0a0a5;
+    background-color: hsl(240, 3%, 64%);
   }
 
   /* set button(top and bottom of the scrollbar) */
   &::-webkit-scrollbar-button {
-    display: none
+    display: none;
   }
 }

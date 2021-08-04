@@ -1,13 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
 :root {
-  --font-color: #272727;
-  --bg-color: #edebe7;
-  --bg-zooom: #edebe7;
+  --font-color: hsl(0, 0%, 15%);
+  --bg-color: hsl(40, 14%, 92%);
+  --bg-zooom: hsl(40, 14%, 92%);
 }
 
-body[data-theme=dark] {
-  --font-color: #d8d8d8;
-  --bg-color: #242424;
-  --bg-zooom: #242424;
+body[data-theme="dark"] {
+  --font-color: hsl(0, 0%, 85%);
+  --bg-color: hsl(0, 0%, 14%);
+  --bg-zooom: hsl(0, 0%, 14%);
 }
 
 *,
@@ -22,9 +24,8 @@ html {
 
 body {
   position: relative;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji;
-  font-size: calc(16px + .25vw);
-  font-weight: 400;
+  font-family: "Lato", sans-serif;
+  font-size: calc(16px + 0.25vw);
   line-height: 1.4;
   font-style: normal;
   min-height: 100%;
@@ -85,6 +86,6 @@ svg:not(:root) {
   &.is-active {
     padding: 10px 20px;
     border-radius: 5px;
-    background: #fbfbfb;
+    background: hsl(0, 0%, 98%);
   }
 }
