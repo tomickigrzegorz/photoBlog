@@ -5,6 +5,13 @@
   },
   "items": [
     {
+      "img": "./images/antek-sesja-pokomunijna/576/IMG_0933.jpg",
+      "alt": "Antek sesja pokomunijna",
+      "href": "antek-sesja-pokomunijna.html",
+      "text": "Antek sesja pokomunijna",
+      "date": "18.07.2021"
+    },
+    {
       "img": "./images/antek/576/IMG_0175.jpg",
       "alt": "Antek w Warszawie",
       "href": "antek.html",
