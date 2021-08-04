@@ -1,6 +1,6 @@
 :root {
-  --bg-social: #d3d3d3;
-  --svg-color: #4d4d4d;
+  --bg-social: hsl(0, 0%, 83%);
+  --svg-color: hsl(0, 0%, 30%);
 }
 
 .share-mobile {
@@ -20,8 +20,8 @@
     transition: all 0.3s ease-in-out;
 
     &:hover {
-      --svg-color: #fff;
-      --bg-social: #4d4d4d;
+      --svg-color: hsl(0, 0%, 100%);
+      --bg-social: hsl(0, 0%, 30%);
     }
   }
 
@@ -55,9 +55,9 @@
   }
 
   &:hover {
-    color: #fff;
-    --svg-color: #fff;
-    --bg-social: #4d4d4d;
+    color: hsl(0, 0%, 100%);
+    --svg-color: hsl(0, 0%, 100%);
+    --bg-social: hsl(0, 0%, 30%);
   }
 }
 
