@@ -3,9 +3,11 @@ const fs = require('fs');
 const buildMode =
   process.env.NODE_ENV === 'production' ? 'production' : 'development';
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const CopyPlugin = require("copy-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 
-const dataFiles = fs.readdirSync(path.resolve(__dirname, '../sources/', 'data'));
+const dataFiles = fs.readdirSync(
+  path.resolve(__dirname, '../sources/', 'data')
+);
 
 // Configure Html Loader
 const configureHtmlLoader = (mode) => {
@@ -16,8 +18,8 @@ const configureHtmlLoader = (mode) => {
       {
         loader: 'html-loader',
         options: {
-          minimize: type
-        }
+          minimize: type,
+        },
       },
     ],
   };
@@ -58,7 +60,7 @@ const configureFileLoader = () => {
 };
 
 // Multiple Entry
-const entryHtmlPlugins = dataFiles.map(entryName => {
+const entryHtmlPlugins = dataFiles.map((entryName) => {
   const nameData = entryName.split('.')[0];
   const templateName = nameData === 'index' ? 'index' : 'article';
 
@@ -66,33 +68,21 @@ const entryHtmlPlugins = dataFiles.map(entryName => {
     filename: `${nameData}.html`,
     template: `./sources/templates/${templateName}.pug`,
     DATA: require(`../sources/data/${entryName}`),
-    chunks: [templateName, 'share'],
     inject: true,
-    cache: true
+    cache: true,
   });
 });
 
 module.exports = {
-  entry: {
-    index: {
-      import: './sources/js/index.js',
-      dependOn: 'share'
-    },
-    article: {
-      import: './sources/js/article.js',
-      dependOn: 'share'
-    },
-    share: ['./sources/js/share.js']
-  },
+  entry: './sources/js/script.js',
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: 'vendor/js/[name].[fullhash].js',
-    chunkFilename: 'vendor/js/[name].[fullhash].chunk.js',
+    filename: 'vendor/js/script.[fullhash].js',
   },
   resolve: {
     alias: {
-      'styles': path.resolve(__dirname, '../sources/scss')
-    }
+      styles: path.resolve(__dirname, '../sources/scss'),
+    },
   },
   module: {
     rules: [
@@ -102,7 +92,5 @@ module.exports = {
       configureFileLoader(),
     ],
   },
-  plugins: [
-    ...entryHtmlPlugins
-  ]
+  plugins: [...entryHtmlPlugins],
 };

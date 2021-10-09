@@ -72,12 +72,33 @@ html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
             zIndex: 9,
             animationTime: 300,
             cursor: {
-              in: 'zoom-in',
-              out: 'zoom-out',
+              in: 'var(--zoom-in)',
+              out: 'var(--zoom-out)',
             },
             overlay: {
               color: '#f5f5f5',
               opacity: 100,
+            },
+            onResize: function () {
+              // we set the page width from which it will
+              // be possible to click on the image
+              let responsiveMin = 800;
+
+              // we check the width of the browser window
+              const windowWidth =
+                window.innerWidth ||
+                document.documentElement.clientWidth ||
+                document.body.clientWidth;
+
+              // we return the boolean value 'true/false'
+              // the value 'true' blocks clicking the image
+              const widthWindow = windowWidth < responsiveMin ? true : false;
+
+              const root = document.documentElement;
+              root.style.setProperty('--zoom-in', widthWindow ? 'default' : 'zoom-in');
+              root.style.setProperty('--zoom-out', widthWindow ? 'default' : 'zoom-out');
+
+              return widthWindow;
             },
           });
 
