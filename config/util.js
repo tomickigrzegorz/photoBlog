@@ -4,7 +4,7 @@ module.exports.cssLoaders = [
   {
     loader: 'css-loader',
     options: {
-      importLoaders: 2
+      importLoaders: 2,
     },
   },
   {
@@ -21,7 +21,7 @@ module.exports.cssLoaders = [
       webpackImporter: true,
       additionalData: `
         @import "sources/scss/modules/_config.scss";
-      `
+      `,
     },
   },
 ];
