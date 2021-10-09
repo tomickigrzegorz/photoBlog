@@ -24,7 +24,7 @@ const baseConfig = require('./webpack.common.js');
 const { cssLoaders } = require('./util');
 const copyWebpackPlugin = require('copy-webpack-plugin');
 
-const checkFolder = folder => {
+const checkFolder = (folder) => {
   try {
     if (fs.existsSync(folder)) {
       return true;
@@ -39,8 +39,8 @@ const checkFolder = folder => {
 const configureTerser = () => {
   return {
     terserOptions: {
-      sourceMap: true
-    }
+      sourceMap: true,
+    },
   };
 };
 
@@ -51,10 +51,11 @@ const configureOptimization = () => {
     minimizer: [new TerserPlugin(configureTerser())],
     splitChunks: {
       cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
+        styles: {
+          name: 'styles',
+          type: 'css/mini-extract',
           chunks: 'all',
+          enforce: true,
         },
       },
     },
@@ -70,11 +71,17 @@ const configureCleanWebpack = () => {
 };
 
 // Configure Mini Css Extract
+// const configureMiniCssExtract = () => {
+//   return {
+//     filename: ({ chunk }) => `${chunk.name === 'index'
+//       ? 'vendor/css/index.[fullhash].css'
+//       : 'vendor/css/article.[fullhash].css'}`
+//   };
+// };
 const configureMiniCssExtract = () => {
   return {
-    filename: ({ chunk }) => `${chunk.name === 'index'
-      ? 'vendor/css/index.[fullhash].css'
-      : 'vendor/css/article.[fullhash].css'}`
+    filename: 'vendor/css/[name].[fullhash].css',
+    // ignoreOrder: false, // Enable to remove warnings about conflicting order
   };
 };
 
@@ -85,8 +92,8 @@ const configureSW = () => {
     skipWaiting: true,
     directoryIndex: 'index.html',
     offlineGoogleAnalytics: true,
-    exclude: ['images']
-  }
+    exclude: ['images'],
+  };
 };
 
 const configureFavicons = () => {
@@ -98,14 +105,15 @@ const configureFavicons = () => {
     favicons: {
       appName: 'Fotoblog Grzegorz Tomicki',
       appShortName: 'Fotoblog GT',
-      appDescription: 'Blog fotograficzny, ciekawe nietuzinkowe zdjęcia, niezapomniane chwile',
+      appDescription:
+        'Blog fotograficzny, ciekawe nietuzinkowe zdjęcia, niezapomniane chwile',
       background: '#FFF',
       theme_color: '#FFF',
       display: 'standalone',
       lang: 'PL',
       appleStatusBarStyle: 'black-translucent',
       orientation: 'portrait',
-      start_url: "/?source=pwa",
+      start_url: '/?source=pwa',
       scope: '/',
       icons: {
         android: true,
@@ -115,10 +123,10 @@ const configureFavicons = () => {
         coast: false,
         firefox: false,
         window: false,
-        yandex: false
-      }
-    }
-  }
+        yandex: false,
+      },
+    },
+  };
 };
 
 // Configure Copy Webpack
@@ -127,10 +135,8 @@ const configureCopyWebpack = () => {
   // const check = checkFolder(IMAGE_FOLDER);
 
   const config = {
-    patterns: [
-      { from: 'sources/assets/js', to: 'assets/js' }
-    ]
-  }
+    patterns: [{ from: 'sources/assets/js', to: 'assets/js' }],
+  };
   // return check ? config : { patterns: [...config.patterns, images] };
   return config;
 };
@@ -147,10 +153,7 @@ const configureBundleAnalyzer = () => {
 const configureCssLoader = () => {
   return {
     test: /\.(css|sass|scss)$/,
-    use: [
-      MiniCssExtractPlugin.loader,
-      ...cssLoaders
-    ],
+    use: [MiniCssExtractPlugin.loader, ...cssLoaders],
   };
 };
 
@@ -162,26 +165,14 @@ module.exports = merge(baseConfig, {
     rules: [configureCssLoader(buildMode)],
   },
   plugins: [
-    new CleanWebpackPlugin(
-      configureCleanWebpack()
-    ),
-    new MiniCssExtractPlugin(
-      configureMiniCssExtract()
-    ),
-    new WorkboxPlugin.GenerateSW(
-      configureSW()
-    ),
-    new FaviconsWebpackPlugin(
-      configureFavicons()
-    ),
-    new copyWebpackPlugin(
-      configureCopyWebpack()
-    ),
+    new CleanWebpackPlugin(configureCleanWebpack()),
+    new MiniCssExtractPlugin(configureMiniCssExtract()),
+    new WorkboxPlugin.GenerateSW(configureSW()),
+    new FaviconsWebpackPlugin(configureFavicons()),
+    new copyWebpackPlugin(configureCopyWebpack()),
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(true),
     }),
-    new BundleAnalyzerPlugin(
-      configureBundleAnalyzer()
-    ),
+    new BundleAnalyzerPlugin(configureBundleAnalyzer()),
   ],
 });

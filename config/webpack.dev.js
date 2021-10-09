@@ -11,13 +11,14 @@ const { cssLoaders } = require('./util');
 // Configure Dev Server
 const configureDevServer = () => {
   return {
-    contentBase: path.resolve(__dirname, '../sources'),
+    static: {
+      directory: path.resolve(__dirname, '../sources'),
+      publicPath: '/',
+    },
     open: true,
     port: 3000,
     liveReload: true,
     hot: true,
-    publicPath: "/",
-    watchContentBase: true,
   };
 };
 
@@ -25,10 +26,7 @@ const configureDevServer = () => {
 const configureCssLoader = () => {
   return {
     test: /\.(css|sass|scss)$/,
-    use: [
-      'style-loader',
-      ...cssLoaders
-    ],
+    use: ['style-loader', ...cssLoaders],
   };
 };
 
@@ -44,6 +42,6 @@ module.exports = merge(baseConfig, {
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(false),
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
   ],
 });
