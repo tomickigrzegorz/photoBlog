@@ -1,6 +1,6 @@
 {
   "name": "blog-gt",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "author": "Grzegorz Tomicki",
   "license": "MIT",
   "scripts": {
@@ -42,7 +42,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.4.0",
     "cssnano": "^5.0.8",
-    "eslint": "^7.32.0",
+    "eslint": "^8.0.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-html": "^6.2.0",
