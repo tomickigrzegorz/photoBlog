@@ -70,6 +70,7 @@ const entryHtmlPlugins = dataFiles.map((entryName) => {
     DATA: require(`../sources/data/${entryName}`),
     inject: true,
     cache: true,
+    favicon: './sources/assets/favicon.ico',
   });
 });
 
