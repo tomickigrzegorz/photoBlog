@@ -1,5 +1,5 @@
-@import "./shareIcons";
-@import "./discus-button";
+@import './shareIcons';
+@import './discus-button';
 
 .article {
   max-width: 930px;
@@ -105,6 +105,29 @@ h2 {
   }
 }
 
+@media (max-width: 499px) {
+  .reading-date {
+    display: block;
+  }
+}
+
+@media (min-width: 500px) {
+  .reading-date {
+    position: relative;
+    &:before {
+      position: absolute;
+      content: '';
+      top: 2px;
+      bottom: 0;
+      margin: auto;
+      width: 1px;
+      height: 15px;
+      left: -7px;
+      background: var(--font-color);
+    }
+  }
+}
+
 .article__date {
   margin-top: 10px;
   font-size: 1.1rem;
@@ -126,18 +149,6 @@ h2 {
     display: inline-block;
     position: relative;
     margin-right: 10px;
-
-    &:after {
-      position: absolute;
-      content: "";
-      top: 2px;
-      bottom: 0;
-      margin: auto;
-      width: 1px;
-      height: 15px;
-      right: -9px;
-      background: var(--font-color);
-    }
   }
 }
 
