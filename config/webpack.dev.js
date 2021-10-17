@@ -42,6 +42,6 @@ module.exports = merge(baseConfig, {
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(false),
     }),
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
   ],
 });
