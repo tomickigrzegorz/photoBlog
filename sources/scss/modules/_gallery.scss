@@ -28,7 +28,8 @@
     transition: all 300ms linear;
 
     img {
-      min-height: 100px;
+      width: 100%;
+      height: auto;
     }
 
     figure {
@@ -59,7 +60,7 @@
         align-items: center;
 
         &::before {
-          content: "";
+          content: '';
           z-index: -1;
           position: absolute;
         }
@@ -73,7 +74,7 @@
 
         figure:before {
           position: absolute;
-          content: "";
+          content: '';
           width: 100%;
           height: 100%;
           z-index: 8;
