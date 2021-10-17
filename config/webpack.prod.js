@@ -70,18 +70,9 @@ const configureCleanWebpack = () => {
   };
 };
 
-// Configure Mini Css Extract
-// const configureMiniCssExtract = () => {
-//   return {
-//     filename: ({ chunk }) => `${chunk.name === 'index'
-//       ? 'vendor/css/index.[fullhash].css'
-//       : 'vendor/css/article.[fullhash].css'}`
-//   };
-// };
 const configureMiniCssExtract = () => {
   return {
     filename: 'vendor/css/[name].[fullhash].css',
-    // ignoreOrder: false, // Enable to remove warnings about conflicting order
   };
 };
 
