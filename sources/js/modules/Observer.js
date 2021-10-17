@@ -1,6 +1,7 @@
 // import 'styles/modules/_observer.scss';
 
 const images = document.querySelectorAll('source, img');
+const imageArray = [].slice.call(images);
 
 function loadImage(image) {
   image.classList.add('fade-in');
@@ -14,31 +15,26 @@ function loadImage(image) {
 }
 
 if ('IntersectionObserver' in window) {
-  // IntersectionObserver Supported
   const config = {
     root: null,
     rootMargin: '0px',
-    threshold: 1.0,
+    threshold: 0.1,
   };
 
-  // eslint-disable-next-line no-inner-declarations
-  function onChange(entries, observer) {
-    entries.forEach((entrie) => {
-      // console.log(change);
-      if (entrie.isIntersecting) {
-        // Stop watching and load the image
-        loadImage(entrie.target);
-        observer.unobserve(entrie.target);
+  const ovserver = new IntersectionObserver((entries, observer) => {
+    entries.map((entry) => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.75) {
+        loadImage(entry.target);
+        observer.unobserve(entry.target);
       }
     });
-  }
+  }, config);
 
-  const observer = new IntersectionObserver(onChange, config);
-  images.forEach((img) => {
-    observer.observe(img);
+  imageArray.map((item) => {
+    ovserver.observe(item);
   });
 } else {
-  for (let i = 0; i < images.length; i += 1) {
-    loadImage(images[i]);
-  }
+  imageArray.map((element, index) => {
+    loadImage(element[index]);
+  });
 }
