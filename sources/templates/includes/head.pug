@@ -12,8 +12,8 @@ mixin head(data, type)
   meta(name="msapplication-navbutton-color" content="#ffffff")
   meta(name="apple-mobile-web-app-status-bar-style" content="#ffffff")
   if type === 'article'
-    script(defer, src="https://cdn.jsdelivr.net/gh/tomik23/zooom.js@master/docs/zooom.min.js") 
-    script(defer, src="https://cdn.jsdelivr.net/gh/tomik23/reading-time@master/docs/readingTime.min.js") 
+    script(defer, src="https://cdn.jsdelivr.net/gh/tomik23/zooom.js@1.1.0/dist/zooom.min.js") 
+    script(src="https://cdn.jsdelivr.net/gh/tomik23/reading-time@1.0.4/dist/readingTime.min.js") 
   title= data.head.title
   link(rel="manifest" href="/assets/manifest.json")
   link(rel="icon" type="image/x-icon" href="/favicon.ico")
