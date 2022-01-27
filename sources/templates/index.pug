@@ -28,7 +28,7 @@ html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
           div.gallery__items
             a(href=val.href)
               figure
-                img(data-src=(val.img) alt=val.alt loading="lazy")
+                img(src=(val.img) alt=val.alt loading="lazy" width="576" height="384")
                 noscript
                   img(src=(val.img) loading="lazy")
                 figcaption

@@ -1,23 +1,27 @@
-mixin image(path, src, className, alt)
+mixin image(path, src, className, alt, width, height)
   -
     var img576 = path + "576/" + src
     var img768 = path + "768/" + src
     var img992 = path + "992/" + src
     var img1200 = path + "1200/" + src
+  
+  if width === undefined
+    - var width = "1200"
+    - var height = "800"
 
   picture
-    source(data-srcset=img1200.replace('jpg', 'webp') media="(min-width: 993px)" type="image/webp")
-    source(data-srcset=img1200 media="(min-width: 992px)")
+    source(srcset=img1200.replace('jpg', 'webp') media="(min-width: 993px)" type="image/webp")
+    source(srcset=img1200 media="(min-width: 992px)")
 
-    source(data-srcset=img992.replace('jpg', 'webp') media="(min-width: 769px)" type="image/webp")
-    source(data-srcset=img992 media="(min-width: 769px)")
+    source(srcset=img992.replace('jpg', 'webp') media="(min-width: 769px)" type="image/webp")
+    source(srcset=img992 media="(min-width: 769px)")
 
-    source(data-srcset=img768.replace('jpg', 'webp') media="(min-width: 577px)" type="image/webp")
-    source(data-srcset=img768 media="(min-width: 577px)")
+    source(srcset=img768.replace('jpg', 'webp') media="(min-width: 577px)" type="image/webp")
+    source(srcset=img768 media="(min-width: 577px)")
 
-    source(data-srcset=img576.replace('jpg', 'webp') media="(max-width: 576px)" type="image/webp")
-    source(data-srcset=img576 media="(max-width: 576px)")
+    source(srcset=img576.replace('jpg', 'webp') media="(max-width: 576px)" type="image/webp")
+    source(srcset=img576 media="(max-width: 576px)")
 
-    img(data-src=img1200 alt=alt class="zooom")
+    img(src=img1200 alt=alt loading="lazy" class="zooom" width=width height=height)
     noscript
-      img(src=img1200 alt=alt class="zooom")
+      img(src=img1200 alt=alt loading="lazy" class="zooom" width=width height=height)
