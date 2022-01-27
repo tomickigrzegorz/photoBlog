@@ -36,14 +36,15 @@ html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
                     path(d="M15.701 11.35h-3.05V8.298a.563.563 0 00-1.125 0v3.613c0 .31.252.562.562.562h3.613a.562.562 0 000-1.125z")
                   path(d="M0 0h24v24H0z")
               small.reading-time
-              small= path.body.date
+              small.reading-date
+                =path.body.date
             #share-button-stick.share-button-temp
           //- .article__text!= path.file.body.text.replace(/\n?\r\n/g, '<br />' )
           .article__text!= path.body.text.replace(/<a\s+href=/gi, '<a rel="noopener" target="_blank" class="sweep-to-top" href=')
           .article__content
             each val, i in path.body.items
               figure
-                +image(val.path, val.img, "responsively-lazy", val.alt)
+                +image(val.path, val.img, "responsively-lazy", val.alt, val.width, val.height)
                 if val.text
                   figcaption!= val.text
 
@@ -82,7 +83,7 @@ html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
             onResize: function () {
               // we set the page width from which it will
               // be possible to click on the image
-              let responsiveMin = 800;
+              let responsiveMin = 1000;
 
               // we check the width of the browser window
               const windowWidth =
@@ -111,8 +112,8 @@ html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
             onResult: function (index, minutes, words, images) {
               const element = document.querySelector('.reading-time');
               const text = minutes > 1 ? 'minut czytania' : 'minuta czytania';
-              element.textContent = `${Math.ceil(minutes)} ${text}`;
-              //- element.textContent = `~${Math.ceil(minutes)} ${text} (słów: ${words}, zdjęć: ${images})`;
+              //- element.textContent = `${Math.ceil(minutes)} ${text}`;
+              element.textContent = `~${Math.ceil(minutes)} ${text} (słów: ${words}, zdjęć: ${images})`;
             },
           });
         });

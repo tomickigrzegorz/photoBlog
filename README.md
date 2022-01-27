@@ -1,6 +1,6 @@
 ## My photo blog
 
-The whole environment is based on `webpack 5`, `pug templates` and the input data are `json` files. [Webpack 4](https://github.com/tomik23/photoBlog/tree/webpack-4) is still available.
+The whole environment is based on `webpack 5`, `pug templates` and the input data are `json` files.
 
 ```
 sources
@@ -24,29 +24,37 @@ sources
 ```
 
 ## Optimization
+
 Of course, this 100/100 is when there is no `google adsense` code and that here it is only the main page has 100/100 ;)
 
 ### Clone the repo and install dependencies
+
 ```bash
-git clone 
+git clone
 cd node-sharp-images
 npm i
 ```
 
 ### How to run
+
 Dev
+
 ```
 npm run dev
 or
 yarn dev
 ```
+
 Prod
+
 ```
 npm run prod
 or
 yarn prod
 ```
+
 It is also possible to generate a sitemap based on html files
+
 ```
 npm run sitemap
 or
@@ -61,12 +69,36 @@ To generate such a number of photos I used my script which, based on the origina
 
 ```html
 <picture>
-    <source data-srcset="./images/576/img.jpg" media="(max-width: 576px)" class="fade-in" srcset="./images/576/img.jpg">
-    <source data-srcset="./images/768/img.jpg" media="(max-width: 768px)" class="fade-in" srcset="./images/768/img.jpg">
-    <source data-srcset="./images/992/img.jpg" media="(max-width: 992px)" class="fade-in" srcset="./images/992/img.jpg">
-    <source data-srcset="./images/1200/img.jpg" media="(max-width: 1200px)" class="fade-in" srcset="./images/1200/img.jpg">
-    <img data-src="./images/1200/img.jpg" class="fade-in" src="./images/1200/lwow/.jpg">
-    <noscript><img src="./images/1200/img.jpg"></noscript>
+  <source
+    data-srcset="./images/576/img.jpg"
+    media="(max-width: 576px)"
+    class="fade-in"
+    srcset="./images/576/img.jpg"
+  />
+  <source
+    data-srcset="./images/768/img.jpg"
+    media="(max-width: 768px)"
+    class="fade-in"
+    srcset="./images/768/img.jpg"
+  />
+  <source
+    data-srcset="./images/992/img.jpg"
+    media="(max-width: 992px)"
+    class="fade-in"
+    srcset="./images/992/img.jpg"
+  />
+  <source
+    data-srcset="./images/1200/img.jpg"
+    media="(max-width: 1200px)"
+    class="fade-in"
+    srcset="./images/1200/img.jpg"
+  />
+  <img
+    data-src="./images/1200/img.jpg"
+    class="fade-in"
+    src="./images/1200/lwow/.jpg"
+  />
+  <noscript><img src="./images/1200/img.jpg" /></noscript>
 </picture>
 ```
 
