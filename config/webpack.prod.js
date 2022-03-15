@@ -1,28 +1,27 @@
 // production builds
 const buildMode =
-  process.env.NODE_ENV === 'production' ? 'production' : 'development';
-const IMAGE_FOLDER = './dist/images/';
+  process.env.NODE_ENV === "production" ? "production" : "development";
+const IMAGE_FOLDER = "./dist/images/";
 
 // node modules
-const fs = require('fs');
-const webpack = require('webpack');
-const path = require('path');
-const { merge } = require('webpack-merge');
+const fs = require("fs");
+const webpack = require("webpack");
+const path = require("path");
+const { merge } = require("webpack-merge");
 
 // webpack plugins
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const WorkboxPlugin = require("workbox-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 // config files
-const baseConfig = require('./webpack.common.js');
+const baseConfig = require("./webpack.common.js");
 
-const { cssLoaders } = require('./util');
-const copyWebpackPlugin = require('copy-webpack-plugin');
+const { cssLoaders } = require("./util");
+const copyWebpackPlugin = require("copy-webpack-plugin");
 
 const checkFolder = (folder) => {
   try {
@@ -52,9 +51,9 @@ const configureOptimization = () => {
     splitChunks: {
       cacheGroups: {
         styles: {
-          name: 'styles',
-          type: 'css/mini-extract',
-          chunks: 'all',
+          name: "styles",
+          type: "css/mini-extract",
+          chunks: "all",
           enforce: true,
         },
       },
@@ -72,7 +71,7 @@ const configureCleanWebpack = () => {
 
 const configureMiniCssExtract = () => {
   return {
-    filename: 'vendor/css/[name].[fullhash].css',
+    filename: "vendor/css/[name].[fullhash].css",
   };
 };
 
@@ -81,42 +80,9 @@ const configureSW = () => {
   return {
     clientsClaim: true,
     skipWaiting: true,
-    directoryIndex: 'index.html',
+    directoryIndex: "index.html",
     offlineGoogleAnalytics: true,
-    exclude: ['images'],
-  };
-};
-
-const configureFavicons = () => {
-  return {
-    logo: './sources/assets/logo.png',
-    prefix: 'assets/',
-    cache: true,
-    inject: true,
-    favicons: {
-      appName: 'Fotoblog Grzegorz Tomicki',
-      appShortName: 'Fotoblog GT',
-      appDescription:
-        'Blog fotograficzny, ciekawe nietuzinkowe zdjęcia, niezapomniane chwile',
-      background: '#FFF',
-      theme_color: '#FFF',
-      display: 'standalone',
-      lang: 'PL',
-      appleStatusBarStyle: 'black-translucent',
-      orientation: 'portrait',
-      start_url: '/?source=pwa',
-      scope: '/',
-      icons: {
-        android: true,
-        appleIcon: true,
-        favicons: true,
-        appleStartup: false,
-        coast: false,
-        firefox: false,
-        window: false,
-        yandex: false,
-      },
-    },
+    exclude: ["images"],
   };
 };
 
@@ -126,7 +92,11 @@ const configureCopyWebpack = () => {
   // const check = checkFolder(IMAGE_FOLDER);
 
   const config = {
-    patterns: [{ from: 'sources/assets/js', to: 'assets/js' }],
+    patterns: [
+      { from: "sources/assets/js", to: "assets/js" },
+      { from: "sources/favicons", to: "assets/" },
+      { from: "sources/favicons/favicon.ico", to: "/dist" },
+    ],
   };
   // return check ? config : { patterns: [...config.patterns, images] };
   return config;
@@ -149,8 +119,8 @@ const configureCssLoader = () => {
 };
 
 module.exports = merge(baseConfig, {
-  mode: 'production',
-  target: 'web',
+  mode: "production",
+  target: "web",
   optimization: configureOptimization(),
   module: {
     rules: [configureCssLoader(buildMode)],
@@ -159,11 +129,10 @@ module.exports = merge(baseConfig, {
     new CleanWebpackPlugin(configureCleanWebpack()),
     new MiniCssExtractPlugin(configureMiniCssExtract()),
     new WorkboxPlugin.GenerateSW(configureSW()),
-    new FaviconsWebpackPlugin(configureFavicons()),
     new copyWebpackPlugin(configureCopyWebpack()),
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(true),
     }),
-    new BundleAnalyzerPlugin(configureBundleAnalyzer()),
+    // new BundleAnalyzerPlugin(configureBundleAnalyzer()),
   ],
 });

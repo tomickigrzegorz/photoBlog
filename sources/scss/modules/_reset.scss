@@ -78,10 +78,6 @@ svg:not(:root) {
   position: relative;
 }
 
-#zooom-overlay {
-  background-color: var(--bg-zooom) !important;
-}
-
 .disqus-contet {
   &.is-active {
     padding: 10px 20px;
