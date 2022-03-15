@@ -1,9 +1,9 @@
 const shareButtonOptions = {
   place: {
-    stick: 'share-button-stick',
-    bottom: 'share-button-bottom',
+    stick: "share-button-stick",
+    bottom: "share-button-bottom",
   },
-  title: 'Podziel się',
+  title: "Podziel się",
 };
 
 class ShareButton {
@@ -35,9 +35,9 @@ class ShareButton {
     }
 
     if (navigator.share && this.isMobile()) {
-      const btns = document.querySelectorAll('.social-buttons__btn');
+      const btns = document.querySelectorAll(".social-buttons__btn");
       for (let i = 0; i < btns.length; i++) {
-        btns[i].addEventListener('click', async () => {
+        btns[i].addEventListener("click", async () => {
           try {
             await navigator.share(this.shareData);
           } catch (err) {
@@ -53,15 +53,15 @@ class ShareButton {
   isMobile() {
     // sprawdzenie czy jest mobilny
     let hasTouchScreen = false;
-    if ('maxTouchPoints' in navigator) {
+    if ("maxTouchPoints" in navigator) {
       hasTouchScreen = navigator.maxTouchPoints > 0;
-    } else if ('msMaxTouchPoints' in navigator) {
+    } else if ("msMaxTouchPoints" in navigator) {
       hasTouchScreen = navigator.msMaxTouchPoints > 0;
     } else {
-      let mQ = window.matchMedia && matchMedia('(pointer:coarse)');
-      if (mQ && mQ.media === '(pointer:coarse)') {
+      let mQ = window.matchMedia && matchMedia("(pointer:coarse)");
+      if (mQ && mQ.media === "(pointer:coarse)") {
         hasTouchScreen = !!mQ.matches;
-      } else if ('orientation' in window) {
+      } else if ("orientation" in window) {
         hasTouchScreen = true; // deprecated, but good fallback
       } else {
         // Only as a last resort, fall back to user agent sniffing
@@ -81,8 +81,7 @@ class ShareButton {
         '<svg class="share-icon"><use xlink:href="#facebook-icon"></use></svg>',
       twitter:
         '<svg class="share-icon"><use xlink:href="#twitter-icon"></use></svg>',
-      mail:
-        '<svg class="share-icon"><use xlink:href="#mail-icon"></use></svg>',
+      mail: '<svg class="share-icon"><use xlink:href="#mail-icon"></use></svg>',
     };
 
     const template = `
@@ -110,19 +109,19 @@ class ShareButton {
   }
 
   handlerEvent() {
-    const buttonShare = document.querySelectorAll('.icon');
+    const buttonShare = document.querySelectorAll(".icon");
     const winWidth = 520;
     const winHeight = 320;
     const winTop = window.screen.height / 2 - winHeight / 2;
     const winLeft = window.screen.width / 2 - winWidth / 2;
 
     for (let i = 0; i < buttonShare.length; i += 1) {
-      buttonShare[i].addEventListener('click', ({ currentTarget }) => {
-        const typeSocial = currentTarget.getAttribute('data-share');
+      buttonShare[i].addEventListener("click", ({ currentTarget }) => {
+        const typeSocial = currentTarget.getAttribute("data-share");
         switch (typeSocial) {
-          case 'mail': {
+          case "mail": {
             const mailtoLink = `mailto:?subject=Zobacz może Ci się spodoba&body=${this.getTitle} %20%0A ${this.getUrl}`;
-            const win = window.open(mailtoLink, 'mail');
+            const win = window.open(mailtoLink, "mail");
             setTimeout(() => {
               win.close();
             }, 500);
@@ -132,7 +131,7 @@ class ShareButton {
           default: {
             window.open(
               this.showShareLink(typeSocial),
-              'sharer',
+              "sharer",
               `top=${winTop}, left=${winLeft}, toolbar=0, status=0, width=${winWidth}, height=${winHeight}`
             );
             break;
@@ -145,12 +144,12 @@ class ShareButton {
   showShareLink(typeSocial) {
     let url;
     switch (typeSocial) {
-      case 'facebook':
+      case "facebook":
         url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURI(
           this.getUrl
-        )}&p=${encodeURI(this.getDescription().replace(/ /g, '%20'))}`;
+        )}&p=${encodeURI(this.getDescription().replace(/ /g, "%20"))}`;
         break;
-      case 'twitter':
+      case "twitter":
         url = `http://twitter.com/share?text=${this.getTitle}&url=${this.getUrl}`;
         break;
       default:
@@ -161,10 +160,10 @@ class ShareButton {
 
   getDescription() {
     let description;
-    const meta = document.getElementsByTagName('meta');
+    const meta = document.getElementsByTagName("meta");
 
     for (let x = 0, y = meta.length; x < y; x += 1) {
-      if (meta[x].name.toLowerCase() === 'description') {
+      if (meta[x].name.toLowerCase() === "description") {
         description = meta[x];
       }
     }

@@ -1,10 +1,10 @@
 // import 'styles/modules/_observer.scss';
 
-const images = document.querySelectorAll('source, img');
+const images = document.querySelectorAll("source, img");
 const imageArray = [].slice.call(images);
 
 function loadImage(image) {
-  image.classList.add('fade-in');
+  image.classList.add("fade-in");
   if (image.dataset && image.dataset.src) {
     image.src = image.dataset.src;
   }
@@ -14,10 +14,10 @@ function loadImage(image) {
   }
 }
 
-if ('IntersectionObserver' in window) {
+if ("IntersectionObserver" in window) {
   const config = {
     root: null,
-    rootMargin: '0px',
+    rootMargin: "0px",
     threshold: 0.1,
   };
 

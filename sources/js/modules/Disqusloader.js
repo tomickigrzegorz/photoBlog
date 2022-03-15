@@ -1,9 +1,9 @@
 const disqusOptions = {
-  disqusContent: 'disqus-contet',
-  disqusThread: 'disqus_thread',
-  commentsButton: 'comments-button',
-  buttonName: 'dodaj / pokaż komentarze',
-  disqusShortName: 'bloggrzegorztomickipl',
+  disqusContent: "disqus-contet",
+  disqusThread: "disqus_thread",
+  commentsButton: "comments-button",
+  buttonName: "dodaj / pokaż komentarze",
+  disqusShortName: "bloggrzegorztomickipl",
 };
 
 class DisqusLoader {
@@ -21,8 +21,8 @@ class DisqusLoader {
   }
 
   disqusButtonCreate() {
-    const commentsButton = document.createElement('button');
-    commentsButton.setAttribute('class', this.option.commentsButton);
+    const commentsButton = document.createElement("button");
+    commentsButton.setAttribute("class", this.option.commentsButton);
     commentsButton.innerHTML = this.option.buttonName;
     return commentsButton;
   }
@@ -32,25 +32,25 @@ class DisqusLoader {
       `.${this.option.commentsButton}`
     );
 
-    disqusButton.addEventListener('click', (e) => {
+    disqusButton.addEventListener("click", (e) => {
       e.preventDefault();
       const content = document.querySelector(`.${this.option.disqusContent}`);
-      const disqusContainer = document.createElement('div');
-      disqusContainer.setAttribute('id', this.option.disqusThread);
+      const disqusContainer = document.createElement("div");
+      disqusContainer.setAttribute("id", this.option.disqusThread);
       document.body.appendChild(disqusContainer);
 
-      content.classList.add('is-active');
+      content.classList.add("is-active");
 
       const disqusShortname = this.option.disqusShortName;
 
-      const dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
+      const dsq = document.createElement("script");
+      dsq.type = "text/javascript";
       dsq.async = true;
       dsq.src = ` //${disqusShortname}.disqus.com/embed.js`;
 
       (
-        document.getElementsByTagName('head')[0] ||
-        document.getElementsByTagName('body')[0]
+        document.getElementsByTagName("head")[0] ||
+        document.getElementsByTagName("body")[0]
       ).appendChild(dsq);
     });
   }

@@ -1,4 +1,4 @@
-import 'styles/style.scss';
+import "styles/style.scss";
 
-import './share';
-import './article';
+import "./share";
+import "./article";

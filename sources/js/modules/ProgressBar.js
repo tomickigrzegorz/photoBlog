@@ -8,12 +8,12 @@ function scrollYProgression() {
 
 function scrollHandler() {
   const progress = scrollYProgression();
-  const bar = document.querySelector('#progress');
-  bar.setAttribute('value', progress * 100);
+  const bar = document.querySelector("#progress");
+  bar.setAttribute("value", progress * 100);
 }
 
 window.addEventListener(
-  'scroll',
+  "scroll",
   () => {
     window.requestAnimationFrame(scrollHandler);
   },

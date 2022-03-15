@@ -1,5 +1,5 @@
-@import './shareIcons';
-@import './discus-button';
+@import "./shareIcons";
+@import "./discus-button";
 
 .article {
   max-width: 930px;
@@ -116,7 +116,7 @@ h2 {
     position: relative;
     &:before {
       position: absolute;
-      content: '';
+      content: "";
       top: 2px;
       bottom: 0;
       margin: auto;
