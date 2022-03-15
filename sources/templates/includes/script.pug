@@ -1,0 +1,50 @@
+script(defer, src="https://cdn.jsdelivr.net/gh/tomik23/zooom.js@1.1.1/dist/zooom.min.js") 
+script(defer, src="https://cdn.jsdelivr.net/gh/tomik23/reading-time@1.0.4/dist/readingTime.min.js") 
+
+script.
+  document.addEventListener('DOMContentLoaded', function() {
+    new Zooom('zooom', {
+      zIndex: 9,
+      animationTime: 300,
+      cursor: {
+        in: 'var(--zoom-in)',
+        out: 'var(--zoom-out)',
+      },
+      overlay: 'var(--bg-zooom)',
+      onResize: function () {
+        // we set the page width from which it will
+        // be possible to click on the image
+        let responsiveMin = 1000;
+
+        // we check the width of the browser window
+        const windowWidth =
+          window.innerWidth ||
+          document.documentElement.clientWidth ||
+          document.body.clientWidth;
+
+        // we return the boolean value 'true/false'
+        // the value 'true' blocks clicking the image
+        const widthWindow = windowWidth < responsiveMin ? true : false;
+
+        const root = document.documentElement;
+        root.style.setProperty('--zoom-in', widthWindow ? 'default' : 'zoom-in');
+        root.style.setProperty('--zoom-out', widthWindow ? 'default' : 'zoom-out');
+
+        return widthWindow;
+      },
+    });
+
+    new ReadingTime({
+      wordsPerMinute: 215,
+      photosPerMinute: 12,
+
+      elements: ['article'],
+
+      onResult: function (index, minutes, words, images) {
+        const element = document.querySelector('.reading-time');
+        const text = minutes > 1 ? 'minut czytania' : 'minuta czytania';
+        //- element.textContent = `${Math.ceil(minutes)} ${text}`;
+        element.textContent = `~${Math.ceil(minutes)} ${text} (słów: ${words}, zdjęć: ${images})`;
+      },
+    });
+  });

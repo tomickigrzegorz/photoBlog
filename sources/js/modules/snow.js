@@ -12,8 +12,8 @@ class Hohoho {
     this.createCanvas();
     this.resizeWindow();
 
-    this.canvas = document.getElementById('canvas');
-    this.ctx = this.canvas.getContext('2d');
+    this.canvas = document.getElementById("canvas");
+    this.ctx = this.canvas.getContext("2d");
 
     this.getWidth();
 
@@ -35,17 +35,17 @@ class Hohoho {
   }
 
   createCanvas() {
-    const canv = document.createElement('canvas');
-    canv.id = 'canvas';
+    const canv = document.createElement("canvas");
+    canv.id = "canvas";
     canv.setAttribute(
-      'style',
-      'position: fixed; top: 0; pointer-events: none;'
+      "style",
+      "position: fixed; top: 0; pointer-events: none;"
     );
     document.body.appendChild(canv);
   }
 
   resizeWindow() {
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       this.getWidth();
     });
   }
@@ -102,9 +102,9 @@ class Hohoho {
 }
 
 const options = {
-  canvas: 'canvas',
-  snowColor: '255,255,255', // snowflakes color - white
-  snowOpacity: '0.6', // snowflakes opacity
+  canvas: "canvas",
+  snowColor: "255,255,255", // snowflakes color - white
+  snowOpacity: "0.6", // snowflakes opacity
   ns: 50, // the number of snowflakes
   radius: 3, // size snowflakes
   interval: 30, // falling speed
@@ -112,4 +112,4 @@ const options = {
 
 const snow = new Hohoho(options).drawSnowflakes();
 
-window.addEventListener('load', snow);
+window.addEventListener("load", snow);

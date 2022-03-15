@@ -7,9 +7,6 @@ mixin head(data, type)
   meta(name="viewport" content="width=device-width, initial-scale=1")
   meta(name="robots" content="index,follow")
   meta(name="google-site-verification" content="9P4FtusJunAS1pkZkQ_zCim0qapHt7_w9_Ly6WzrpkA") 
-  if type === 'article'
-    script(defer, src="https://cdn.jsdelivr.net/gh/tomik23/zooom.js@1.1.1/dist/zooom.min.js") 
-    script(src="https://cdn.jsdelivr.net/gh/tomik23/reading-time@1.0.4/dist/readingTime.min.js") 
   title= data.head.title
   
   //-   include googleAdsense
