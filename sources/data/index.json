@@ -5,6 +5,13 @@
   },
   "items": [
     {
+      "img": "./images/nelka-sesja-pokomunijna/576/IMG_1433.jpg",
+      "alt": "Nelka sesja pokomunijna",
+      "href": "nelka-sesja-pokomunijna.html",
+      "text": "Nelka sesja pokomunijna",
+      "date": "15.07.2022"
+    },
+    {
       "img": "./images/antek-sesja-pokomunijna/576/IMG_0933.jpg",
       "alt": "Antek sesja pokomunijna",
       "href": "antek-sesja-pokomunijna.html",
