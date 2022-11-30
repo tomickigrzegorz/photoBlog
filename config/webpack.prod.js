@@ -94,6 +94,8 @@ const configureCopyWebpack = () => {
   const config = {
     patterns: [
       { from: "sources/assets/js", to: "assets/js" },
+      { from: "sources/assets/sprite.svg", to: "assets/" },
+      { from: "sources/assets/og-logo.png", to: "assets/" },
       { from: "sources/favicons", to: "assets/" },
       { from: "sources/favicons/favicon.ico", to: "/dist" },
     ],
