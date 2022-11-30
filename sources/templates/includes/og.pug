@@ -1,0 +1,20 @@
+mixin og(data, where, images)
+  if where === "index"
+    - var image = "https://grzegorztomicki.pl/assets/og-logo.png"
+  else 
+    - var image = "https://grzegorztomicki.pl/" + images[0].path + "1200/" + images[0].img
+
+  meta(property="og:title" content=data.head.title)
+  meta(property="og:description" content=data.head.description)
+  meta(property="og:url" content="url")
+  meta(property="og:image" content=image)
+  meta(property="og:image:type" content="image/jpg")
+  meta(property="og:image:width" content="1200")
+  meta(property="og:image:height" content="800")
+  meta(property="og:type" content="website")
+
+  meta(name="twitter:card" content="summary_large_image")
+  meta(name="twitter:creator" content="@TomickiGrzegorz")
+  meta(name="twitter:title" content=data.head.title)
+  meta(name="twitter:description" content=data.head.description)
+  meta(name="twitter:image" content=image)
