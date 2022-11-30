@@ -6,11 +6,12 @@ html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
 
   include ./includes/head.pug
   include ./includes/header.pug
-  include ./includes/svgLogos.pug
   include ./includes/image.pug
+  include ./includes/og.pug
 
   head
     +head(path, 'article')
+    +og(path, 'article', path.body.items)
 
   body
     script. 
@@ -20,7 +21,6 @@ html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
         document.body.dataset.theme = null
       }
     .flex-wrap.container.article
-      +svgLogos()
       +header('article')
 
       //- div(id="progress" class="bar")

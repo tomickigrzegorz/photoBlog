@@ -78,10 +78,10 @@ class ShareButton {
   htmlTemplate() {
     const social = {
       facebook:
-        '<svg class="share-icon"><use xlink:href="#facebook-icon"></use></svg>',
+        '<svg class="share-icon"><use href="/assets/sprite.svg#facebook-icon"></use></svg>',
       twitter:
-        '<svg class="share-icon"><use xlink:href="#twitter-icon"></use></svg>',
-      mail: '<svg class="share-icon"><use xlink:href="#mail-icon"></use></svg>',
+        '<svg class="share-icon"><use href="/assets/sprite.svg#twitter-icon"></use></svg>',
+      mail: '<svg class="share-icon"><use href="/assets/sprite.svg#mail-icon"></use></svg>',
     };
 
     const template = `
@@ -99,7 +99,7 @@ class ShareButton {
     const share = `
       <div class="social-buttons__btn">
         <svg class="share__icon">
-          <use xlink:href="#share-icon"></use>
+          <use href="/assets/sprite.svg#share-icon"></use>
         </svg>
         <h2>${this.option.title}</h2>
       </div>
@@ -129,11 +129,7 @@ class ShareButton {
           }
 
           default: {
-            window.open(
-              this.showShareLink(typeSocial),
-              "sharer",
-              `top=${winTop}, left=${winLeft}, toolbar=0, status=0, width=${winWidth}, height=${winHeight}`
-            );
+            window.open(this.showShareLink(typeSocial), "_blank");
             break;
           }
         }

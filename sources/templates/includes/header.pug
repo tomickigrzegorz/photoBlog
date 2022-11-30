@@ -3,13 +3,13 @@ mixin header(type)
     if type === 'article'
       a(href="./" class="header-logo" title="strona główna")
         svg(class="logo")
-          use(xlink:href="#logo")
+          use(href="/assets/sprite.svg#logo")
     else
       svg(class="logo")
-        use(xlink:href="#logo")
+        use(href="/assets/sprite.svg#logo")
 
     button(class="theme" aria-label="zmień motyw")
       svg(class="theme-light")
-        use(xlink:href="#sun-icon")
+        use(href="/assets/sprite.svg#sun-icon")
       svg(class="theme-dark")
-        use(xlink:href="#moon-icon")
+        use(href="/assets/sprite.svg#moon-icon")

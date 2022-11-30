@@ -1,22 +1,22 @@
-const path = require('path');
-const fs = require('fs');
+const path = require("path");
+const fs = require("fs");
 const buildMode =
-  process.env.NODE_ENV === 'production' ? 'production' : 'development';
-const HtmlWebPackPlugin = require('html-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+  process.env.NODE_ENV === "production" ? "production" : "development";
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+// const CopyPlugin = require('copy-webpack-plugin');
 
 const dataFiles = fs.readdirSync(
-  path.resolve(__dirname, '../sources/', 'data')
+  path.resolve(__dirname, "../sources/", "data")
 );
 
 // Configure Html Loader
 const configureHtmlLoader = (mode) => {
-  const type = mode === 'production' ? true : false;
+  const type = mode === "production" ? true : false;
   return {
     test: /\.html$/,
     use: [
       {
-        loader: 'html-loader',
+        loader: "html-loader",
         options: {
           minimize: type,
         },
@@ -31,7 +31,7 @@ const configureBabelLoader = () => {
     test: /\.js$/,
     exclude: /node_modules/,
     use: {
-      loader: 'babel-loader',
+      loader: "babel-loader",
     },
   };
 };
@@ -40,7 +40,7 @@ const configureBabelLoader = () => {
 const configurePugLoader = () => {
   return {
     test: /\.pug$/,
-    loader: 'pug-loader',
+    loader: "pug-loader",
     options: {
       pretty: true,
       self: true,
@@ -52,17 +52,17 @@ const configurePugLoader = () => {
 const configureFileLoader = () => {
   return {
     test: /\.(jpe?g|png|gif|svg)$/i,
-    loader: 'file-loader',
+    loader: "file-loader",
     options: {
-      name: '[name].[ext]',
+      name: "[name].[ext]",
     },
   };
 };
 
 // Multiple Entry
 const entryHtmlPlugins = dataFiles.map((entryName) => {
-  const nameData = entryName.split('.')[0];
-  const templateName = nameData === 'index' ? 'index' : 'article';
+  const nameData = entryName.split(".")[0];
+  const templateName = nameData === "index" ? "index" : "article";
 
   return new HtmlWebPackPlugin({
     filename: `${nameData}.html`,
@@ -70,19 +70,19 @@ const entryHtmlPlugins = dataFiles.map((entryName) => {
     DATA: require(`../sources/data/${entryName}`),
     inject: true,
     cache: true,
-    favicon: './sources/assets/favicon.ico',
+    favicon: "./sources/assets/favicon.ico",
   });
 });
 
 module.exports = {
-  entry: './sources/js/script.js',
+  entry: "./sources/js/script.js",
   output: {
-    path: path.resolve(__dirname, '../dist'),
-    filename: 'vendor/js/script.[fullhash].js',
+    path: path.resolve(__dirname, "../dist"),
+    filename: "vendor/js/script.[fullhash].js",
   },
   resolve: {
     alias: {
-      styles: path.resolve(__dirname, '../sources/scss'),
+      styles: path.resolve(__dirname, "../sources/scss"),
     },
   },
   module: {
