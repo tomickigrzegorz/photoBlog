@@ -6,10 +6,11 @@ html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
 
   include ./includes/head.pug
   include ./includes/header.pug
-  include ./includes/svgLogos.pug
+  include ./includes/og.pug
 
   head
     +head(path, 'index')
+    +og(path, 'index', path.items)
 
   body
     script. 
@@ -20,7 +21,6 @@ html(lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage")
       }
 
     .flex-wrap.container.home
-      +svgLogos()
       +header('homepage')
 
       main.gallery
