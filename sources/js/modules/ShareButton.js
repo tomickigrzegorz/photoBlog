@@ -110,10 +110,6 @@ class ShareButton {
 
   handlerEvent() {
     const buttonShare = document.querySelectorAll(".icon");
-    const winWidth = 520;
-    const winHeight = 320;
-    const winTop = window.screen.height / 2 - winHeight / 2;
-    const winLeft = window.screen.width / 2 - winWidth / 2;
 
     for (let i = 0; i < buttonShare.length; i += 1) {
       buttonShare[i].addEventListener("click", ({ currentTarget }) => {
@@ -142,7 +138,7 @@ class ShareButton {
     switch (typeSocial) {
       case "facebook":
         url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURI(
-          this.getUrl
+          this.getUrl,
         )}&p=${encodeURI(this.getDescription().replace(/ /g, "%20"))}`;
         break;
       case "twitter":

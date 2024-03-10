@@ -1,9 +1,14 @@
-import mail from "./modules/Mail";
-import backToTop from "./modules/BackToTop";
-import smoothScroll from "./modules/SmoothScroll";
-// import './modules/Observer';
+import { Mail } from "./modules/Mail";
+import { BackToTop } from "./modules/BackToTop";
+import { SmoothScroll } from "./modules/SmoothScroll";
 import "./modules/Theme";
 
-mail();
-backToTop();
-smoothScroll();
+Mail();
+BackToTop();
+SmoothScroll();
+
+const d = new Date();
+let year = d.getFullYear();
+
+const fullYear = document.querySelector(".fullYear");
+fullYear.append(year);
