@@ -13,7 +13,7 @@ try {
   readHeadFile = fs.readFileSync(
     `${dir}/assets/head.txt`,
     "utf8",
-    (err, data) => data
+    (err, data) => data,
   );
 } catch (err) {
   fileExits = false;

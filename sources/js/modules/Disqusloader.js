@@ -29,7 +29,7 @@ class DisqusLoader {
 
   disqusEvent() {
     const disqusButton = document.querySelector(
-      `.${this.option.commentsButton}`
+      `.${this.option.commentsButton}`,
     );
 
     disqusButton.addEventListener("click", (e) => {
