@@ -1,4 +1,4 @@
-const SmoothScroll = () => {
+export const SmoothScroll = () => {
   const buttonTop = document.querySelector(".scroll");
   buttonTop.addEventListener("click", (e) => {
     e.preventDefault();
@@ -8,5 +8,3 @@ const SmoothScroll = () => {
     });
   });
 };
-
-export default SmoothScroll;
