@@ -1,4 +1,5 @@
 .vscode
+.env
 
 sitemap.xml
 
@@ -11,3 +12,5 @@ sources/data/*
 
 sources/images/*
 !sources/images/.gitkeep
+
+sync.log
