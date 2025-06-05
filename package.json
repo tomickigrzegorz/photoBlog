@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack serve --config ./config/webpack.dev.js --progress",
-    "prod": "cross-env NODE_ENV=production webpack --config ./config/webpack.prod.js && yarn favicons:addToHead",
+    "prod": "cross-env NODE_ENV=production webpack --config ./config/webpack.prod.js && yarn favicons:addToHead && yarn sync",
     "sync": "node ./scripts/sync.js",
     "sitemap": "node ./scripts/sitemap-generator.js",
     "favicons": "node ./scripts/favicons.js",
