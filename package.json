@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack serve --config ./config/webpack.dev.js --progress",
     "prod": "cross-env NODE_ENV=production webpack --config ./config/webpack.prod.js && yarn favicons:addToHead",
+    "sync": "node ./scripts/sync.js",
     "sitemap": "node ./scripts/sitemap-generator.js",
     "favicons": "node ./scripts/favicons.js",
     "favicons:addToHead": "node ./scripts/injectFavicons.js"
@@ -32,6 +33,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.10.0",
     "cssnano": "^6.1.0",
+    "dotenv": "^16.5.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-html": "^8.0.0",
