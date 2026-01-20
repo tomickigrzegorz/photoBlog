@@ -1,0 +1,82 @@
+:root {
+  --bg-social: hsl(0, 0%, 83%);
+  --svg-color: hsl(0, 0%, 30%);
+}
+
+.share-mobile {
+  display: flex;
+
+  .icon {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 5px;
+    margin-right: 8px;
+    border-radius: 3px;
+    background: var(--bg-social);
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      --svg-color: hsl(0, 0%, 100%);
+      --bg-social: hsl(0, 0%, 30%);
+    }
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.social-buttons__btn {
+  display: flex;
+  border-radius: 3px;
+  align-items: center;
+  max-width: 200px;
+  margin: auto;
+  padding: 5px;
+  color: var(--svg-color);
+  background: var(--bg-social);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  text-transform: uppercase;
+
+  h2 {
+    font-size: 95%;
+  }
+
+  svg {
+    margin-left: 10px;
+    width: 18px;
+    height: 18px;
+  }
+
+  &:hover {
+    color: hsl(0, 0%, 100%);
+    --svg-color: hsl(0, 0%, 100%);
+    --bg-social: hsl(0, 0%, 30%);
+  }
+}
+
+.share-button-temp {
+  margin: 20px 0;
+
+  h4 {
+    margin: 10px;
+    font-weight: inherit;
+  }
+
+  @media (max-width: 900px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    h4 {
+      margin: 0 10px;
+    }
+  }
+}

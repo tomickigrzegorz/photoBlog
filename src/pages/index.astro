@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Gallery from '../components/Gallery.astro';
+
+const title = "Zdjęcia zebrane";
+const description = "Blog fotograficzny, ciekawe nietuzinkowe zdjęcia, niezapomniane chwile.";
+---
+
+<BaseLayout title={title} description={description}>
+  <Gallery />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "http://schema.org/",
+    "@type": "Blog",
+    "publisher": "grzegorztomicki.pl",
+    "author": "Grzegorz Tomicki",
+    "datePublished": "2016-06-23",
+    "dateModified": "2017-06-22",
+    "headline": "Blog fotograficzny"
+  })} />
+</BaseLayout>

@@ -1,0 +1,46 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BackToTop from '../components/BackToTop.astro';
+import '../styles/global.scss';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: 'website' | 'article';
+  isArticle?: boolean;
+}
+
+const { title, description, image, type = 'website', isArticle = false } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="pl" dir="ltr" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <BaseHead
+    title={title}
+    description={description}
+    image={image}
+    type={type}
+  />
+</head>
+<body>
+  <script is:inline>
+    try {
+      document.body.dataset.theme = localStorage.getItem('theme')
+    } catch (e) {
+      document.body.dataset.theme = null
+    }
+  </script>
+
+  <div class={`flex-wrap container ${isArticle ? 'article' : 'home'}`}>
+    <Header isArticle={isArticle} />
+    <slot />
+  </div>
+
+  <BackToTop />
+  <Footer />
+</body>
+</html>

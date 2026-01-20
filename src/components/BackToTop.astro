@@ -1,0 +1,30 @@
+---
+---
+
+<a href="#" class="scroll">
+  <div class="back-to-top">Wróć na początek strony</div>
+</a>
+
+<script>
+  const scrollButton = document.querySelector('.scroll');
+
+  if (scrollButton) {
+    // Show/hide based on scroll position
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 200) {
+        scrollButton.classList.add('show');
+      } else {
+        scrollButton.classList.remove('show');
+      }
+    });
+
+    // Smooth scroll to top
+    scrollButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+</script>

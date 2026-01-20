@@ -1,0 +1,28 @@
+---
+---
+
+<button class="theme" aria-label="zmień motyw">
+  <svg class="theme-light">
+    <use href="/assets/sprite.svg#sun-icon"></use>
+  </svg>
+  <svg class="theme-dark">
+    <use href="/assets/sprite.svg#moon-icon"></use>
+  </svg>
+</button>
+
+<script>
+  const toggleSwitch = document.querySelector('.theme');
+
+  toggleSwitch?.addEventListener('click', () => {
+    const currentTheme = localStorage.getItem('theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+    document.body.dataset.theme = newTheme;
+    localStorage.setItem('theme', newTheme);
+
+    toggleSwitch.setAttribute(
+      'aria-label',
+      `zmień motyw na ${newTheme === 'dark' ? 'light' : 'dark'}`
+    );
+  });
+</script>
