@@ -1,0 +1,28 @@
+---
+interface Props {
+  slug: string;
+  title: string;
+  thumbnail: string;
+  thumbnailAlt: string;
+}
+
+const { slug, title, thumbnail, thumbnailAlt } = Astro.props;
+---
+
+<div class="gallery__items">
+  <a href={`/${slug}`}>
+    <figure>
+      <img
+        src={`/images/${thumbnail}`}
+        alt={thumbnailAlt}
+        loading="lazy"
+        width="576"
+        height="384"
+      />
+      <noscript>
+        <img src={`/images/${thumbnail}`} loading="lazy" />
+      </noscript>
+      <figcaption>{title}</figcaption>
+    </figure>
+  </a>
+</div>

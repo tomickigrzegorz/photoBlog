@@ -1,64 +1,25 @@
 {
   "name": "blog-gt",
-  "version": "1.1.3",
+  "version": "3.0.0",
   "author": "Grzegorz Tomicki",
   "license": "MIT",
+  "type": "module",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack serve --config ./config/webpack.dev.js --progress",
-    "prod": "cross-env NODE_ENV=production webpack --config ./config/webpack.prod.js && yarn favicons:addToHead",
-    "sync": "node ./scripts/sync.js",
-    "sitemap": "node ./scripts/sitemap-generator.js",
-    "favicons": "node ./scripts/favicons.js",
-    "favicons:addToHead": "node ./scripts/injectFavicons.js"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "convert-md": "node scripts/json-to-md.js"
   },
   "keywords": [
-    "webpack 5",
-    "pug",
-    "postcss",
-    "json data",
-    "babel",
-    "service worker"
+    "astro",
+    "photo blog",
+    "static site"
   ],
+  "dependencies": {
+    "@astrojs/sitemap": "^3.6.1",
+    "astro": "^5.16.9"
+  },
   "devDependencies": {
-    "@babel/core": "^7.24.0",
-    "@babel/eslint-parser": "^7.23.10",
-    "@babel/plugin-transform-runtime": "^7.24.0",
-    "@babel/preset-env": "^7.24.0",
-    "autoprefixer": "^10.4.18",
-    "babel-eslint": "^10.1.0",
-    "babel-loader": "^9.1.3",
-    "clean-webpack-plugin": "4.0.0",
-    "copy-webpack-plugin": "^12.0.2",
-    "core-js": "^3.36.0",
-    "cross-env": "^7.0.3",
-    "css-loader": "^6.10.0",
-    "cssnano": "^6.1.0",
-    "dotenv": "^16.5.0",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-html": "^8.0.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-prettier": "^5.1.3",
-    "favicons": "7.1.5",
-    "file-loader": "^6.2.0",
-    "html-webpack-plugin": "^5.6.0",
-    "mini-css-extract-plugin": "^2.8.1",
-    "node-html-parser": "^6.1.12",
-    "postcss": "^8.4.35",
-    "postcss-loader": "^8.1.1",
-    "postcss-url": "^10.1.3",
-    "prettier": "^3.2.5",
-    "pug": "^3.0.3",
-    "pug-loader": "^2.4.0",
-    "sass": "^1.71.1",
-    "sass-loader": "^14.1.1",
-    "style-loader": "^3.3.4",
-    "terser-webpack-plugin": "^5.3.10",
-    "webpack": "^5.94.0",
-    "webpack-bundle-analyzer": "^4.10.1",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.2.1",
-    "webpack-merge": "^5.10.0",
-    "workbox-webpack-plugin": "^7.0.0"
+    "sass": "^1.97.2"
   }
 }

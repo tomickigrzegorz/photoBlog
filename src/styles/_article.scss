@@ -1,0 +1,157 @@
+@use "shareIcons";
+@use "discus-button";
+
+.article {
+  max-width: 930px;
+  margin: auto;
+
+  .sweep-to-top {
+    display: inline-block;
+    color: var(--font-color);
+    text-decoration: none;
+    padding-bottom: 1px;
+    border-bottom: 2px solid hsl(0, 100%, 73%);
+    transition: color 300ms ease-out, color 300ms ease-out;
+
+    &:hover {
+      color: hsl(0, 0%, 100%);
+      color: hsl(0, 100%, 50%);
+      transition: color 300ms ease-in, color 300ms ease-in;
+    }
+  }
+
+  figure {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 200px;
+  }
+
+  img {
+    display: block;
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 800px;
+    width: auto;
+    height: auto;
+    margin: auto;
+  }
+
+  picture {
+    height: 100%;
+  }
+
+  &__date {
+    small {
+      margin-left: 5px;
+    }
+  }
+
+  &__text {
+    margin-bottom: 15px;
+  }
+
+  @media (max-width: 930px) {
+    &__content {
+      figure {
+        margin-left: -15px;
+        margin-right: -15px;
+      }
+
+      figcaption {
+        padding: 20px 15px;
+      }
+    }
+  }
+
+  @media (max-width: 900px) {
+    &__title {
+      text-align: center;
+    }
+  }
+}
+
+figure {
+  margin: 0 0 4px;
+}
+
+figcaption {
+  padding: 20px 0;
+
+  @media (min-width: 900px) {
+    padding: 20px 16px;
+  }
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 100%;
+  margin: 0;
+
+  @media (max-width: 900px) {
+    font-size: 1.6rem;
+  }
+}
+
+h2 {
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin: 0 auto;
+}
+
+@media (max-width: 420px) {
+  .reading-time {
+    display: block;
+  }
+}
+
+@media (max-width: 499px) {
+  .reading-date {
+    display: block;
+  }
+}
+
+@media (min-width: 500px) {
+  .reading-date {
+    position: relative;
+    &:before {
+      position: absolute;
+      content: "";
+      top: 2px;
+      bottom: 0;
+      margin: auto;
+      width: 1px;
+      height: 15px;
+      left: -7px;
+      background: var(--font-color);
+    }
+  }
+}
+
+.article__date {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  color: var(--font-color);
+
+  .icon {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    stroke-width: 0;
+    margin-top: -3px;
+    margin-left: -2px;
+    stroke: currentColor;
+    fill: currentColor;
+    vertical-align: middle;
+  }
+
+  .reading-time {
+    display: inline-block;
+    position: relative;
+    margin-right: 10px;
+  }
+}
+
+.clock {
+  fill: var(--font-color);
+}

@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleCard from './ArticleCard.astro';
+
+// Read index.json for original order
+import indexData from '../../sources/data/index.json';
+
+const articles = await getCollection('articles');
+
+// Create a map of slug -> article for quick lookup
+const articleMap = new Map();
+articles.forEach(article => {
+  articleMap.set(article.slug, article);
+});
+
+// Get articles in index.json order (only those that exist)
+const orderedArticles = indexData.items
+  .map(item => {
+    const slug = item.href.replace('.html', '');
+    const article = articleMap.get(slug);
+    if (!article) return null;
+    return { article, item };
+  })
+  .filter(Boolean);
+---
+
+<main class="gallery">
+  {orderedArticles.map(({ article, item }) => (
+    <ArticleCard
+      slug={article.slug}
+      title={item.text}
+      thumbnail={article.data.thumbnail || ''}
+      thumbnailAlt={item.alt || item.text}
+    />
+  ))}
+</main>

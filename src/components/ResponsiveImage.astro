@@ -1,0 +1,52 @@
+---
+interface Props {
+  folder: string;
+  filename: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+  class?: string;
+}
+
+const { folder, filename, alt = '', width = 1200, height = 800, class: className } = Astro.props;
+
+const basePath = `/images/${folder}`;
+
+// Generate paths for each breakpoint
+const img576 = `${basePath}/576/${filename}`;
+const img768 = `${basePath}/768/${filename}`;
+const img992 = `${basePath}/992/${filename}`;
+const img1200 = `${basePath}/1200/${filename}`;
+
+// WebP versions
+const webp576 = img576.replace('.jpg', '.webp').replace('.JPG', '.webp');
+const webp768 = img768.replace('.jpg', '.webp').replace('.JPG', '.webp');
+const webp992 = img992.replace('.jpg', '.webp').replace('.JPG', '.webp');
+const webp1200 = img1200.replace('.jpg', '.webp').replace('.JPG', '.webp');
+---
+
+<picture>
+  <source srcset={webp1200} media="(min-width: 993px)" type="image/webp" />
+  <source srcset={img1200} media="(min-width: 992px)" />
+
+  <source srcset={webp992} media="(min-width: 769px)" type="image/webp" />
+  <source srcset={img992} media="(min-width: 769px)" />
+
+  <source srcset={webp768} media="(min-width: 577px)" type="image/webp" />
+  <source srcset={img768} media="(min-width: 577px)" />
+
+  <source srcset={webp576} media="(max-width: 576px)" type="image/webp" />
+  <source srcset={img576} media="(max-width: 576px)" />
+
+  <img
+    src={img1200}
+    alt={alt}
+    loading="lazy"
+    class={className || 'zooom'}
+    width={width}
+    height={height}
+  />
+</picture>
+<noscript>
+  <img src={img1200} alt={alt} loading="lazy" width={width} height={height} />
+</noscript>

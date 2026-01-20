@@ -1,0 +1,25 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props {
+  isArticle?: boolean;
+}
+
+const { isArticle = false } = Astro.props;
+---
+
+<header class="header">
+  {isArticle ? (
+    <a href="/" class="header-logo" title="strona główna">
+      <svg class="logo">
+        <use href="/assets/sprite.svg#logo"></use>
+      </svg>
+    </a>
+  ) : (
+    <svg class="logo">
+      <use href="/assets/sprite.svg#logo"></use>
+    </svg>
+  )}
+
+  <ThemeToggle />
+</header>

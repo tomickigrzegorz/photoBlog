@@ -1,0 +1,233 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ResponsiveImage from '../components/ResponsiveImage.astro';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map(article => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await article.render();
+const { title, displayTitle, description, dateDisplay, publishedDate, modifiedDate, author, folder, thumbnail, images } = article.data;
+const pageUrl = Astro.url.href;
+const ogImage = thumbnail ? `https://grzegorztomicki.pl/images/${thumbnail.replace('/576/', '/1200/')}` : undefined;
+---
+
+<BaseLayout
+  title={title}
+  description={description || title}
+  image={ogImage}
+  type="article"
+  isArticle={true}
+>
+  <main class="container">
+    <article class="article">
+      <header class="article__title">
+        <h1>{title}</h1>
+        <div class="article__date">
+          <svg class="icon" viewBox="0 0 24 24">
+            <g fill="none">
+              <g class="clock" fill-rule="nonzero">
+                <path d="M20.473 11.473a.527.527 0 00-.528.527c0 4.381-3.564 7.945-7.945 7.945S4.055 16.381 4.055 12 7.619 4.055 12 4.055c1.336 0 2.635.331 3.795.963l-.659.66a.527.527 0 00.373.9h2.523a.527.527 0 00.528-.527V3.527a.528.528 0 00-.901-.372l-1.09 1.09A8.96 8.96 0 0012 3a8.94 8.94 0 00-6.364 2.636C3.936 7.336 3 9.596 3 12s.936 4.664 2.636 6.364C7.336 20.064 9.596 21 12 21s4.664-.936 6.364-2.636A8.94 8.94 0 0021 12a.527.527 0 00-.527-.527z" />
+                <path d="M15.701 11.35h-3.05V8.298a.563.563 0 00-1.125 0v3.613c0 .31.252.562.562.562h3.613a.562.562 0 000-1.125z" />
+              </g>
+              <path d="M0 0h24v24H0z" />
+            </g>
+          </svg>
+          <small class="reading-time"></small>
+          <small class="reading-date">{dateDisplay}</small>
+        </div>
+        <div id="share-button-stick" class="share-button-temp"></div>
+      </header>
+
+      <div class="article__text">
+        <Content />
+      </div>
+
+      <div class="article__content">
+        {images && folder && images.map((img) => (
+          <figure>
+            <ResponsiveImage
+              folder={folder}
+              filename={img.filename}
+              alt={img.alt || ''}
+              width={img.width || 1200}
+              height={img.height || 800}
+            />
+            {img.caption && <figcaption set:html={img.caption} />}
+          </figure>
+        ))}
+      </div>
+
+      <div id="share-button-bottom" class="share-button-temp"></div>
+
+      <div class="disqus-content row">
+        <div id="disqus_thread"></div>
+        <button class="comments-button" id="load-disqus">
+          dodaj / pokaż komentarze
+        </button>
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </article>
+  </main>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "http://schema.org/",
+    "@type": "Blog",
+    "publisher": "grzegorztomicki.pl",
+    "author": author,
+    "datePublished": publishedDate?.toISOString().split('T')[0],
+    "dateModified": modifiedDate?.toISOString().split('T')[0],
+    "headline": "Blog fotograficzny"
+  })} />
+
+  <script>
+    // Disqus loader
+    const disqusButton = document.getElementById('load-disqus');
+    const disqusShortname = 'bloggrzegorztomickipl';
+
+    disqusButton?.addEventListener('click', (e) => {
+      e.preventDefault();
+      disqusButton.style.display = 'none';
+
+      const d = document;
+      const s = d.createElement('script');
+      s.src = `//${disqusShortname}.disqus.com/embed.js`;
+      s.setAttribute('data-timestamp', String(+new Date()));
+      (d.head || d.body).appendChild(s);
+    });
+
+    // Share button functionality
+    const shareContainers = document.querySelectorAll('.share-button-temp');
+    const pageTitle = document.title;
+    const pageUrl = window.location.href;
+
+    shareContainers.forEach(container => {
+      // Check for native share API support on mobile
+      if (navigator.share && 'maxTouchPoints' in navigator && navigator.maxTouchPoints > 0) {
+        container.innerHTML = `
+          <div class="social-buttons__btn">
+            <svg class="share__icon" viewBox="0 0 24 24">
+              <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/>
+            </svg>
+            <h4>Podziel się</h4>
+          </div>
+        `;
+
+        container.querySelector('.social-buttons__btn')?.addEventListener('click', async () => {
+          try {
+            await navigator.share({
+              title: pageTitle,
+              url: pageUrl
+            });
+          } catch (err) {
+            console.log(err);
+          }
+        });
+      } else {
+        // Desktop fallback
+        container.innerHTML = `
+          <h4>Podziel się</h4>
+          <div class="share-mobile">
+            <div title="Udostępnij w serwisie Facebook" data-share="facebook" class="icon">
+              <svg class="share-icon" viewBox="0 0 24 24"><path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"/></svg>
+            </div>
+            <div title="Udostępnij w serwisie Twitter" data-share="twitter" class="icon">
+              <svg class="share-icon" viewBox="0 0 24 24"><path d="M23.44 4.83c-.8.37-1.5.38-2.22.02.93-.56.98-.96 1.32-2.02-.88.52-1.86.9-2.9 1.1-.82-.88-2-1.43-3.3-1.43-2.5 0-4.55 2.04-4.55 4.54 0 .36.03.7.1 1.04-3.77-.2-7.12-2-9.36-4.75-.4.67-.6 1.45-.6 2.3 0 1.56.8 2.95 2 3.77-.74-.03-1.44-.23-2.05-.57v.06c0 2.2 1.56 4.03 3.64 4.44-.67.2-1.37.2-2.06.08.58 1.8 2.26 3.12 4.25 3.16C5.78 18.1 3.37 18.74 1 18.46c2 1.3 4.4 2.04 6.97 2.04 8.35 0 12.92-6.92 12.92-12.93 0-.2 0-.4-.02-.6.9-.63 1.96-1.22 2.56-2.14z"/></svg>
+            </div>
+            <div title="Wyślij maila" data-share="mail" class="icon">
+              <svg class="share-icon" viewBox="0 0 24 24"><path d="M22 4H2C.9 4 0 4.9 0 6v12c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-10 5L2 8V6l10 5 10-5v2z"/></svg>
+            </div>
+          </div>
+        `;
+
+        container.querySelectorAll('.icon').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const type = (e.currentTarget as HTMLElement).dataset.share;
+            let shareUrl;
+
+            switch(type) {
+              case 'facebook':
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
+                window.open(shareUrl, '_blank');
+                break;
+              case 'twitter':
+                shareUrl = `https://twitter.com/share?text=${encodeURIComponent(pageTitle)}&url=${encodeURIComponent(pageUrl)}`;
+                window.open(shareUrl, '_blank');
+                break;
+              case 'mail':
+                window.location.href = `mailto:?subject=${encodeURIComponent(pageTitle)}&body=${encodeURIComponent(pageUrl)}`;
+                break;
+            }
+          });
+        });
+      }
+    });
+  </script>
+
+  <script defer src="https://cdn.jsdelivr.net/gh/tomik23/zooom.js@1.1.2/dist/zooom.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/gh/tomik23/reading-time@1.0.4/dist/readingTime.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      function getAverageRgb(img) {
+        const context = document.createElement("canvas").getContext("2d");
+        if (typeof img == "string") {
+          let src = img;
+          img = new Image();
+          img.setAttribute("crossOrigin", "");
+          img.src = src;
+        }
+        context.imageSmoothingEnabled = true;
+        context.drawImage(img, 0, 0, 1, 1);
+        return context.getImageData(0, 0, 1, 1).data.slice(0, 3);
+      }
+
+      // zooom
+      new Zooom('zooom', {
+        zIndex: 9,
+        animationTime: 300,
+        cursor: {
+          in: 'var(--zoom-in)',
+          out: 'var(--zoom-out)',
+        },
+        overlay: 'var(--bg-zooom)',
+        onResize: function () {
+          let responsiveMin = 1000;
+          const windowWidth =
+            window.innerWidth ||
+            document.documentElement.clientWidth ||
+            document.body.clientWidth;
+          const widthWindow = windowWidth < responsiveMin ? true : false;
+          const root = document.documentElement;
+          root.style.setProperty('--zoom-in', widthWindow ? 'default' : 'zoom-in');
+          root.style.setProperty('--zoom-out', widthWindow ? 'default' : 'zoom-out');
+          return widthWindow;
+        },
+        onOpen: function(element) {
+          const zooomOverlay = document.querySelector(".zooom-clone");
+          zooomOverlay.style.setProperty("filter", `drop-shadow(0 0 4rem rgba(${getAverageRgb(zooomOverlay)},0.7))`);
+        }
+      });
+
+      // readingtime
+      new ReadingTime({
+        wordsPerMinute: 215,
+        photosPerMinute: 12,
+        elements: ['article'],
+        onResult: function (index, minutes, words, images) {
+          const element = document.querySelector('.reading-time');
+          const text = minutes > 1 ? 'minut czytania' : 'minuta czytania';
+          element.textContent = `~${Math.ceil(minutes)} ${text} (słów: ${words}, zdjęć: ${images})`;
+        },
+      });
+    });
+  </script>
+</BaseLayout>

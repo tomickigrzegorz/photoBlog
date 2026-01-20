@@ -1,0 +1,34 @@
+{
+    "head": {
+        "title": "Komunia Łucji Chełm oraz plener na Żółtańcach",
+        "description": "Łucja Pierwsza Komunia Chełm, plener na Żółtańcach. Pogoda dopisała, ciepło słonecznie aż za bardzo ;)"
+    },
+    "body": {
+        "title": "Komunia Łucji Chełm oraz plener na Żółtańcach",
+        "date": "24.5.2018",
+        "text": "Łucja Pierwsza Komunia w Chełmie, następnego dnia plener na Żółtańcach oraz na łące. Pogoda dopisała, ciepło słonecznie aż za bardzo ;) Spontaniczny plener bez planowania zawsze na propsie, chyba wtedy najlepiej wychodzą zdjęcia.",
+        "items": [
+				{"path":"./images/lucja-komunia-i-plener/","img":"IMG_0002.jpg","alt":""},
+				{"path":"./images/lucja-komunia-i-plener/","img":"IMG_0030.jpg","alt":""},
+                {"path":"./images/lucja-komunia-i-plener/","img":"IMG_0079.jpg","alt":""},
+                {"path":"./images/lucja-komunia-i-plener/","img":"IMG_0094.jpg","alt":""},
+                {"path":"./images/lucja-komunia-i-plener/","img":"IMG_0111.jpg","alt":""},
+                {"path":"./images/lucja-komunia-i-plener/","img":"IMG_0013.jpg","alt":""},
+				{"path":"./images/lucja-komunia-i-plener/","img":"IMG_0061.jpg","alt":""},
+				{"path":"./images/lucja-komunia-i-plener/","img":"IMG_0173.jpg","alt":""},
+				{"path":"./images/lucja-komunia-i-plener/","img":"IMG_0203.jpg","alt":""},
+				{"path":"./images/lucja-komunia-i-plener/","img":"IMG_0227.jpg","alt":""},
+				{"path":"./images/lucja-komunia-i-plener/","img":"IMG_0232.jpg","alt":""},
+				{"path":"./images/lucja-komunia-i-plener/","img":"IMG_0256.jpg","alt":""},
+				{"path":"./images/lucja-komunia-i-plener/","img":"IMG_0272.jpg","alt":""},
+				{"path":"./images/lucja-komunia-i-plener/","img":"IMG_0274.jpg","alt":""},
+				{"path":"./images/lucja-komunia-i-plener/","img":"IMG_0289.jpg","alt":""}
+         ]
+    },
+    "schema": {
+        "datePublished": "2018-05-24",
+        "dateModified": "2018-05-24",
+        "author": "Grzegorz Tomicki"
+    }
+}
+    
