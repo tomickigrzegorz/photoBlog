@@ -17,6 +17,16 @@ sitemap.xml
 # Logs
 sync.log
 
+# JSON data (except index and bratyslawa)
+sources/data/*.json
+!sources/data/index.json
+!sources/data/bratyslawa.json
+
+# MD articles (except index and bratyslawa)
+src/content/articles/*.md
+!src/content/articles/index.md
+!src/content/articles/bratyslawa.md
+
 # Images (stored externally, too large for git)
 public/images/*
 !public/images/.gitkeep
