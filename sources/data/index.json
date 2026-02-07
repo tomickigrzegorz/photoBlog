@@ -5,6 +5,13 @@
   },
   "items": [
     {
+      "img": "./images/jakiss-sobie-nowy-tekst-a-moze-i-nie-olsaasnansans/576/",
+      "alt": "aaaaaaaa",
+      "href": "jakiss-sobie-nowy-tekst-a-moze-i-nie-olsaasnansans.html",
+      "text": "ccccccccccccc",
+      "date": "07.02.2026"
+    },
+    {
       "img": "./images/nelka-sesja-pokomunijna/576/IMG_1433.jpg",
       "alt": "Nelka sesja pokomunijna",
       "href": "nelka-sesja-pokomunijna.html",
@@ -41,34 +48,34 @@
     },
     {
       "img": "./images/chiny/576/IMG_8413.jpg",
-      "alt": "Chiny z Itaką",
+      "alt": "Chiny z Itaką - Opowieści z Chin 07-17.10.2016",
       "href": "chiny.html",
-      "text": "Chiny Itaka",
-      "date": "07-17.10.2016"
+      "text": "Chiny z Itaką",
+      "date": "23.10.2016"
     },
     {
-      "img": "./images/agnieszka-andrzej/576/IMG_6274.jpg",
+      "img": "./images/agnieszka-i-andrzej-slub-i-plener/576/IMG_6274.jpg",
       "alt": "Agnieszka i Andrzej reportaż ślubny",
       "href": "agnieszka-i-andrzej-slub-i-plener.html",
       "text": "Agnieszka i Andrzej",
       "date": "09.07.2016"
     },
     {
-      "img": "./images/gotania/576/IMG_5074.jpg",
+      "img": "./images/miedzynarodowy-festiwal-kultury-antycznej-gotania/576/IMG_5074.jpg",
       "alt": "Międzynarodowy Festiwal Kultury Antycznej – Gotania 2015",
       "href": "miedzynarodowy-festiwal-kultury-antycznej-gotania.html",
       "text": "Gotania",
       "date": "30.06.2015"
     },
     {
-      "img": "./images/izrael/576/IMG_2071.jpg",
+      "img": "./images/izrael-jerozolima-tel-aviv/576/IMG_2071.jpg",
       "alt": "Izrael",
       "href": "izrael-jerozolima-tel-aviv.html",
       "text": "Izrael",
       "date": "23-27.01.2014"
     },
     {
-      "img": "./images/monika-i-pawel/576/IMG_2459.jpg",
+      "img": "./images/monika-i-pawel-reportaz-chelm/576/IMG_2459.jpg",
       "alt": "Monika i Paweł reportaż ślubny",
       "href": "monika-i-pawel-reportaz-chelm.html",
       "text": "Monika i Paweł",
@@ -96,7 +103,7 @@
       "date": "27.04 – 04.05.2013"
     },
     {
-      "img": "./images/dorota-i-piotrek/576/IMG_1429.jpg",
+      "img": "./images/dorota-i-piotrek-slub-i-plener/576/IMG_1429.jpg",
       "alt": "Dorota i Piotrek reportaż ślubny",
       "href": "dorota-i-piotrek-slub-i-plener.html",
       "text": "Dorota i Piotrek",
@@ -183,13 +190,13 @@
       "img": "./images/lublin/576/IMG_4969.jpg",
       "alt": "Lublin",
       "href": "lublin.html",
-      "text": "lublin",
+      "text": "Lublin",
       "date": "29.01.2011"
     }
   ],
   "schema": {
     "datePublished": "2016-06-23",
-    "dateModified": "2017-06-22",
+    "dateModified": "2026-02-07",
     "author": "Grzegorz Tomicki"
   }
 }

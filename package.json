@@ -8,7 +8,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "convert-md": "node scripts/json-to-md.js"
+    "convert-md": "node scripts/json-to-md.js",
+    "cms": "node cms/server.js"
   },
   "keywords": [
     "astro",
@@ -17,7 +18,9 @@
   ],
   "dependencies": {
     "@astrojs/sitemap": "^3.6.1",
-    "astro": "^5.16.9"
+    "astro": "^5.16.9",
+    "compression": "^1.7.5",
+    "express": "^4.21.2"
   },
   "devDependencies": {
     "sass": "^1.97.2"

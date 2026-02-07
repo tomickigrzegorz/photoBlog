@@ -1,9 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Gallery from '../components/Gallery.astro';
+import indexData from '../../sources/data/index.json';
 
-const title = "Zdjęcia zebrane";
-const description = "Blog fotograficzny, ciekawe nietuzinkowe zdjęcia, niezapomniane chwile.";
+const { head, schema } = indexData;
+const title = head.title;
+const description = head.description;
 ---
 
 <BaseLayout title={title} description={description}>
@@ -13,9 +15,9 @@ const description = "Blog fotograficzny, ciekawe nietuzinkowe zdjęcia, niezapom
     "@context": "http://schema.org/",
     "@type": "Blog",
     "publisher": "grzegorztomicki.pl",
-    "author": "Grzegorz Tomicki",
-    "datePublished": "2016-06-23",
-    "dateModified": "2017-06-22",
+    "author": schema?.author || "Grzegorz Tomicki",
+    "datePublished": schema?.datePublished || "2016-06-23",
+    "dateModified": schema?.dateModified || "2016-06-23",
     "headline": "Blog fotograficzny"
   })} />
 </BaseLayout>

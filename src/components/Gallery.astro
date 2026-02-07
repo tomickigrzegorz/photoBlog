@@ -29,7 +29,7 @@ const orderedArticles = indexData.items
     <ArticleCard
       slug={article.slug}
       title={item.text}
-      thumbnail={article.data.thumbnail || ''}
+      thumbnail={item.img.replace('./images/', '')}
       thumbnailAlt={item.alt || item.text}
     />
   ))}
