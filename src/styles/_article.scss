@@ -11,12 +11,16 @@
     text-decoration: none;
     padding-bottom: 1px;
     border-bottom: 2px solid hsl(0, 100%, 73%);
-    transition: color 300ms ease-out, color 300ms ease-out;
+    transition:
+      color 300ms ease-out,
+      color 300ms ease-out;
 
     &:hover {
       color: hsl(0, 0%, 100%);
       color: hsl(0, 100%, 50%);
-      transition: color 300ms ease-in, color 300ms ease-in;
+      transition:
+        color 300ms ease-in,
+        color 300ms ease-in;
     }
   }
 
