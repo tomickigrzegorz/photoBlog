@@ -32,3 +32,4 @@ public/images/*
 !public/images/.gitkeep
 
 .claude
+CLAUDE.md
