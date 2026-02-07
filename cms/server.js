@@ -1,29 +1,41 @@
-import { existsSync, statSync, readdirSync, readFileSync, writeFileSync, unlinkSync } from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import express from 'express';
-import compression from 'compression';
-import { getAllFiles, getAllDirectory, getAllJson, readJson } from './helpers/images.js';
-import { saveTemplate } from './helpers/template.js';
-import { saveMarkdown } from './helpers/markdown.js';
+import {
+  existsSync,
+  statSync,
+  readdirSync,
+  readFileSync,
+  writeFileSync,
+  unlinkSync,
+} from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import express from "express";
+import compression from "compression";
+import {
+  getAllFiles,
+  getAllDirectory,
+  getAllJson,
+  readJson,
+} from "./helpers/images.js";
+import { saveTemplate } from "./helpers/template.js";
+import { saveMarkdown } from "./helpers/markdown.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const root = path.join(__dirname, '..');
+const root = path.join(__dirname, "..");
 const port = 3000;
-const author = 'Grzegorz Tomicki';
+const author = "Grzegorz Tomicki";
 
 const app = express();
 app.use(compression());
 app.use(express.urlencoded({ extended: false, parameterLimit: 10000 }));
 app.use(express.json());
 
-app.use('/vendor', express.static(path.join(__dirname, 'public')));
-app.use('/update', express.static(path.join(root, 'sources/data')));
+app.use("/vendor", express.static(path.join(__dirname, "public")));
+app.use("/update", express.static(path.join(root, "sources/data")));
 
-app.get('/images/:folder/:file', (req, res) => {
+app.get("/images/:folder/:file", (req, res) => {
   const { folder, file } = req.params;
-  const imgBase = path.join(root, 'public/images', folder);
-  for (const size of ['1200', '992', '768', '576']) {
+  const imgBase = path.join(root, "public/images", folder);
+  for (const size of ["1200", "992", "768", "576"]) {
     const filePath = path.join(imgBase, size, file);
     if (existsSync(filePath)) {
       res.sendFile(filePath);
@@ -35,14 +47,21 @@ app.get('/images/:folder/:file', (req, res) => {
     res.sendFile(directPath);
     return;
   }
-  res.status(404).send('Image not found');
+  res.status(404).send("Image not found");
 });
 
-app.post('/', (req, res) => {
+app.post("/", (req, res) => {
   const {
-    folderName, seoTitle, seoDescription,
-    bodyTitle, bodyDate, bodyText, bodyAuthor,
-    imageName, imageAlt, imageText,
+    folderName,
+    seoTitle,
+    seoDescription,
+    bodyTitle,
+    bodyDate,
+    bodyText,
+    bodyAuthor,
+    imageName,
+    imageAlt,
+    imageText,
   } = req.body;
 
   const config = {
@@ -61,23 +80,25 @@ app.post('/', (req, res) => {
   saveTemplate(config, root);
   saveMarkdown(config, root);
 
-  res.redirect('./success');
+  res.redirect("./success");
 });
 
-const imagesDir = path.join(root, 'public/images');
-const dataDir = path.join(root, 'sources/data');
+const imagesDir = path.join(root, "public/images");
+const dataDir = path.join(root, "sources/data");
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   const keys = getAllDirectory(imagesDir);
   const jsonFiles = getAllJson(dataDir);
 
-  const folders = keys.map(key => [key, jsonFiles.includes(key)]);
-  const jsonOnly = jsonFiles.filter(j => !keys.includes(j)).map(j => [j, true]);
+  const folders = keys.map((key) => [key, jsonFiles.includes(key)]);
+  const jsonOnly = jsonFiles
+    .filter((j) => !keys.includes(j))
+    .map((j) => [j, true]);
 
   res.send(renderIndex([...folders, ...jsonOnly]));
 });
 
-app.get('/name/:imageFolder', (req, res) => {
+app.get("/name/:imageFolder", (req, res) => {
   const { imageFolder } = req.params;
   const folderPath = path.join(imagesDir, imageFolder);
 
@@ -87,16 +108,18 @@ app.get('/name/:imageFolder', (req, res) => {
   }
 
   const allImages = getAllFiles(folderPath, imageFolder);
-  res.send(renderEditor({
-    siteType: 'new',
-    title: imageFolder,
-    count: allImages.length,
-    images: allImages,
-    author,
-  }));
+  res.send(
+    renderEditor({
+      siteType: "new",
+      title: imageFolder,
+      count: allImages.length,
+      images: allImages,
+      author,
+    }),
+  );
 });
 
-app.get('/update/:imageFolder', (req, res) => {
+app.get("/update/:imageFolder", (req, res) => {
   const { imageFolder } = req.params;
   const jsonPath = path.join(dataDir, `${imageFolder}.json`);
 
@@ -111,67 +134,85 @@ app.get('/update/:imageFolder', (req, res) => {
   // Use image order from JSON when updating
   let allImages;
   if (jsonData.body?.items?.length) {
-    allImages = jsonData.body.items.map(item => {
-      const img = item.img.includes('/') ? item.img.split('/').pop() : item.img;
+    allImages = jsonData.body.items.map((item) => {
+      const img = item.img.includes("/") ? item.img.split("/").pop() : item.img;
       return `./images/${imageFolder}/${img}`;
     });
   } else {
-    allImages = existsSync(folderPath) ? getAllFiles(folderPath, imageFolder) : [];
+    allImages = existsSync(folderPath)
+      ? getAllFiles(folderPath, imageFolder)
+      : [];
   }
 
-  const optionsDate = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-  const dateCreate = new Date(statSync(jsonPath).mtime).toLocaleString('pl', optionsDate);
+  const optionsDate = {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  };
+  const dateCreate = new Date(statSync(jsonPath).mtime).toLocaleString(
+    "pl",
+    optionsDate,
+  );
 
-  res.send(renderEditor({
-    siteType: 'update',
-    title: imageFolder,
-    count: allImages.length,
-    images: allImages,
-    author,
-    data: dateCreate,
-    jsonData,
-  }));
+  res.send(
+    renderEditor({
+      siteType: "update",
+      title: imageFolder,
+      count: allImages.length,
+      images: allImages,
+      author,
+      data: dateCreate,
+      jsonData,
+    }),
+  );
 });
 
-app.get('/create', (req, res) => {
-  const slug = slugify(req.query.slug || '');
+app.get("/create", (req, res) => {
+  const slug = slugify(req.query.slug || "");
   if (!slug) {
-    res.redirect('/');
+    res.redirect("/");
     return;
   }
-  res.send(renderEditor({
-    siteType: 'new',
-    title: slug,
-    count: 0,
-    images: [],
-    author,
-  }));
+  res.send(
+    renderEditor({
+      siteType: "new",
+      title: slug,
+      count: 0,
+      images: [],
+      author,
+    }),
+  );
 });
 
-app.get('/api/images/:folder', (req, res) => {
+app.get("/api/images/:folder", (req, res) => {
   const { folder } = req.params;
   const folderPath = path.join(imagesDir, folder);
   if (!existsSync(folderPath)) return res.json([]);
-  const sizeDir = path.join(folderPath, '576');
+  const sizeDir = path.join(folderPath, "576");
   const dir = existsSync(sizeDir) ? sizeDir : folderPath;
-  const files = readdirSync(dir).filter(f => /\.(jpg|jpeg|png|gif)$/i.test(f));
+  const files = readdirSync(dir).filter((f) =>
+    /\.(jpg|jpeg|png|gif)$/i.test(f),
+  );
   res.json(files);
 });
 
-app.delete('/delete/:slug', (req, res) => {
+app.delete("/delete/:slug", (req, res) => {
   const { slug } = req.params;
   const jsonPath = path.join(dataDir, `${slug}.json`);
-  const mdPath = path.join(root, 'src/content/articles', `${slug}.md`);
-  const indexPath = path.join(dataDir, 'index.json');
+  const mdPath = path.join(root, "src/content/articles", `${slug}.md`);
+  const indexPath = path.join(dataDir, "index.json");
 
   if (existsSync(jsonPath)) unlinkSync(jsonPath);
   if (existsSync(mdPath)) unlinkSync(mdPath);
 
   if (existsSync(indexPath)) {
     try {
-      const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
-      index.items = index.items.filter(i => i.href !== `${slug}.html`);
-      writeFileSync(indexPath, JSON.stringify(index, null, 2), 'utf-8');
+      const index = JSON.parse(readFileSync(indexPath, "utf-8"));
+      index.items = index.items.filter((i) => i.href !== `${slug}.html`);
+      writeFileSync(indexPath, JSON.stringify(index, null, 2), "utf-8");
     } catch {}
   }
 
@@ -179,21 +220,33 @@ app.delete('/delete/:slug', (req, res) => {
   res.json({ ok: true });
 });
 
-app.get('/gallery', (req, res) => {
-  const indexPath = path.join(dataDir, 'index.json');
-  const indexData = existsSync(indexPath) ? JSON.parse(readFileSync(indexPath, 'utf-8')) : { head: {}, items: [], schema: {} };
+app.get("/gallery", (req, res) => {
+  const indexPath = path.join(dataDir, "index.json");
+  const indexData = existsSync(indexPath)
+    ? JSON.parse(readFileSync(indexPath, "utf-8"))
+    : { head: {}, items: [], schema: {} };
   const jsonFiles = getAllJson(dataDir);
   res.send(renderGallery(indexData, jsonFiles));
 });
 
-app.post('/gallery', (req, res) => {
+app.post("/gallery", (req, res) => {
   const { items } = req.body;
-  const indexPath = path.join(dataDir, 'index.json');
-  let indexData = { head: { title: 'Zdjęcia zebrane', description: 'Blog fotograficzny, ciekawe nietuzinkowe zdjęcia, niezapomniane chwile.' }, items: [], schema: {} };
+  const indexPath = path.join(dataDir, "index.json");
+  let indexData = {
+    head: {
+      title: "Zdjęcia zebrane",
+      description:
+        "Blog fotograficzny, ciekawe nietuzinkowe zdjęcia, niezapomniane chwile.",
+    },
+    items: [],
+    schema: {},
+  };
   if (existsSync(indexPath)) {
-    try { indexData = JSON.parse(readFileSync(indexPath, 'utf-8')); } catch {}
+    try {
+      indexData = JSON.parse(readFileSync(indexPath, "utf-8"));
+    } catch {}
   }
-  indexData.items = items.map(item => ({
+  indexData.items = items.map((item) => ({
     img: item.img,
     alt: item.alt,
     href: item.href,
@@ -201,11 +254,11 @@ app.post('/gallery', (req, res) => {
     date: item.date,
   }));
   indexData.schema.dateModified = new Date().toISOString().slice(0, 10);
-  writeFileSync(indexPath, JSON.stringify(indexData, null, 2), 'utf-8');
+  writeFileSync(indexPath, JSON.stringify(indexData, null, 2), "utf-8");
   res.json({ ok: true });
 });
 
-app.get('/success', (req, res) => {
+app.get("/success", (req, res) => {
   res.send(renderSuccess());
 });
 
@@ -214,15 +267,15 @@ app.use((req, res) => {
 });
 
 function renderLayout(title, siteType, content) {
-  const isEditor = siteType === 'new' || siteType === 'update';
+  const isEditor = siteType === "new" || siteType === "update";
   return `<!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/vendor/css/style.css">
-  ${isEditor ? '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">' : ''}
-  ${isEditor ? '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pell/dist/pell.min.css">' : ''}
+  ${isEditor ? '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">' : ""}
+  ${isEditor ? '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pell/dist/pell.min.css">' : ""}
   <title>${title}</title>
 </head>
 <body>
@@ -234,9 +287,10 @@ function renderLayout(title, siteType, content) {
     <symbol id="long-arrow-right-icon" viewBox="0 0 27 28"><path d="M27 13.953a.549.549 0 01-.156.375l-6 5.531A.5.5 0 0120 19.5V16H.5a.494.494 0 01-.5-.5v-3c0-.281.219-.5.5-.5H20V8.5c0-.203.109-.375.297-.453s.391-.047.547.078l6 5.469a.508.508 0 01.156.359z"/></symbol>
   </svg>
   ${content}
-  ${isEditor ? `
+  ${
+    isEditor
+      ? `
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pl.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pell"></script>
   <script src="https://cdn.jsdelivr.net/npm/@nicorevin/zooom@1.2.0/dist/zooom.min.js"></script>
@@ -244,13 +298,17 @@ function renderLayout(title, siteType, content) {
     const fileJson = '${title}.json';
     const type = '${siteType}';
   </script>
-  <script src="/vendor/js/script.js"></script>` : ''}
+  <script src="/vendor/js/script.js"></script>`
+      : ""
+  }
 </body>
 </html>`;
 }
 
 function renderIndex(folders) {
-  const rows = folders.map(([name, hasJson]) => `
+  const rows = folders
+    .map(
+      ([name, hasJson]) => `
     <tr>
       <td>
         <div class="flex align-center">
@@ -262,53 +320,72 @@ function renderIndex(folders) {
         <a href="/name/${name}" class="button bg-blue">NEW</a>
       </td>
       <td class="text-center">
-        ${hasJson ? `<a href="/update/${name}" class="button bg-orange">UPDATE</a>` : ''}
+        ${hasJson ? `<a href="/update/${name}" class="button bg-orange">UPDATE</a>` : ""}
       </td>
       <td class="text-center">
-        ${hasJson ? `<button class="button bg-red" onclick="if(confirm('Usunąć ${name}? (JSON + MD, zdjęcia pozostaną)'))fetch('/delete/${name}',{method:'DELETE'}).then(r=>{if(r.ok)location.reload()})">USUŃ</button>` : ''}
+        ${hasJson ? `<button class="button bg-red" onclick="if(confirm('Delete ${name}? (JSON + MD, images will remain)'))fetch('/delete/${name}',{method:'DELETE'}).then(r=>{if(r.ok)location.reload()})">DELETE</button>` : ""}
       </td>
-    </tr>`).join('');
+    </tr>`,
+    )
+    .join("");
 
-  return renderLayout('CMS - Lista galerii', 'home', `
+  return renderLayout(
+    "CMS - Gallery list",
+    "home",
+    `
     <div class="container">
       <div class="flex gap-10 mtb-20">
-        <a href="/gallery" class="button bg-red" style="padding:12px 20px;font-size:100%">EDYTUJ GALERIĘ (index.json)</a>
+        <a href="/gallery" class="button bg-red" style="padding:12px 20px;font-size:100%">EDIT GALLERY (index.json)</a>
       </div>
       <div class="info green box-shadow mtb-20">
-        <h4 class="uppercase mb-5">Nowy artykuł</h4>
+        <h4 class="uppercase mb-5">New article</h4>
         <form action="/create" method="GET" class="flex gap-10 align-center">
-          <input type="text" name="slug" placeholder="nazwa-artykulu (slug)" required style="max-width:400px">
-          <button class="button bg-green" type="submit">UTWÓRZ</button>
+          <input type="text" name="slug" placeholder="article-name (slug)" required style="max-width:400px">
+          <button class="button bg-green" type="submit">CREATE</button>
         </form>
       </div>
       <table>
         <thead>
           <tr>
-            <th class="text-left">Lista galerii</th>
-            <th class="text-center">Nowy</th>
-            <th class="text-center">Edycja</th>
-            <th class="text-center">Usuń</th>
+            <th class="text-left">Gallery list</th>
+            <th class="text-center">NEW</th>
+            <th class="text-center">EDIT</th>
+            <th class="text-center">DELETE</th>
           </tr>
         </thead>
         <tbody>${rows}</tbody>
       </table>
       <div class="info blue flex align-center box-shadow">
         <svg class="icon small mr-10"><use xlink:href="#info-icon"></use></svg>
-        Tworzenie nowych lub edycja istniejących artykułów.
+        Create new or edit existing articles.
       </div>
-    </div>`);
+    </div>`,
+  );
 }
 
-function renderEditor({ siteType, title, count, images, author, data, jsonData }) {
-  const buttonText = siteType === 'new' ? 'ZAPISZ' : 'AKTUALIZUJ';
-  const dateInfo = data ? `<div class="date-time"><small>Ostatnia zmiana - ${data}</small></div>` : '';
+function renderEditor({
+  siteType,
+  title,
+  count,
+  images,
+  author,
+  data,
+  jsonData,
+}) {
+  const buttonText = siteType === "new" ? "SAVE" : "UPDATE";
+  const dateInfo = data
+    ? `<div class="date-time"><small>Last modified - ${data}</small></div>`
+    : "";
 
-  const imageItems = images.map((image, i) => {
-    const filename = image.split('/').pop();
-    const jsonItem = jsonData?.body?.items?.[i];
-    const altVal = jsonItem?.alt || '';
-    const textVal = jsonItem?.text ? jsonItem.text.replace(/<br\s*\/?>/g, '\r\n') : '';
-    return `
+  const imageItems = images
+    .map((image, i) => {
+      const filename = image.split("/").pop();
+      const jsonItem = jsonData?.body?.items?.[i];
+      const altVal = jsonItem?.alt || "";
+      const textVal = jsonItem?.text
+        ? jsonItem.text.replace(/<br\s*\/?>/g, "\r\n")
+        : "";
+      return `
     <div class="flex gap-20 item">
       <div class="image-section">
         <span class="ribbon label">${filename}</span>
@@ -317,25 +394,29 @@ function renderEditor({ siteType, title, count, images, author, data, jsonData }
       </div>
       <div class="edit-section">
         <div class="form-column">
-          <label>alt do zdjęcia</label>
-          <input type="text" name="imageAlt" placeholder="alt do zdjęcia" value="${escapeHtml(altVal)}">
+          <label>image alt</label>
+          <input type="text" name="imageAlt" placeholder="image alt" value="${escapeHtml(altVal)}">
         </div>
         <div class="form-column">
-          <label>treść pod zdjęciem</label>
+          <label>caption</label>
           <textarea name="imageText" rows="4">${escapeHtml(textVal)}</textarea>
         </div>
       </div>
     </div>`;
-  }).join('');
+    })
+    .join("");
 
-  const seoTitle = jsonData?.head?.title || '';
-  const seoDesc = jsonData?.head?.description || '';
-  const bodyTitle = jsonData?.body?.title || '';
-  const bodyDate = jsonData?.body?.date || '';
-  const bodyText = jsonData?.body?.text || '';
+  const seoTitle = jsonData?.head?.title || "";
+  const seoDesc = jsonData?.head?.description || "";
+  const bodyTitle = jsonData?.body?.title || "";
+  const bodyDate = jsonData?.body?.date || "";
+  const bodyText = jsonData?.body?.text || "";
   const bodyAuthor = jsonData?.schema?.author || author;
 
-  return renderLayout(title, siteType, `
+  return renderLayout(
+    title,
+    siteType,
+    `
     <div class="container page">
       <h1>
         <a href="/" class="text-d-none uppercase">
@@ -360,30 +441,38 @@ function renderEditor({ siteType, title, count, images, author, data, jsonData }
               <input id="seoDescription" type="text" name="seoDescription" placeholder="description" value="${escapeHtml(seoDesc)}" required>
             </div>
           </div>
-          <h4 class="dividing uppercase mt-20 mb-5 ptb-5">dane na górze strony</h4>
+          <h4 class="dividing uppercase mt-20 mb-5 ptb-5">page header</h4>
           <div class="flex gap-10">
             <div class="form-column">
-              <label for="bodyTitle">tytuł H1</label>
+              <label for="bodyTitle">H1 title</label>
               <input id="bodyTitle" type="text" name="bodyTitle" placeholder="title" value="${escapeHtml(bodyTitle)}" required>
             </div>
             <div class="form-column">
-              <label for="bodyDate">data</label>
-              <input id="bodyDate" type="text" class="bodyDate" name="bodyDate" placeholder="Data" value="${escapeHtml(bodyDate)}" required>
+              <label for="bodyDate">date</label>
+              <div class="flex gap-10">
+                <input id="bodyDate" type="text" class="bodyDate" name="bodyDate" placeholder="Date" value="${escapeHtml(bodyDate)}" required>
+                <select id="dateFormat" style="width:auto;padding:8px;border-radius:5px;border:1px solid #ccc;font-size:85%">
+                  <option value="d.m.Y">DD.MM.YYYY</option>
+                  <option value="Y-m-d">YYYY-MM-DD</option>
+                  <option value="m/d/Y">MM/DD/YYYY</option>
+                  <option value="d/m/Y">DD/MM/YYYY</option>
+                </select>
+              </div>
             </div>
           </div>
           <div class="form-column">
-            <label>tekst</label>
+            <label>text</label>
             <div id="editor" class="pell"></div>
             <textarea id="text-output" name="bodyText" hidden>${escapeHtml(bodyText)}</textarea>
           </div>
           <div class="half">
-            <label for="bodyAuthor">autor</label>
-            <input id="bodyAuthor" type="text" name="bodyAuthor" placeholder="Autor artykułu" value="${escapeHtml(bodyAuthor)}" required>
+            <label for="bodyAuthor">author</label>
+            <input id="bodyAuthor" type="text" name="bodyAuthor" placeholder="Article author" value="${escapeHtml(bodyAuthor)}" required>
           </div>
         </div>
-        <h2 class="flex align-center mtb-20 dividing uppercase">lista zdjęć
+        <h2 class="flex align-center mtb-20 dividing uppercase">photo list
           <svg class="icon big fill-red mrl-10"><use xlink:href="#long-arrow-right-icon"></use></svg>
-          szt. ${count}
+          ${count} pcs.
         </h2>
         <div id="columns" class="columns">
           ${imageItems}
@@ -402,25 +491,27 @@ function renderEditor({ siteType, title, count, images, author, data, jsonData }
           </div>
         </div>
       </form>
-    </div>`);
+    </div>`,
+  );
 }
 
 function renderGallery(indexData, jsonFiles) {
   const items = indexData.items || [];
-  const existingSlugs = items.map(i => i.href.replace('.html', ''));
-  const availableArticles = jsonFiles.filter(s => !existingSlugs.includes(s));
+  const existingSlugs = items.map((i) => i.href.replace(".html", ""));
+  const availableArticles = jsonFiles.filter((s) => !existingSlugs.includes(s));
 
-  const itemRows = items.map((item, i) => {
-    const slug = item.href.replace('.html', '');
-    const imgFile = item.img.split('/').pop();
-    return `
+  const itemRows = items
+    .map((item, i) => {
+      const slug = item.href.replace(".html", "");
+      const imgFile = item.img.split("/").pop();
+      return `
     <div class="gallery-item flex gap-10 align-center" data-index="${i}">
       <span class="gallery-handle" style="cursor:grab;font-size:20px;padding:0 8px">☰</span>
       <img src="/images/${slug}/${imgFile}" style="width:80px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0">
       <div style="flex:1;display:flex;flex-wrap:wrap;gap:5px;align-items:center">
-        <input type="text" class="g-text" value="${escapeHtml(item.text)}" placeholder="tekst" style="width:200px">
+        <input type="text" class="g-text" value="${escapeHtml(item.text)}" placeholder="text" style="width:200px">
         <input type="text" class="g-alt" value="${escapeHtml(item.alt)}" placeholder="alt" style="width:200px">
-        <input type="text" class="g-date" value="${escapeHtml(item.date)}" placeholder="data" style="width:130px">
+        <input type="text" class="g-date" value="${escapeHtml(item.date)}" placeholder="date" style="width:130px">
         <select class="g-img" style="width:180px;padding:6px;border-radius:4px;border:1px solid #ccc"></select>
       </div>
       <input type="hidden" class="g-href" value="${escapeHtml(item.href)}">
@@ -428,38 +519,44 @@ function renderGallery(indexData, jsonFiles) {
       <input type="hidden" class="g-current-img" value="${escapeHtml(item.img)}">
       <button type="button" class="button bg-red gallery-remove" style="flex-shrink:0">✕</button>
     </div>`;
-  }).join('');
+    })
+    .join("");
 
-  const optionsHtml = availableArticles.map(s => `<option value="${s}">${s}</option>`).join('');
+  const optionsHtml = availableArticles
+    .map((s) => `<option value="${s}">${s}</option>`)
+    .join("");
 
-  return renderLayout('Edycja galerii', 'gallery', `
+  return renderLayout(
+    "Edit gallery",
+    "gallery",
+    `
     <div class="container page">
       <h1>
         <a href="/" class="text-d-none uppercase">
           <div class="flex align-center">
             <svg class="icon big mr-10 fill-red"><use xlink:href="#home-icon"></use></svg>
-            Edycja galerii (index.json)
+            Edit gallery (index.json)
           </div>
         </a>
       </h1>
       <div class="form box-shadow mt-10">
-        <h4 class="dividing uppercase mb-5 pb-5">Dodaj artykuł do galerii</h4>
+        <h4 class="dividing uppercase mb-5 pb-5">Add article to gallery</h4>
         <div class="flex gap-10 align-center">
           <select id="addArticle" style="padding:8px;border-radius:4px;border:1px solid #ccc;width:300px">
-            <option value="">-- wybierz artykuł --</option>
+            <option value="">-- select article --</option>
             ${optionsHtml}
           </select>
-          <button type="button" id="addBtn" class="button bg-green">DODAJ</button>
+          <button type="button" id="addBtn" class="button bg-green">ADD</button>
         </div>
       </div>
-      <h2 class="mtb-20 uppercase">Kolejność artykułów (${items.length})</h2>
+      <h2 class="mtb-20 uppercase">Article order (${items.length})</h2>
       <div class="gallery-header flex gap-10 align-center" style="padding:8px 10px;font-size:75%;text-transform:uppercase;font-weight:bold;color:#666;border-bottom:2px solid #ccc;margin-bottom:8px">
         <span style="width:28px"></span>
         <span style="width:80px">foto</span>
-        <span style="width:200px">tytuł (pod zdjęciem)</span>
-        <span style="width:200px">alt (atrybut img)</span>
-        <span style="width:130px">data</span>
-        <span style="width:180px">miniatura</span>
+        <span style="width:200px">title (below photo)</span>
+        <span style="width:200px">alt (img attribute)</span>
+        <span style="width:130px">date</span>
+        <span style="width:180px">thumbnail</span>
         <span style="width:32px"></span>
       </div>
       <div id="galleryList" style="margin-bottom:80px">
@@ -467,7 +564,7 @@ function renderGallery(indexData, jsonFiles) {
       </div>
       <div class="footer flex justify-center">
         <div class="container gap-20 mtb-10 flex">
-          <button type="button" id="saveGallery" class="button bg-orange" style="padding:12px 20px">ZAPISZ</button>
+          <button type="button" id="saveGallery" class="button bg-orange" style="padding:12px 20px">SAVE</button>
           <button type="button" class="flex button align-center bg-gray gap-10 scroll" name="scroll">
             <svg class="icon smaller fill-white"><use xlink:href="#chevron-up-icon"></use></svg>
             <div>TOP</div>
@@ -524,9 +621,9 @@ function renderGallery(indexData, jsonFiles) {
           <span class="gallery-handle" style="cursor:grab;font-size:20px;padding:0 8px">☰</span>
           <img src="/images/\${slug}/\${firstImg}" style="width:80px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0">
           <div style="flex:1;display:flex;flex-wrap:wrap;gap:5px;align-items:center">
-            <input type="text" class="g-text" value="\${slug}" placeholder="tekst" style="width:200px">
+            <input type="text" class="g-text" value="\${slug}" placeholder="text" style="width:200px">
             <input type="text" class="g-alt" value="" placeholder="alt" style="width:200px">
-            <input type="text" class="g-date" value="" placeholder="data" style="width:130px">
+            <input type="text" class="g-date" value="" placeholder="date" style="width:130px">
             <select class="g-img" style="width:180px;padding:6px;border-radius:4px;border:1px solid #ccc">
               \${files.map(f => '<option value="./images/' + slug + '/576/' + f + '">' + f + '</option>').join('')}
             </select>
@@ -576,7 +673,7 @@ function renderGallery(indexData, jsonFiles) {
         if (res.ok) {
           window.location.href = '/success';
         } else {
-          alert('Błąd zapisu');
+          alert('Save error');
         }
       });
 
@@ -586,57 +683,87 @@ function renderGallery(indexData, jsonFiles) {
         window.scroll({ top: 0, behavior: 'smooth' });
       });
     })();
-    </script>`);
+    </script>`,
+  );
 }
 
 function renderSuccess() {
-  return renderLayout('Sukces', 'success', `
+  return renderLayout(
+    "Success",
+    "success",
+    `
     <div class="container">
       <div class="info green box-shadow">
         <div class="flex content-info">
           <svg class="icon big mt-5 mr-10"><use xlink:href="#info-icon"></use></svg>
           <div>
-            <p>JSON i MD zostały zapisane</p>
-            <a href="/" class="d-ib button bg-green mt-10 gap-10">STRONA GŁÓWNA</a>
+            <p>JSON and MD saved successfully</p>
+            <a href="/" class="d-ib button bg-green mt-10 gap-10">HOME</a>
           </div>
         </div>
       </div>
-    </div>`);
+    </div>`,
+  );
 }
 
 function render404() {
-  return renderLayout('Błąd 404', '404', `
+  return renderLayout(
+    "Error 404",
+    "404",
+    `
     <div class="container">
       <div class="info red box-shadow">
         <div class="flex content-info">
           <svg class="icon big mt-5 mr-10"><use xlink:href="#info-icon"></use></svg>
           <div>
-            <p>Nie znaleziono strony. Adres powinien zawierać nazwę folderu ze zdjęciami.</p>
-            <a href="/" class="d-ib button bg-green mt-10 gap-10">STRONA GŁÓWNA</a>
+            <p>Page not found. URL should contain the image folder name.</p>
+            <a href="/" class="d-ib button bg-green mt-10 gap-10">HOME</a>
           </div>
         </div>
       </div>
-    </div>`);
+    </div>`,
+  );
 }
 
 function slugify(str) {
-  const map = { 'ą':'a','ć':'c','ę':'e','ł':'l','ń':'n','ó':'o','ś':'s','ź':'z','ż':'z',
-    'Ą':'a','Ć':'c','Ę':'e','Ł':'l','Ń':'n','Ó':'o','Ś':'s','Ź':'z','Ż':'z' };
+  const map = {
+    ą: "a",
+    ć: "c",
+    ę: "e",
+    ł: "l",
+    ń: "n",
+    ó: "o",
+    ś: "s",
+    ź: "z",
+    ż: "z",
+    Ą: "a",
+    Ć: "c",
+    Ę: "e",
+    Ł: "l",
+    Ń: "n",
+    Ó: "o",
+    Ś: "s",
+    Ź: "z",
+    Ż: "z",
+  };
   return str
-    .split('').map(c => map[c] || c).join('')
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .split("")
+    .map((c) => map[c] || c)
+    .join("")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 function escapeHtml(str) {
-  if (!str) return '';
+  if (!str) return "";
   return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/"/g, '&quot;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }
 
 app.listen(port, () => {

@@ -142,7 +142,7 @@ textarea {
 }
 
 .form:after {
-  content: "wszystkie pola wymagane";
+  content: "all fields required";
   position: absolute;
   bottom: 5px;
   right: 10px;

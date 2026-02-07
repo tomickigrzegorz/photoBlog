@@ -96,11 +96,24 @@ window.addEventListener('DOMContentLoaded', () => {
     window.scroll({ top: 0, behavior: 'smooth' });
   });
 
-  flatpickr('.bodyDate', {
-    locale: 'pl',
-    dateFormat: 'd.m.Y',
+  const dateFormatSelect = document.getElementById('dateFormat');
+  let fp = flatpickr('.bodyDate', {
+    dateFormat: dateFormatSelect ? dateFormatSelect.value : 'd.m.Y',
     allowInput: true
   });
+
+  if (dateFormatSelect) {
+    dateFormatSelect.addEventListener('change', () => {
+      const val = document.getElementById('bodyDate').value;
+      if (Array.isArray(fp)) fp.forEach(i => i.destroy());
+      else fp.destroy();
+      fp = flatpickr('.bodyDate', {
+        dateFormat: dateFormatSelect.value,
+        allowInput: true
+      });
+      document.getElementById('bodyDate').value = val;
+    });
+  }
 
   let title = document.title;
 
