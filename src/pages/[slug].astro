@@ -1,11 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import ResponsiveImage from '../components/ResponsiveImage.astro';
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ResponsiveImage from "../components/ResponsiveImage.astro";
 
 export async function getStaticPaths() {
-  const articles = await getCollection('articles');
-  return articles.map(article => ({
+  const articles = await getCollection("articles");
+  return articles.map((article) => ({
     params: { slug: article.slug },
     props: { article },
   }));
@@ -13,9 +13,22 @@ export async function getStaticPaths() {
 
 const { article } = Astro.props;
 const { Content } = await article.render();
-const { title, displayTitle, description, dateDisplay, publishedDate, modifiedDate, author, folder, thumbnail, images } = article.data;
+const {
+  title,
+  displayTitle,
+  description,
+  dateDisplay,
+  publishedDate,
+  modifiedDate,
+  author,
+  folder,
+  thumbnail,
+  images,
+} = article.data;
 const pageUrl = Astro.url.href;
-const ogImage = thumbnail ? `https://grzegorztomicki.pl/images/${thumbnail.replace('/576/', '/1200/')}` : undefined;
+const ogImage = thumbnail
+  ? `https://grzegorztomicki.pl/images/${thumbnail.replace("/576/", "/1200/")}`
+  : undefined;
 ---
 
 <BaseLayout
@@ -33,10 +46,14 @@ const ogImage = thumbnail ? `https://grzegorztomicki.pl/images/${thumbnail.repla
           <svg class="icon" viewBox="0 0 24 24">
             <g fill="none">
               <g class="clock" fill-rule="nonzero">
-                <path d="M20.473 11.473a.527.527 0 00-.528.527c0 4.381-3.564 7.945-7.945 7.945S4.055 16.381 4.055 12 7.619 4.055 12 4.055c1.336 0 2.635.331 3.795.963l-.659.66a.527.527 0 00.373.9h2.523a.527.527 0 00.528-.527V3.527a.528.528 0 00-.901-.372l-1.09 1.09A8.96 8.96 0 0012 3a8.94 8.94 0 00-6.364 2.636C3.936 7.336 3 9.596 3 12s.936 4.664 2.636 6.364C7.336 20.064 9.596 21 12 21s4.664-.936 6.364-2.636A8.94 8.94 0 0021 12a.527.527 0 00-.527-.527z" />
-                <path d="M15.701 11.35h-3.05V8.298a.563.563 0 00-1.125 0v3.613c0 .31.252.562.562.562h3.613a.562.562 0 000-1.125z" />
+                <path
+                  d="M20.473 11.473a.527.527 0 00-.528.527c0 4.381-3.564 7.945-7.945 7.945S4.055 16.381 4.055 12 7.619 4.055 12 4.055c1.336 0 2.635.331 3.795.963l-.659.66a.527.527 0 00.373.9h2.523a.527.527 0 00.528-.527V3.527a.528.528 0 00-.901-.372l-1.09 1.09A8.96 8.96 0 0012 3a8.94 8.94 0 00-6.364 2.636C3.936 7.336 3 9.596 3 12s.936 4.664 2.636 6.364C7.336 20.064 9.596 21 12 21s4.664-.936 6.364-2.636A8.94 8.94 0 0021 12a.527.527 0 00-.527-.527z"
+                ></path>
+                <path
+                  d="M15.701 11.35h-3.05V8.298a.563.563 0 00-1.125 0v3.613c0 .31.252.562.562.562h3.613a.562.562 0 000-1.125z"
+                ></path>
               </g>
-              <path d="M0 0h24v24H0z" />
+              <path d="M0 0h24v24H0z"></path>
             </g>
           </svg>
           <small class="reading-time"></small>
@@ -50,18 +67,23 @@ const ogImage = thumbnail ? `https://grzegorztomicki.pl/images/${thumbnail.repla
       </div>
 
       <div class="article__content">
-        {images && folder && images.map((img) => (
-          <figure>
-            <ResponsiveImage
-              folder={folder}
-              filename={img.filename}
-              alt={img.alt || ''}
-              width={img.width || 1200}
-              height={img.height || 800}
-            />
-            {img.caption && <figcaption set:html={img.caption} />}
-          </figure>
-        ))}
+        {
+          images &&
+            folder &&
+            images.map((img, index) => (
+              <figure>
+                <ResponsiveImage
+                  folder={folder}
+                  filename={img.filename}
+                  alt={img.alt || ""}
+                  width={img.width || 1200}
+                  height={img.height || 800}
+                  loading={index < 2 ? "eager" : "lazy"}
+                />
+                {img.caption && <figcaption set:html={img.caption} />}
+              </figure>
+            ))
+        }
       </div>
 
       <div id="share-button-bottom" class="share-button-temp"></div>
@@ -73,46 +95,55 @@ const ogImage = thumbnail ? `https://grzegorztomicki.pl/images/${thumbnail.repla
         </button>
         <noscript>
           Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+          <a href="https://disqus.com/?ref_noscript" rel="nofollow"
+            >comments powered by Disqus.</a
+          >
         </noscript>
       </div>
     </article>
   </main>
 
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "http://schema.org/",
-    "@type": "Blog",
-    "publisher": "grzegorztomicki.pl",
-    "author": author,
-    "datePublished": publishedDate?.toISOString().split('T')[0],
-    "dateModified": modifiedDate?.toISOString().split('T')[0],
-    "headline": "Blog fotograficzny"
-  })} />
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "http://schema.org/",
+      "@type": "Blog",
+      publisher: "grzegorztomicki.pl",
+      author: author,
+      datePublished: publishedDate?.toISOString().split("T")[0],
+      dateModified: modifiedDate?.toISOString().split("T")[0],
+      headline: "Blog fotograficzny",
+    })}
+  />
 
   <script>
     // Disqus loader
-    const disqusButton = document.getElementById('load-disqus');
-    const disqusShortname = 'bloggrzegorztomickipl';
+    const disqusButton = document.getElementById("load-disqus");
+    const disqusShortname = "bloggrzegorztomickipl";
 
-    disqusButton?.addEventListener('click', (e) => {
+    disqusButton?.addEventListener("click", (e) => {
       e.preventDefault();
-      disqusButton.style.display = 'none';
+      disqusButton.style.display = "none";
 
       const d = document;
-      const s = d.createElement('script');
+      const s = d.createElement("script");
       s.src = `//${disqusShortname}.disqus.com/embed.js`;
-      s.setAttribute('data-timestamp', String(+new Date()));
+      s.setAttribute("data-timestamp", String(+new Date()));
       (d.head || d.body).appendChild(s);
     });
 
     // Share button functionality
-    const shareContainers = document.querySelectorAll('.share-button-temp');
+    const shareContainers = document.querySelectorAll(".share-button-temp");
     const pageTitle = document.title;
     const pageUrl = window.location.href;
 
-    shareContainers.forEach(container => {
+    shareContainers.forEach((container) => {
       // Check for native share API support on mobile
-      if (navigator.share && 'maxTouchPoints' in navigator && navigator.maxTouchPoints > 0) {
+      if (
+        navigator.share &&
+        "maxTouchPoints" in navigator &&
+        navigator.maxTouchPoints > 0
+      ) {
         container.innerHTML = `
           <div class="social-buttons__btn">
             <svg class="share__icon" viewBox="0 0 24 24">
@@ -122,16 +153,18 @@ const ogImage = thumbnail ? `https://grzegorztomicki.pl/images/${thumbnail.repla
           </div>
         `;
 
-        container.querySelector('.social-buttons__btn')?.addEventListener('click', async () => {
-          try {
-            await navigator.share({
-              title: pageTitle,
-              url: pageUrl
-            });
-          } catch (err) {
-            console.log(err);
-          }
-        });
+        container
+          .querySelector(".social-buttons__btn")
+          ?.addEventListener("click", async () => {
+            try {
+              await navigator.share({
+                title: pageTitle,
+                url: pageUrl,
+              });
+            } catch (err) {
+              console.log(err);
+            }
+          });
       } else {
         // Desktop fallback
         container.innerHTML = `
@@ -149,21 +182,21 @@ const ogImage = thumbnail ? `https://grzegorztomicki.pl/images/${thumbnail.repla
           </div>
         `;
 
-        container.querySelectorAll('.icon').forEach(btn => {
-          btn.addEventListener('click', (e) => {
+        container.querySelectorAll(".icon").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
             const type = (e.currentTarget as HTMLElement).dataset.share;
             let shareUrl;
 
-            switch(type) {
-              case 'facebook':
+            switch (type) {
+              case "facebook":
                 shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
-                window.open(shareUrl, '_blank');
+                window.open(shareUrl, "_blank");
                 break;
-              case 'twitter':
+              case "twitter":
                 shareUrl = `https://twitter.com/share?text=${encodeURIComponent(pageTitle)}&url=${encodeURIComponent(pageUrl)}`;
-                window.open(shareUrl, '_blank');
+                window.open(shareUrl, "_blank");
                 break;
-              case 'mail':
+              case "mail":
                 window.location.href = `mailto:?subject=${encodeURIComponent(pageTitle)}&body=${encodeURIComponent(pageUrl)}`;
                 break;
             }
@@ -173,10 +206,16 @@ const ogImage = thumbnail ? `https://grzegorztomicki.pl/images/${thumbnail.repla
     });
   </script>
 
-  <script defer src="https://cdn.jsdelivr.net/gh/tomik23/zooom.js@1.1.2/dist/zooom.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/gh/tomik23/reading-time@1.0.4/dist/readingTime.min.js"></script>
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/gh/tomik23/zooom.js@1.1.2/dist/zooom.min.js"
+  ></script>
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/gh/tomik23/reading-time@1.0.4/dist/readingTime.min.js"
+  ></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener("DOMContentLoaded", function () {
       function getAverageRgb(img) {
         const context = document.createElement("canvas").getContext("2d");
         if (typeof img == "string") {
@@ -191,14 +230,14 @@ const ogImage = thumbnail ? `https://grzegorztomicki.pl/images/${thumbnail.repla
       }
 
       // zooom
-      new Zooom('zooom', {
+      new Zooom("zooom", {
         zIndex: 9,
         animationTime: 300,
         cursor: {
-          in: 'var(--zoom-in)',
-          out: 'var(--zoom-out)',
+          in: "var(--zoom-in)",
+          out: "var(--zoom-out)",
         },
-        overlay: 'var(--bg-zooom)',
+        overlay: "var(--bg-zooom)",
         onResize: function () {
           let responsiveMin = 1000;
           const windowWidth =
@@ -207,24 +246,33 @@ const ogImage = thumbnail ? `https://grzegorztomicki.pl/images/${thumbnail.repla
             document.body.clientWidth;
           const widthWindow = windowWidth < responsiveMin ? true : false;
           const root = document.documentElement;
-          root.style.setProperty('--zoom-in', widthWindow ? 'default' : 'zoom-in');
-          root.style.setProperty('--zoom-out', widthWindow ? 'default' : 'zoom-out');
+          root.style.setProperty(
+            "--zoom-in",
+            widthWindow ? "default" : "zoom-in",
+          );
+          root.style.setProperty(
+            "--zoom-out",
+            widthWindow ? "default" : "zoom-out",
+          );
           return widthWindow;
         },
-        onOpen: function(element) {
+        onOpen: function (element) {
           const zooomOverlay = document.querySelector(".zooom-clone");
-          zooomOverlay.style.setProperty("filter", `drop-shadow(0 0 4rem rgba(${getAverageRgb(zooomOverlay)},0.7))`);
-        }
+          zooomOverlay.style.setProperty(
+            "filter",
+            `drop-shadow(0 0 4rem rgba(${getAverageRgb(zooomOverlay)},0.7))`,
+          );
+        },
       });
 
       // readingtime
       new ReadingTime({
         wordsPerMinute: 215,
         photosPerMinute: 12,
-        elements: ['article'],
+        elements: ["article"],
         onResult: function (index, minutes, words, images) {
-          const element = document.querySelector('.reading-time');
-          const text = minutes > 1 ? 'minut czytania' : 'minuta czytania';
+          const element = document.querySelector(".reading-time");
+          const text = minutes > 1 ? "minut czytania" : "minuta czytania";
           element.textContent = `~${Math.ceil(minutes)} ${text} (słów: ${words}, zdjęć: ${images})`;
         },
       });

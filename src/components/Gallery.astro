@@ -25,12 +25,13 @@ const orderedArticles = indexData.items
 ---
 
 <main class="gallery">
-  {orderedArticles.map(({ article, item }) => (
+  {orderedArticles.map(({ article, item }, index) => (
     <ArticleCard
       slug={article.slug}
       title={item.text}
       thumbnail={item.img.replace('./images/', '')}
       thumbnailAlt={item.alt || item.text}
+      loading={index < 4 ? 'eager' : 'lazy'}
     />
   ))}
 </main>

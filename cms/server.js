@@ -293,7 +293,7 @@ function renderLayout(title, siteType, content) {
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pell"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@nicorevin/zooom@1.2.0/dist/zooom.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/tomickigrzegorz/zooom.js@1.1.2/dist/zooom.min.js"></script>
   <script>
     const fileJson = '${title}.json';
     const type = '${siteType}';

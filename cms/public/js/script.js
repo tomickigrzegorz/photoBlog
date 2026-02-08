@@ -137,4 +137,5 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  window.dispatchEvent(new Event('resize'));
 });

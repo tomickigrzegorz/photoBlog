@@ -6,9 +6,10 @@ interface Props {
   width?: number;
   height?: number;
   class?: string;
+  loading?: 'lazy' | 'eager';
 }
 
-const { folder, filename, alt = '', width = 1200, height = 800, class: className } = Astro.props;
+const { folder, filename, alt = '', width = 1200, height = 800, class: className, loading = 'lazy' } = Astro.props;
 
 const basePath = `/images/${folder}`;
 
@@ -41,12 +42,12 @@ const webp1200 = img1200.replace('.jpg', '.webp').replace('.JPG', '.webp');
   <img
     src={img1200}
     alt={alt}
-    loading="lazy"
+    loading={loading}
     class={className || 'zooom'}
     width={width}
     height={height}
   />
 </picture>
 <noscript>
-  <img src={img1200} alt={alt} loading="lazy" width={width} height={height} />
+  <img src={img1200} alt={alt} loading={loading} width={width} height={height} />
 </noscript>
