@@ -22,7 +22,7 @@ import { saveMarkdown } from "./helpers/markdown.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..");
 const port = 3000;
-const author = "Grzegorz Tomicki";
+const author = process.env.BLOG_AUTHOR || "Grzegorz Tomicki";
 
 const app = express();
 app.use(compression());

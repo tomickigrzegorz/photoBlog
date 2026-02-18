@@ -9,7 +9,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "convert-md": "node scripts/json-to-md.js",
-    "cms": "node cms/server.js"
+    "cms": "node --env-file=.env cms/server.js"
   },
   "keywords": [
     "astro",
