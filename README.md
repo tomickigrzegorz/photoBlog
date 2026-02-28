@@ -1,112 +1,87 @@
 ## My photo blog
 
-The whole environment is based on `webpack 5`, `pug templates` and the input data are `json` files.
+Oparty na `Astro`, dane w plikach `markdown`.
 
 ```
-sources
-├── data
-│   ├── index.json
-│   └── jeden-dzien-w-berlinie.json
+src
+├── components
+│   ├── ArticleCard.astro
+│   ├── Gallery.astro
+│   └── ...
+├── content
+│   └── articles
+│       └── jeden-dzien-w-berlinie.md
+├── layouts
+│   └── BaseLayout.astro
+├── pages
+│   ├── index.astro
+│   └── [slug].astro
+└── styles
+public
 └── images
     └── jeden-dzien-w-berlinie
-        ├── 1200
-        │   ├── IMG_0432.jpg
-        │   └── ...
         ├── 576
-        │   ├── IMG_0432.jpg
-        │   └── ...
         ├── 768
-        │   ├── IMG_0432.jpg
-        │   └── ...
-        └── 992
-            ├── IMG_0432.jpg
-            └── ...
+        ├── 992
+        └── 1200
+sources
+└── data
+    ├── index.json
+    └── jeden-dzien-w-berlinie.json
+cms
+├── server.js
+├── helpers
+│   ├── template.js
+│   ├── markdown.js
+│   └── images.js
+└── public
+    ├── css/style.css
+    └── js/script.js
 ```
 
-## Optimization
-
-Of course, this 100/100 is when there is no `google adsense` code and that here it is only the main page has 100/100 ;)
-
-### Clone the repo and install dependencies
+### Instalacja
 
 ```bash
 git clone
-cd node-sharp-images
 npm i
 ```
 
-### How to run
+### Uruchomienie
 
 Dev
 
-```
+```bash
 npm run dev
-or
-yarn dev
 ```
 
-Prod
+Build
 
-```
-npm run prod
-or
-yarn prod
+```bash
+npm run build
 ```
 
-It is also possible to generate a sitemap based on html files
+### CMS
 
-```
-npm run sitemap
-or
-yarn sitemap
-```
+Panel do zarządzania artykułami (Express, port 3000).
 
-### Photo optimization
-
-The page consists of the pictures themselves, therefore I load the photos dynamically using 'IntersectionObserver'. In addition, each picture is served in several sizes depending on the width of the window.
-
-To generate such a number of photos I used my script which, based on the original, generates folders with appropriate image sizes -> [sharp-images](https://github.com/tomik23/sharp-images)
-
-```html
-<picture>
-  <source
-    data-srcset="./images/576/img.jpg"
-    media="(max-width: 576px)"
-    class="fade-in"
-    srcset="./images/576/img.jpg"
-  />
-  <source
-    data-srcset="./images/768/img.jpg"
-    media="(max-width: 768px)"
-    class="fade-in"
-    srcset="./images/768/img.jpg"
-  />
-  <source
-    data-srcset="./images/992/img.jpg"
-    media="(max-width: 992px)"
-    class="fade-in"
-    srcset="./images/992/img.jpg"
-  />
-  <source
-    data-srcset="./images/1200/img.jpg"
-    media="(max-width: 1200px)"
-    class="fade-in"
-    srcset="./images/1200/img.jpg"
-  />
-  <img
-    data-src="./images/1200/img.jpg"
-    class="fade-in"
-    src="./images/1200/lwow/.jpg"
-  />
-  <noscript><img src="./images/1200/img.jpg" /></noscript>
-</picture>
+```bash
+npm run cms
 ```
 
-Of course, this solution is compatible with SEO - photos are indexed by google.
-The addition is an essential element `<noscript><img src="./images/1200/img.jpg"></noscript>`
+Funkcje:
+- tworzenie i edycja artykułów
+- zarządzanie zdjęciami (sortowanie, podpisy, teksty alternatywne)
+- podgląd zdjęć
+- automatyczny zapis do `sources/data/*.json` i generowanie `src/content/articles/*.md`
 
-After optimizing images, the page `PageSpeed Insight` shows **`100/100`** in the results.
+Dane źródłowe przechowywane w `sources/data/` (pliki JSON), z których generowane są pliki markdown dla Astro.
 
-### Production version
+### Optymalizacja zdjęć
 
-Visit online: [https://www.grzegorztomicki.pl](https://www.grzegorztomicki.pl)
+Zdjęcia ładowane dynamicznie, serwowane w różnych rozmiarach (576, 768, 992, 1200) zależnie od szerokości okna.
+
+Generator rozmiarów: [sharp-images](https://github.com/tomickigrzegorz/sharp-images)
+
+### Wersja produkcyjna
+
+[https://www.grzegorztomicki.pl](https://www.grzegorztomicki.pl)

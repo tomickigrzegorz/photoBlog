@@ -1,0 +1,27 @@
+@use "variables" as *;
+
+.flex-grid {
+  display: flex;
+
+  & > * {
+    flex: 0 1 100%;
+
+    &:not(:first-child) {
+      margin-left: $gridGap;
+    }
+  }
+
+  @media (max-width: ($minColWidth * 3)) {
+    flex-wrap: wrap;
+
+    & > * {
+      margin: 2rem 0 0 !important;
+    }
+  }
+
+  @media (min-width: ($minColWidth * 3)) {
+    & + .flex-grid {
+      margin-top: $gridGap;
+    }
+  }
+}

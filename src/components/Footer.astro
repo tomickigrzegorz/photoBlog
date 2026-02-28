@@ -1,0 +1,27 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer>
+  <p>
+    Strona używa plików cookies. Brak zmiany ustawień przeglądarki oznacza zgodę na ich użycie.
+    <a href="#" class="mail">Kontakt mailowy.</a>
+  </p>
+  <p>
+    Copyright © <span class="fullYear">{currentYear}</span> by
+    <a href="http://wig.pl" rel="noopener" target="_blank" class="copyright">wig.pl</a>
+  </p>
+</footer>
+
+<script>
+  // Mail obfuscation
+  const mailLink = document.querySelector('.mail');
+  if (mailLink) {
+    mailLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const user = 'kontakt';
+      const domain = 'grzegorztomicki.pl';
+      window.location.href = `mailto:${user}@${domain}`;
+    });
+  }
+</script>

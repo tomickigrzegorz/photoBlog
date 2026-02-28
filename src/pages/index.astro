@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Gallery from '../components/Gallery.astro';
+import indexData from '../../sources/data/index.json';
+
+const { head, schema } = indexData;
+const title = head.title;
+const description = head.description;
+---
+
+<BaseLayout title={title} description={description}>
+  <Gallery />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "http://schema.org/",
+    "@type": "Blog",
+    "publisher": "grzegorztomicki.pl",
+    "author": schema?.author || "Grzegorz Tomicki",
+    "datePublished": schema?.datePublished || "2016-06-23",
+    "dateModified": schema?.dateModified || "2016-06-23",
+    "headline": "Blog fotograficzny"
+  })} />
+</BaseLayout>
