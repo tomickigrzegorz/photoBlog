@@ -76,6 +76,22 @@ Funkcje:
 
 Dane źródłowe przechowywane w `sources/data/` (pliki JSON), z których generowane są pliki markdown dla Astro.
 
+### Konwersja JSON → Markdown
+
+Ręczna konwersja plików `sources/data/*.json` do `src/content/articles/*.md`.
+
+Wszystkie pliki:
+
+```bash
+npm run convert-md
+```
+
+Jeden plik (podaj slug bez `.json`):
+
+```bash
+npm run convert-md -- bratyslawa
+```
+
 ### Optymalizacja zdjęć
 
 Zdjęcia ładowane dynamicznie, serwowane w różnych rozmiarach (576, 768, 992, 1200) zależnie od szerokości okna.

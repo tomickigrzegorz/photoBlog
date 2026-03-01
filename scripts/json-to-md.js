@@ -214,14 +214,24 @@ function convertJsonToMd(filename) {
   console.log(`✓ ${filename} → ${slug}.md (${images.length} images)`);
 }
 
-// Convert all JSON files
-console.log(`Converting ${jsonFiles.length} JSON files to Markdown...\n`);
+// Support optional single-file argument: node json-to-md.js bratyslawa
+const targetSlug = process.argv[2];
 
-for (const file of jsonFiles) {
-  try {
-    convertJsonToMd(file);
-  } catch (err) {
-    console.error(`✗ ${file}: ${err.message}`);
+if (targetSlug) {
+  const targetFile = targetSlug.endsWith(".json") ? targetSlug : `${targetSlug}.json`;
+  if (!jsonFiles.includes(targetFile)) {
+    console.error(`✗ File not found: sources/data/${targetFile}`);
+    process.exit(1);
+  }
+  convertJsonToMd(targetFile);
+} else {
+  console.log(`Converting ${jsonFiles.length} JSON files to Markdown...\n`);
+  for (const file of jsonFiles) {
+    try {
+      convertJsonToMd(file);
+    } catch (err) {
+      console.error(`✗ ${file}: ${err.message}`);
+    }
   }
 }
 

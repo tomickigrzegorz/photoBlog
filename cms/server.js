@@ -2,7 +2,6 @@ import {
   existsSync,
   statSync,
   readdirSync,
-  readFileSync,
   writeFileSync,
   unlinkSync,
 } from "fs";
@@ -15,6 +14,7 @@ import {
   getAllDirectory,
   getAllJson,
   readJson,
+  today,
 } from "./helpers/images.js";
 import { saveTemplate } from "./helpers/template.js";
 import { saveMarkdown } from "./helpers/markdown.js";
@@ -66,12 +66,12 @@ app.post("/", (req, res) => {
 
   const config = {
     nameFolder: folderName,
-    seoTitle: JSON.stringify(seoTitle),
-    seoDescription: JSON.stringify(seoDescription),
-    bodyTitle: JSON.stringify(bodyTitle),
-    bodyDate: JSON.stringify(bodyDate),
-    bodyText: JSON.stringify(bodyText),
-    bodyAuthor: JSON.stringify(bodyAuthor),
+    seoTitle,
+    seoDescription,
+    bodyTitle,
+    bodyDate,
+    bodyText,
+    bodyAuthor,
     imageNames: imageName,
     imageAlts: imageAlt,
     imageTexts: imageText,
@@ -112,7 +112,6 @@ app.get("/name/:imageFolder", (req, res) => {
     renderEditor({
       siteType: "new",
       title: imageFolder,
-      count: allImages.length,
       images: allImages,
       author,
     }),
@@ -135,8 +134,7 @@ app.get("/update/:imageFolder", (req, res) => {
   let allImages;
   if (jsonData.body?.items?.length) {
     allImages = jsonData.body.items.map((item) => {
-      const img = item.img.includes("/") ? item.img.split("/").pop() : item.img;
-      return `./images/${imageFolder}/${img}`;
+      return `./images/${imageFolder}/${path.basename(item.img)}`;
     });
   } else {
     allImages = existsSync(folderPath)
@@ -161,10 +159,9 @@ app.get("/update/:imageFolder", (req, res) => {
     renderEditor({
       siteType: "update",
       title: imageFolder,
-      count: allImages.length,
       images: allImages,
       author,
-      data: dateCreate,
+      lastModified: dateCreate,
       jsonData,
     }),
   );
@@ -180,7 +177,6 @@ app.get("/create", (req, res) => {
     renderEditor({
       siteType: "new",
       title: slug,
-      count: 0,
       images: [],
       author,
     }),
@@ -208,12 +204,12 @@ app.delete("/delete/:slug", (req, res) => {
   if (existsSync(jsonPath)) unlinkSync(jsonPath);
   if (existsSync(mdPath)) unlinkSync(mdPath);
 
-  if (existsSync(indexPath)) {
-    try {
-      const index = JSON.parse(readFileSync(indexPath, "utf-8"));
-      index.items = index.items.filter((i) => i.href !== `${slug}.html`);
-      writeFileSync(indexPath, JSON.stringify(index, null, 2), "utf-8");
-    } catch {}
+  try {
+    const index = readJson(indexPath);
+    index.items = index.items.filter((i) => i.href !== `${slug}.html`);
+    writeFileSync(indexPath, JSON.stringify(index, null, 2), "utf-8");
+  } catch (e) {
+    console.error("Failed to update index.json:", e);
   }
 
   console.log(`Deleted: ${slug}`);
@@ -222,9 +218,10 @@ app.delete("/delete/:slug", (req, res) => {
 
 app.get("/gallery", (req, res) => {
   const indexPath = path.join(dataDir, "index.json");
-  const indexData = existsSync(indexPath)
-    ? JSON.parse(readFileSync(indexPath, "utf-8"))
-    : { head: {}, items: [], schema: {} };
+  let indexData = { head: {}, items: [], schema: {} };
+  try {
+    indexData = readJson(indexPath);
+  } catch {}
   const jsonFiles = getAllJson(dataDir);
   res.send(renderGallery(indexData, jsonFiles));
 });
@@ -241,10 +238,10 @@ app.post("/gallery", (req, res) => {
     items: [],
     schema: {},
   };
-  if (existsSync(indexPath)) {
-    try {
-      indexData = JSON.parse(readFileSync(indexPath, "utf-8"));
-    } catch {}
+  try {
+    indexData = readJson(indexPath);
+  } catch (e) {
+    console.error("Failed to read index.json:", e);
   }
   indexData.items = items.map((item) => ({
     img: item.img,
@@ -253,7 +250,7 @@ app.post("/gallery", (req, res) => {
     text: item.text,
     date: item.date,
   }));
-  indexData.schema.dateModified = new Date().toISOString().slice(0, 10);
+  indexData.schema.dateModified = today();
   writeFileSync(indexPath, JSON.stringify(indexData, null, 2), "utf-8");
   res.json({ ok: true });
 });
@@ -366,20 +363,19 @@ function renderIndex(folders) {
 function renderEditor({
   siteType,
   title,
-  count,
   images,
   author,
-  data,
+  lastModified,
   jsonData,
 }) {
   const buttonText = siteType === "new" ? "SAVE" : "UPDATE";
-  const dateInfo = data
-    ? `<div class="date-time"><small>Last modified - ${data}</small></div>`
+  const dateInfo = lastModified
+    ? `<div class="date-time"><small>Last modified - ${lastModified}</small></div>`
     : "";
 
   const imageItems = images
     .map((image, i) => {
-      const filename = image.split("/").pop();
+      const filename = path.basename(image);
       const jsonItem = jsonData?.body?.items?.[i];
       const altVal = jsonItem?.alt || "";
       const textVal = jsonItem?.text
@@ -472,7 +468,7 @@ function renderEditor({
         </div>
         <h2 class="flex align-center mtb-20 dividing uppercase">photo list
           <svg class="icon big fill-red mrl-10"><use xlink:href="#long-arrow-right-icon"></use></svg>
-          ${count} pcs.
+          ${images.length} pcs.
         </h2>
         <div id="columns" class="columns">
           ${imageItems}
@@ -503,7 +499,7 @@ function renderGallery(indexData, jsonFiles) {
   const itemRows = items
     .map((item, i) => {
       const slug = item.href.replace(".html", "");
-      const imgFile = item.img.split("/").pop();
+      const imgFile = path.basename(item.img);
       return `
     <div class="gallery-item flex gap-10 align-center" data-index="${i}">
       <span class="gallery-handle" style="cursor:grab;font-size:20px;padding:0 8px">☰</span>

@@ -1,5 +1,13 @@
-import { statSync, existsSync, readdirSync, readFileSync, mkdirSync } from 'fs';
+import { existsSync, readdirSync, readFileSync, mkdirSync } from 'fs';
 import path from 'path';
+
+export function today() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+export function toArray(val) {
+  return Array.isArray(val) ? val : val ? [val] : [];
+}
 
 export function getAllFiles(dir, folder) {
   const sizeDir = path.join(dir, '1200');

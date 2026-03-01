@@ -1,5 +1,6 @@
-import { writeFileSync, readFileSync, existsSync } from 'fs';
+import { writeFileSync } from 'fs';
 import path from 'path';
+import { readJson, today, toArray } from './images.js';
 
 export function saveTemplate(options, root) {
   const {
@@ -8,16 +9,9 @@ export function saveTemplate(options, root) {
     imageNames, imageAlts, imageTexts,
   } = options;
 
-  const title = JSON.parse(seoTitle);
-  const description = JSON.parse(seoDescription);
-  const bTitle = JSON.parse(bodyTitle);
-  const bDate = JSON.parse(bodyDate);
-  const bText = JSON.parse(bodyText);
-  const bAuthor = JSON.parse(bodyAuthor);
-
-  const names = Array.isArray(imageNames) ? imageNames : imageNames ? [imageNames] : [];
-  const alts = Array.isArray(imageAlts) ? imageAlts : imageAlts ? [imageAlts] : [];
-  const texts = Array.isArray(imageTexts) ? imageTexts : imageTexts ? [imageTexts] : [];
+  const names = toArray(imageNames);
+  const alts = toArray(imageAlts);
+  const texts = toArray(imageTexts);
 
   const items = names.map((img, i) => ({
     path: `./images/${nameFolder}/`,
@@ -26,13 +20,14 @@ export function saveTemplate(options, root) {
     text: texts[i]?.replace(/\r\n/g, '<br>').replace(/\n/g, '<br>') || '',
   }));
 
+  const todayStr = today();
   const json = {
-    head: { title, description },
-    body: { title: bTitle, date: bDate, text: bText, items },
+    head: { title: seoTitle, description: seoDescription },
+    body: { title: bodyTitle, date: bodyDate, text: bodyText, items },
     schema: {
-      datePublished: new Date().toISOString().slice(0, 10),
-      dateModified: new Date().toISOString().slice(0, 10),
-      author: bAuthor,
+      datePublished: todayStr,
+      dateModified: todayStr,
+      author: bodyAuthor,
     },
   };
 
@@ -40,14 +35,12 @@ export function saveTemplate(options, root) {
   const jsonPath = path.join(dataDir, `${nameFolder}.json`);
 
   // preserve original datePublished if updating
-  if (existsSync(jsonPath)) {
-    try {
-      const existing = JSON.parse(readFileSync(jsonPath, 'utf-8'));
-      if (existing.schema?.datePublished) {
-        json.schema.datePublished = existing.schema.datePublished;
-      }
-    } catch {}
-  }
+  try {
+    const existing = readJson(jsonPath);
+    if (existing.schema?.datePublished) {
+      json.schema.datePublished = existing.schema.datePublished;
+    }
+  } catch {}
 
   writeFileSync(jsonPath, JSON.stringify(json, null, 2), 'utf-8');
 
@@ -61,10 +54,10 @@ function updateIndex(root, nameFolder, json) {
   const indexPath = path.join(root, 'sources/data/index.json');
   let index = { head: { title: 'Zdjęcia zebrane', description: '' }, items: [], schema: {} };
 
-  if (existsSync(indexPath)) {
-    try {
-      index = JSON.parse(readFileSync(indexPath, 'utf-8'));
-    } catch {}
+  try {
+    index = readJson(indexPath);
+  } catch (e) {
+    console.error('Failed to read index.json:', e);
   }
 
   const firstImage = json.body.items?.[0]?.img || '';
