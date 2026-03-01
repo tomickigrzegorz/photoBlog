@@ -1,6 +1,6 @@
 ## My photo blog
 
-Oparty na `Astro`, dane w plikach `markdown`.
+Built with `Astro`, content stored in `markdown` files.
 
 ```
 src
@@ -39,14 +39,14 @@ cms
     └── js/script.js
 ```
 
-### Instalacja
+### Installation
 
 ```bash
 git clone
 npm i
 ```
 
-### Uruchomienie
+### Running
 
 Dev
 
@@ -62,42 +62,42 @@ npm run build
 
 ### CMS
 
-Panel do zarządzania artykułami (Express, port 3000).
+Article management panel (Express, port 3000).
 
 ```bash
 npm run cms
 ```
 
-Funkcje:
-- tworzenie i edycja artykułów
-- zarządzanie zdjęciami (sortowanie, podpisy, teksty alternatywne)
-- podgląd zdjęć
-- automatyczny zapis do `sources/data/*.json` i generowanie `src/content/articles/*.md`
+Features:
+- create and edit articles
+- manage images (sorting, captions, alt text)
+- image preview
+- auto-save to `sources/data/*.json` and generate `src/content/articles/*.md`
 
-Dane źródłowe przechowywane w `sources/data/` (pliki JSON), z których generowane są pliki markdown dla Astro.
+Source data is stored in `sources/data/` as JSON files, from which Markdown files are generated for Astro.
 
-### Konwersja JSON → Markdown
+### JSON → Markdown conversion
 
-Ręczna konwersja plików `sources/data/*.json` do `src/content/articles/*.md`.
+Manual conversion of `sources/data/*.json` files to `src/content/articles/*.md`.
 
-Wszystkie pliki:
+All files:
 
 ```bash
 npm run convert-md
 ```
 
-Jeden plik (podaj slug bez `.json`):
+Single file (provide slug without `.json`):
 
 ```bash
 npm run convert-md -- bratyslawa
 ```
 
-### Optymalizacja zdjęć
+### Image optimization
 
-Zdjęcia ładowane dynamicznie, serwowane w różnych rozmiarach (576, 768, 992, 1200) zależnie od szerokości okna.
+Images are loaded dynamically and served in multiple sizes (576, 768, 992, 1200) depending on the viewport width.
 
-Generator rozmiarów: [sharp-images](https://github.com/tomickigrzegorz/sharp-images)
+Size generator: [sharp-images](https://github.com/tomickigrzegorz/sharp-images)
 
-### Wersja produkcyjna
+### Live site
 
 [https://www.grzegorztomicki.pl](https://www.grzegorztomicki.pl)
