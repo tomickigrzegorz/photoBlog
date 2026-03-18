@@ -10,6 +10,7 @@ export default defineConfig({
   build: {
     assets: "assets",
     inlineStylesheets: "auto",
+    format: "file",
   },
 
   integrations: [sitemap()],
