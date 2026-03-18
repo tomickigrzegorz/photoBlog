@@ -8,6 +8,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "postbuild": "node scripts/cleanup-images.js",
     "convert-md": "node scripts/json-to-md.js",
     "cms": "node --env-file=.env cms/server.js"
   },
