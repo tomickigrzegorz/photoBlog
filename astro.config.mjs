@@ -1,5 +1,4 @@
 import { defineConfig } from "astro/config";
-import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://grzegorztomicki.pl",
@@ -12,6 +11,4 @@ export default defineConfig({
     inlineStylesheets: "auto",
     format: "file",
   },
-
-  integrations: [sitemap()],
 });
