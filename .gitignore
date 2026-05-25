@@ -30,3 +30,5 @@ src/content/articles/*.md
 # Images (stored externally, too large for git)
 public/images/*
 !public/images/.gitkeep
+
+.playwright-mcp

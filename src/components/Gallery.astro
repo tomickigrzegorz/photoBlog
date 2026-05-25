@@ -10,7 +10,7 @@ const articles = await getCollection('articles');
 // Create a map of slug -> article for quick lookup
 const articleMap = new Map();
 articles.forEach(article => {
-  articleMap.set(article.slug, article);
+  articleMap.set(article.id, article);
 });
 
 // Get articles in index.json order (only those that exist)
@@ -27,7 +27,7 @@ const orderedArticles = indexData.items
 <main class="gallery">
   {orderedArticles.map(({ article, item }, index) => (
     <ArticleCard
-      slug={article.slug}
+      slug={article.id}
       title={item.text}
       thumbnail={item.img.replace('./images/', '')}
       thumbnailAlt={item.alt || item.text}

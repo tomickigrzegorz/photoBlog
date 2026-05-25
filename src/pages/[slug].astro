@@ -1,18 +1,18 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ResponsiveImage from "../components/ResponsiveImage.astro";
 
 export async function getStaticPaths() {
   const articles = await getCollection("articles");
   return articles.map((article) => ({
-    params: { slug: article.slug },
+    params: { slug: article.id },
     props: { article },
   }));
 }
 
 const { article } = Astro.props;
-const { Content } = await article.render();
+const { Content } = await render(article);
 const {
   title,
   displayTitle,
@@ -208,11 +208,15 @@ const ogImage = thumbnail
 
   <script
     defer
-    src="https://cdn.jsdelivr.net/gh/tomik23/zooom.js@1.1.2/dist/zooom.min.js"
+    src="https://cdn.jsdelivr.net/gh/tomickigrzegorz/zooom.js@1.2.1/dist/zooom.min.js"
   ></script>
   <script
     defer
-    src="https://cdn.jsdelivr.net/gh/tomik23/reading-time@1.0.4/dist/readingTime.min.js"
+    src="https://cdn.jsdelivr.net/gh/tomickigrzegorz/zooom.js@1.2.1/dist/zooom-slider.min.js"
+  ></script>
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/gh/tomickigrzegorz/reading-time@1.0.4/dist/readingTime.min.js"
   ></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -263,7 +267,7 @@ const ogImage = thumbnail
             `drop-shadow(0 0 4rem rgba(${getAverageRgb(zooomOverlay)},0.7))`,
           );
         },
-      });
+      }).use(new ZooomSlider({ effect: "slide", counter: true, preload: 1 }));
 
       // readingtime
       new ReadingTime({

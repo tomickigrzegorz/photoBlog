@@ -10,7 +10,7 @@ export async function GET(context: { site: URL }) {
       const date = article.data.date
         ? new Date(article.data.date).toISOString().split("T")[0]
         : null;
-      return `<url><loc>${site}/${article.slug}.html</loc>${date ? `<lastmod>${date}</lastmod>` : ""}</url>`;
+      return `<url><loc>${site}/${article.id}.html</loc>${date ? `<lastmod>${date}</lastmod>` : ""}</url>`;
     }),
   ];
 
