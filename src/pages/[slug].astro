@@ -208,11 +208,15 @@ const ogImage = thumbnail
 
   <script
     defer
-    src="https://cdn.jsdelivr.net/gh/tomickigrzegorz/zooom.js@1.2.1/dist/zooom.min.js"
+    src="https://cdn.jsdelivr.net/gh/tomickigrzegorz/zooom.js@1.4.0/dist/zooom.min.js"
   ></script>
   <script
     defer
-    src="https://cdn.jsdelivr.net/gh/tomickigrzegorz/zooom.js@1.2.1/dist/zooom-slider.min.js"
+    src="https://cdn.jsdelivr.net/gh/tomickigrzegorz/zooom.js@1.4.0/dist/zooom-slider.min.js"
+  ></script>
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/gh/tomickigrzegorz/zooom.js@1.4.0/dist/zooom-panzoom.min.js"
   ></script>
   <script
     defer
@@ -242,6 +246,8 @@ const ogImage = thumbnail
           out: "var(--zoom-out)",
         },
         overlay: "var(--bg-zooom)",
+        closeButton: true,
+
         onResize: function () {
           let responsiveMin = 1000;
           const windowWidth =
@@ -267,7 +273,16 @@ const ogImage = thumbnail
             `drop-shadow(0 0 4rem rgba(${getAverageRgb(zooomOverlay)},0.7))`,
           );
         },
-      }).use(new ZooomSlider({ effect: "slide", counter: true, preload: 1 }));
+      })
+        .use(
+          new ZooomSlider({
+            effect: "slide",
+            counter: true,
+            preload: 1,
+            gap: 100,
+          }),
+        )
+        .use(new ZooomPanZoom());
 
       // readingtime
       new ReadingTime({
