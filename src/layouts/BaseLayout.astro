@@ -29,10 +29,9 @@ const { title, description, image, type = 'website', isArticle = false } = Astro
 <body>
   <script is:inline>
     try {
-      document.body.dataset.theme = localStorage.getItem('theme')
-    } catch (e) {
-      document.body.dataset.theme = null
-    }
+      const theme = localStorage.getItem('theme');
+      if (theme) document.body.dataset.theme = theme;
+    } catch (e) {}
   </script>
 
   <div class={`flex-wrap container ${isArticle ? 'article' : 'home'}`}>

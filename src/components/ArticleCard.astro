@@ -5,23 +5,29 @@ interface Props {
   thumbnail: string;
   thumbnailAlt: string;
   loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
 }
 
-const { slug, title, thumbnail, thumbnailAlt, loading = 'lazy' } = Astro.props;
+const { slug, title, thumbnail, thumbnailAlt, loading = 'lazy', fetchpriority = 'auto' } = Astro.props;
+const webpThumbnail = thumbnail.replace(/\.(jpg|JPG)$/, '.webp');
 ---
 
 <div class="gallery__items">
   <a href={`/${slug}.html`}>
     <figure>
-      <img
-        src={`/images/${thumbnail}`}
-        alt={thumbnailAlt}
-        loading={loading}
-        width="576"
-        height="384"
-      />
+      <picture>
+        <source type="image/webp" srcset={`/images/${webpThumbnail}`} />
+        <img
+          src={`/images/${thumbnail}`}
+          alt={thumbnailAlt}
+          loading={loading}
+          fetchpriority={fetchpriority}
+          width="576"
+          height="384"
+        />
+      </picture>
       <noscript>
-        <img src={`/images/${thumbnail}`} loading={loading} />
+        <img src={`/images/${thumbnail}`} alt={thumbnailAlt} loading={loading} width="576" height="384" />
       </noscript>
       <figcaption>{title}</figcaption>
     </figure>

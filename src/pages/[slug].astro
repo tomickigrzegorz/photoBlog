@@ -25,7 +25,7 @@ const {
   thumbnail,
   images,
 } = article.data;
-const pageUrl = Astro.url.href;
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = thumbnail
   ? `https://grzegorztomicki.pl/images/${thumbnail.replace("/576/", "/1200/")}`
   : undefined;
@@ -106,13 +106,23 @@ const ogImage = thumbnail
   <script
     type="application/ld+json"
     set:html={JSON.stringify({
-      "@context": "http://schema.org/",
-      "@type": "Blog",
-      publisher: "grzegorztomicki.pl",
-      author: author,
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: displayTitle || title,
+      description: description || title,
+      image: ogImage,
+      url: pageUrl,
+      mainEntityOfPage: pageUrl,
+      publisher: {
+        "@type": "Organization",
+        name: "grzegorztomicki.pl",
+      },
+      author: {
+        "@type": "Person",
+        name: author,
+      },
       datePublished: publishedDate?.toISOString().split("T")[0],
       dateModified: modifiedDate?.toISOString().split("T")[0],
-      headline: "Blog fotograficzny",
     })}
   />
 

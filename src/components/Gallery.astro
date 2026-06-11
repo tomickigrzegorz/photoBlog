@@ -32,6 +32,7 @@ const orderedArticles = indexData.items
       thumbnail={item.img.replace('./images/', '')}
       thumbnailAlt={item.alt || item.text}
       loading={index < 4 ? 'eager' : 'lazy'}
+      fetchpriority={index === 0 ? 'high' : 'auto'}
     />
   ))}
 </main>
