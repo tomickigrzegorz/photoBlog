@@ -1,4 +1,7 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
+
 interface Props {
   slug: string;
   title: string;
@@ -8,15 +11,18 @@ interface Props {
   fetchpriority?: 'high' | 'low' | 'auto';
 }
 
-const { slug, title, thumbnail, thumbnailAlt, loading = 'lazy', fetchpriority = 'auto' } = Astro.props;
-const webpThumbnail = thumbnail.replace(/\.(jpg|JPG)$/, '.webp');
+const { slug, title, thumbnail, thumbnailAlt, loading = 'lazy', fetchpriority } = Astro.props;
+const webpThumbnail = thumbnail.replace(/\.(jpe?g|png)$/i, '.webp');
+const hasWebp =
+  webpThumbnail !== thumbnail &&
+  fs.existsSync(path.join(process.cwd(), 'public/images', webpThumbnail));
 ---
 
 <div class="gallery__items">
   <a href={`/${slug}.html`}>
     <figure>
       <picture>
-        <source type="image/webp" srcset={`/images/${webpThumbnail}`} />
+        {hasWebp && <source type="image/webp" srcset={`/images/${webpThumbnail}`} />}
         <img
           src={`/images/${thumbnail}`}
           alt={thumbnailAlt}
@@ -26,9 +32,6 @@ const webpThumbnail = thumbnail.replace(/\.(jpg|JPG)$/, '.webp');
           height="384"
         />
       </picture>
-      <noscript>
-        <img src={`/images/${thumbnail}`} alt={thumbnailAlt} loading={loading} width="576" height="384" />
-      </noscript>
       <figcaption>{title}</figcaption>
     </figure>
   </a>
